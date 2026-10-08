@@ -14,8 +14,8 @@ obter ativos  ->  normalizar  ->  pré-treino (modelo geral)  ->  transfer learn
 ## 1. Dados
 
 - 20 ativos diários do Yahoo Finance (`yfinance`, histórico máximo, preços ajustados), a baixar para
-  `data/raw/<NOME>_1d.csv` (colunas `date, Open, High, Low, Close, Volume`). O script de download
-  (`src/download_data.py`) foi removido do repositório e precisa ser reescrito pela Pessoa A.
+  `data/raw/<NOME>_1d.csv` (colunas `date, Open, High, Low, Close, Volume`). O download está em
+  `src/download_data.py` e a validação em `src/validate_data.py` (ver [docs/dados.md](docs/dados.md)).
   - Índices: S&P 500, Nasdaq, Dow Jones, FTSE 100, DAX, Nikkei 225, Hang Seng, Ibovespa.
   - Commodities: ouro, prata, petróleo WTI, cobre.
   - Câmbio: EUR/USD, USD/JPY, GBP/USD, USD/BRL.
@@ -41,11 +41,11 @@ O modelo só consegue ser "geral" se os ativos estiverem na mesma escala e sem t
 **Não usar min-max 0–1 sobre o preço**: o mínimo e o máximo vêm da série inteira e vazam o futuro, a
 escala quebra quando surge uma nova máxima, e o resultado só reflete a posição na tendência.
 
-**Qual variante escolher ainda está em aberto.** Num teste com gradient boosting e walk-forward
-2010–2026, retorno cru, z-score expansivo e z-score móvel de 252 dias deram resultados quase
-iguais (AUC da direção 0,507–0,512; IC da volatilidade 0,24–0,26). Detalhes em
-[docs/referencias.md](docs/referencias.md). Falta testar em redes neurais, onde a escala pesa mais, e
-a variante "retorno / volatilidade móvel, sem subtrair a média".
+**Qual variante escolher ainda está em aberto.** Um teste preliminar com gradient boosting indicou
+que retorno cru, z-score expansivo e z-score móvel de 252 dias dão resultados parecidos, mas esse
+código e esses dados foram perdidos e o resultado **não é reproduzível**: refazer antes de citá-lo.
+Falta testar em redes neurais, onde a escala pesa mais. O painel atual usa a variante "retorno /
+volatilidade móvel de 252 dias, sem subtrair a média" (ver [docs/dados.md](docs/dados.md)).
 
 ## 3. Alvos
 
@@ -144,7 +144,8 @@ A etapa 1 é a prioridade: com um painel mínimo e folds definidos, B e C começ
 
 | Coluna | Descrição |
 |---|---|
-| `date`, `asset`, `asset_class` | chaves e classe (índice, commodity, câmbio, cripto, juros) |
+| `date`, `asset`, `asset_class` | chaves e classe (indice, commodity, cambio, cripto, juros) |
+| `scale` | desvio-padrão móvel de 252 dias usado na normalização (para reverter ao retorno original) |
 | `f_*` | features já normalizadas |
 | `y_ret_h1`, `y_ret_h5`, `y_dir_h1`, `y_vol_h5` | alvos |
 
