@@ -121,6 +121,9 @@ cada artigo muda no nosso trabalho.
 
 ## 4. O que já testamos e como se liga à literatura
 
+> O experimento abaixo é o preliminar, com 20 ativos, e não é reproduzível. A comparação atual, com 13
+> normalizações, 32 ativos e código no repositório, está em [normalizacao.md](normalizacao.md).
+
 Experimento de normalização feito antes de a equipa se dividir (o script e os CSVs foram removidos do
 repositório; ficam aqui os números). Configuração: gradient boosting, painel de 20 ativos do Yahoo
 Finance, walk-forward anual 2010–2026 (17 anos de teste), embargo de 5 dias, avaliação sempre em
