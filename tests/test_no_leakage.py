@@ -8,6 +8,7 @@ import pytest
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
 import features  # noqa: E402
+import normalization as nz  # noqa: E402
 
 FEATURES = lambda df: [c for c in df if c.startswith("f_")]  # noqa: E731
 
@@ -28,7 +29,8 @@ def synthetic(name: str, n: int = 900, seed: int = 0, level: bool = False) -> pd
 @pytest.fixture
 def raw():
     return {"SP500": synthetic("SP500", seed=1), "VIX": synthetic("VIX", seed=2, level=True),
-            "BTC": synthetic("BTC", seed=3)}
+            "BTC": synthetic("BTC", seed=3), "NASDAQ": synthetic("NASDAQ", seed=4),
+            "GOLD": synthetic("GOLD", seed=5), "ETH": synthetic("ETH", seed=6)}
 
 
 def test_features_do_not_change_when_future_is_removed(raw):
@@ -94,3 +96,43 @@ def test_folds_respect_embargo():
         assert pd.Timestamp(f["train_end"]) < pd.Timestamp(f["embargo_end"]) < pd.Timestamp(f["test_start"])
     for a, b in zip(folds, folds[1:]):
         assert pd.Timestamp(a["test_end"]) < pd.Timestamp(b["test_start"])
+
+
+@pytest.mark.parametrize("norm", nz.ALL_NORMS)
+def test_every_normalization_ignores_the_future(raw, norm):
+    """Para cada normalização: cortar o futuro não altera as features de datas passadas."""
+    cut = pd.Timestamp("2017-06-30")
+    full = features.build_panel(raw, norm)
+    trunc = features.build_panel({k: v[v["date"] <= cut] for k, v in raw.items()}, norm)
+    a = full[full["date"] <= cut].set_index(["date", "asset"])
+    b = trunc.set_index(["date", "asset"])
+    common = b.index.intersection(a.index)
+    assert len(common) > 100
+    cols = FEATURES(full)
+    pd.testing.assert_frame_equal(a.loc[common, cols], b.loc[common, cols], check_exact=False, rtol=1e-9)
+
+
+def test_align_dates_keeps_only_common_dates(raw):
+    raw = dict(raw)
+    raw["BTC"] = raw["BTC"].drop(index=[10, 11, 50])
+    raw["VIX"] = raw["VIX"].drop(index=[11, 70])
+    aligned = nz.align_dates(raw)
+    dates = [set(df["date"]) for df in aligned.values()]
+    assert all(d == dates[0] for d in dates)
+    assert len(dates[0]) == len(raw["SP500"]) - 4
+    panel = features.build_panel(raw)
+    assert panel.groupby("date")["asset"].nunique().eq(len(raw)).all()
+
+
+def test_minmax_and_rank_stay_in_unit_interval(raw):
+    df = raw["SP500"]
+    x = features.base_series(df, "SP500")
+    for f in (nz.minmax_rolling, nz.minmax_expanding, nz.rank_rolling, nz.minmax_price_rolling):
+        z = f(x, df["Close"], False).dropna()
+        assert len(z) > 100 and z.min() >= 0 and z.max() <= 1
+
+
+def test_cross_section_z_has_zero_mean_per_date(raw):
+    wide = pd.DataFrame({n: features.base_series(d, n) for n, d in raw.items()})
+    z = nz.cross_section_z(wide).dropna(how="all")
+    assert z.mean(axis=1).abs().max() < 1e-9

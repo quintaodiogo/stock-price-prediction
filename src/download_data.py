@@ -1,4 +1,4 @@
-"""Baixa os 20 ativos diários do Yahoo Finance para data/raw/<NOME>_1d.csv.
+"""Baixa os ativos diários (globais e ações da B3) do Yahoo Finance para data/raw/<NOME>_1d.csv.
 
 Histórico máximo, preços ajustados (auto_adjust). Volume zero (câmbio, VIX, juros e
 séries antigas de índices) é gravado como vazio. Uso: python src/download_data.py [NOME ...]
@@ -45,8 +45,9 @@ def main(names: list[str]) -> None:
 
 
 if __name__ == "__main__":
-    wanted = sys.argv[1:] or list(ASSETS)
-    unknown = [n for n in wanted if n not in ASSETS]
+    YAHOO = [n for n, (t, _) in ASSETS.items() if t]  # minis não vêm do Yahoo
+    wanted = sys.argv[1:] or YAHOO
+    unknown = [n for n in wanted if n not in YAHOO]
     if unknown:
-        sys.exit(f"Ativos desconhecidos: {unknown}. Opções: {list(ASSETS)}")
+        sys.exit(f"Ativos desconhecidos: {unknown}. Opções: {YAHOO}")
     main(wanted)

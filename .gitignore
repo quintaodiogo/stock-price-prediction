@@ -2,5 +2,6 @@
 __pycache__/
 *.pyc
 data/raw/*.csv
+data/intraday/
 data/processed/
 .pytest_cache/
