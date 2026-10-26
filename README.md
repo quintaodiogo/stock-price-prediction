@@ -1,6 +1,6 @@
 # Modelo geral de previsão de preços de ativos
 
-Objetivo: treinar **um único modelo** com vários ativos (índices, commodities, câmbio, cripto, juros) e
+Objetivo: treinar **um único modelo** com vários ativos (índices, commodities, câmbio, cripto, juros, ações e minis brasileiros) e
 reaproveitá-lo em cada ativo via **transfer learning**, em vez de treinar um modelo isolado por ativo.
 
 Pergunta central: *um modelo pré-treinado em muitos ativos prevê melhor um ativo novo do que um modelo
@@ -13,7 +13,7 @@ obter ativos  ->  normalizar  ->  pré-treino (modelo geral)  ->  transfer learn
 
 ## 1. Dados
 
-- 20 ativos diários do Yahoo Finance (`yfinance`, histórico máximo, preços ajustados), a baixar para
+- 32 ativos diários: 30 do Yahoo Finance (`yfinance`, histórico máximo, preços ajustados) e 2 minis da B3, a gravar em
   `data/raw/<NOME>_1d.csv` (colunas `date, Open, High, Low, Close, Volume`). O download está em
   `src/download_data.py` e a validação em `src/validate_data.py` (ver [docs/dados.md](docs/dados.md)).
   - Índices: S&P 500, Nasdaq, Dow Jones, FTSE 100, DAX, Nikkei 225, Hang Seng, Ibovespa.
@@ -21,14 +21,20 @@ obter ativos  ->  normalizar  ->  pré-treino (modelo geral)  ->  transfer learn
   - Câmbio: EUR/USD, USD/JPY, GBP/USD, USD/BRL.
   - Cripto: BTC, ETH.
   - Juros e volatilidade: Treasury 10Y (`^TNX`), VIX.
-- Os ativos começam em datas diferentes (S&P 500 em 1927, ETH em 2017). O painel final usa só o período
-  em que cada ativo existe; nada de preencher o passado com valores inventados.
+  - Minis da B3: WIN (Ibovespa) e WDO (dólar), agregados de candles de 1 minuto do MT5 por `src/minis_to_daily.py`.
+  - Ações da B3: PETR4, VALE3, ITUB4, BBDC4, BBAS3, ABEV3, WEGE3, B3SA3, SUZB3, RENT3 (tickers `.SA`).
+- Os ativos começam em datas diferentes (S&P 500 em 1927, WIN em 2020). O painel usa **só as datas em que
+  todos os ativos do conjunto têm candle** (interseção); nada de preencher o passado com valores inventados.
+  Com os 32 ativos isso dá cerca de 700 datas (2021 a 2026); sem minis e cripto, cerca de 3.000 (desde 2008).
+  Os conjuntos estão em `UNIVERSES` (`src/assets.py`); ver [docs/normalizacao.md](docs/normalizacao.md).
 - Volume não existe ou é zero em câmbio, VIX e juros. Tratar como ausente, não como zero.
 
 ## 2. Normalização
 
 O modelo só consegue ser "geral" se os ativos estiverem na mesma escala e sem tendência de nível.
 
+0. **Mesmas datas**: todos os ativos entram no painel só nas datas em comum, e o retorno é entre datas
+   consecutivas desse calendário (cripto opera 7 dias, o resto não).
 1. **Preço -> retorno logarítmico**: `r_t = ln(Close_t / Close_{t-1})`. Remove o nível (S&P em 5000 e
    USDBRL em 5 passam a ser comparáveis). Exceções: `US10Y` e `VIX` são níveis, use a diferença.
 2. **Padronizar por ativo** com média e desvio calculados **apenas na janela de treino** (ou em janela
@@ -38,14 +44,19 @@ O modelo só consegue ser "geral" se os ativos estiverem na mesma escala e sem t
 4. **Identificador do ativo** (embedding ou one-hot da classe) como feature opcional, para o modelo
    distinguir comportamentos por classe.
 
-**Não usar min-max 0–1 sobre o preço**: o mínimo e o máximo vêm da série inteira e vazam o futuro, a
-escala quebra quando surge uma nova máxima, e o resultado só reflete a posição na tendência.
+**Min-max e z-score só com janela passada.** Min-max 0–1 ou z-score sobre a série inteira usam o mínimo,
+o máximo e a média do futuro e vazam. As variantes testadas usam janela móvel (252 pregões) ou
+expansiva, que só olham até t. Min-max sobre o preço (não o retorno) normaliza o nível e reflete a
+posição na tendência.
 
-**Qual variante escolher ainda está em aberto.** Um teste preliminar com gradient boosting indicou
-que retorno cru, z-score expansivo e z-score móvel de 252 dias dão resultados parecidos, mas esse
-código e esses dados foram perdidos e o resultado **não é reproduzível**: refazer antes de citá-lo.
-Falta testar em redes neurais, onde a escala pesa mais. O painel atual usa a variante "retorno /
-volatilidade móvel de 252 dias, sem subtrair a média" (ver [docs/dados.md](docs/dados.md)).
+**Comparamos 13 normalizações** (retorno cru, retorno/volatilidade, com corte e EWMA, z-score móvel e
+expansivo, min-max móvel e expansivo, robusta com MAD, percentil, min-max e z-score do preço e z-score
+entre ativos) com o mesmo modelo, alvos e folds: ver [docs/normalizacao.md](docs/normalizacao.md) e
+`python src/compare_normalizations.py`. Resultado: para **volatilidade**, a escala móvel (retorno/volatilidade,
+z-score ou min-max móvel) ganha de `raw` e das variantes expansivas, de preço e entre ativos; para
+**direção e retorno**, nenhuma se separa do ruído. Falta testar em redes neurais, onde a escala pesa mais.
+O painel padrão usa "retorno / volatilidade móvel de 252 dias, sem subtrair a média" (`vol_scaled`; ver
+[docs/dados.md](docs/dados.md)); `python src/features.py --norm NOME --universe NOME` gera o painel com outra.
 
 ## 3. Alvos
 
@@ -99,7 +110,7 @@ o outro.
 
 ### Pessoa A: Dados e features
 
-- Manter `src/download_data.py`; validar os 20 CSVs (datas duplicadas, buracos, splits, zeros).
+- Manter `src/download_data.py`; validar os 32 CSVs (datas duplicadas, buracos, splits, zeros).
 - Implementar normalização e features em `src/features.py`, sem vazamento.
 - Gerar o **painel** `data/processed/panel.parquet` e o arquivo de folds `data/processed/folds.json`
   (walk-forward com embargo).
@@ -124,7 +135,7 @@ o outro.
   classe de ativo.
 - Escrever as conclusões em `docs/` e `reports/`: quando a transferência ajuda, quando não ajuda.
 - **Pronto quando**: tabela final comparando baseline, treino só no ativo, zero-shot e fine-tuning,
-  para os 20 ativos.
+  para os 32 ativos.
 
 ### Ordem de trabalho
 

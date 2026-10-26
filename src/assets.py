@@ -1,4 +1,4 @@
-"""Catálogo dos 20 ativos: nome do arquivo -> ticker do Yahoo Finance e classe."""
+"""Catálogo dos ativos (20 globais, ações da B3 e minis): nome do arquivo -> ticker do Yahoo Finance e classe."""
 
 ASSETS = {
     # nome: (ticker, classe)
@@ -22,6 +22,20 @@ ASSETS = {
     "ETH": ("ETH-USD", "cripto"),
     "US10Y": ("^TNX", "juros"),
     "VIX": ("^VIX", "juros"),
+    # Ações da B3 (Yahoo usa o sufixo .SA)
+    "PETR4": ("PETR4.SA", "acao_br"),
+    "VALE3": ("VALE3.SA", "acao_br"),
+    "ITUB4": ("ITUB4.SA", "acao_br"),
+    "BBDC4": ("BBDC4.SA", "acao_br"),
+    "BBAS3": ("BBAS3.SA", "acao_br"),
+    "ABEV3": ("ABEV3.SA", "acao_br"),
+    "WEGE3": ("WEGE3.SA", "acao_br"),
+    "B3SA3": ("B3SA3.SA", "acao_br"),
+    "SUZB3": ("SUZB3.SA", "acao_br"),
+    "RENT3": ("RENT3.SA", "acao_br"),
+    # Minis da B3: não vêm do Yahoo; gerados por src/minis_to_daily.py a partir de data/intraday/
+    "WIN": (None, "mini"),  # minicontrato de Ibovespa
+    "WDO": (None, "mini"),  # minicontrato de dólar
 }
 
 # Ativos que são níveis (taxa ou índice de volatilidade): usar diferença, não retorno log.
@@ -31,3 +45,11 @@ LEVEL_ASSETS = {"US10Y", "VIX"}
 NO_VOLUME_ASSETS = {n for n, (_, c) in ASSETS.items() if c == "cambio"} | LEVEL_ASSETS
 
 COLUMNS = ["date", "Open", "High", "Low", "Close", "Volume"]
+
+# Conjuntos de ativos para o painel (todos alinhados na interseção de datas de cada conjunto).
+# O alinhamento é limitado pelo ativo mais curto: os minis começam em 2020, a cripto (ETH) em 2017.
+UNIVERSES = {
+    "todos": list(ASSETS),
+    "sem_minis": [n for n, (_, c) in ASSETS.items() if c != "mini"],
+    "sem_minis_cripto": [n for n, (_, c) in ASSETS.items() if c not in ("mini", "cripto")],
+}

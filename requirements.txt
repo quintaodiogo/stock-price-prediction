@@ -1,8 +1,9 @@
-yfinance
-pandas
-numpy
-pyarrow
-pytest
-lightgbm
-scikit-learn
-ipykernel
+   yfinance
+   pandas
+   numpy
+   pyarrow
+   pytest
+   scikit-learn
+   scipy
+   lightgbm
+   ipykernel
