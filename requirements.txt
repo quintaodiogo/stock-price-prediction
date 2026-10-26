@@ -3,3 +3,6 @@ pandas
 numpy
 pyarrow
 pytest
+lightgbm
+scikit-learn
+ipykernel
