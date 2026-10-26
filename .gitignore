@@ -5,3 +5,5 @@ data/raw/*.csv
 data/intraday/
 data/processed/
 .pytest_cache/
+models/*.txt
+reports/results/preds_*.parquet
