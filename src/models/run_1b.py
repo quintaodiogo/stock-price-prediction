@@ -20,7 +20,9 @@ import baselines  # noqa: E402
 import common  # noqa: E402
 import tree  # noqa: E402
 
-MODELS = ["zero", "media_historica", "vol_passada", "lgbm_ativo", "lgbm_classe", "lgbm_geral"]
+BASE_MODELS = ["zero", "media_historica", "vol_passada", "lgbm_ativo", "lgbm_classe", "lgbm_geral"]
+OPTIONAL_MODELS = ["gru_geral"]          # entram na comparação se as previsões existirem (src/models/seq.py)
+MODELS = BASE_MODELS + OPTIONAL_MODELS
 
 
 def ensure_preds(rerun: bool) -> None:
@@ -34,7 +36,8 @@ def ensure_preds(rerun: bool) -> None:
 
 def load_all() -> pd.DataFrame:
     keys = ["date", "asset", "fold", "target"]
-    frames = [pd.read_parquet(common.RESULTS_DIR / f"preds_{m}.parquet").assign(model=m) for m in MODELS]
+    found = [m for m in MODELS if (common.RESULTS_DIR / f"preds_{m}.parquet").exists()]
+    frames = [pd.read_parquet(common.RESULTS_DIR / f"preds_{m}.parquet").assign(model=m) for m in found]
     allp = pd.concat(frames, ignore_index=True)
     # só linhas que todos os modelos aplicáveis ao alvo previram
     n_models = allp.groupby("target")["model"].nunique()

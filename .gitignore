@@ -7,3 +7,4 @@ data/processed/
 .pytest_cache/
 models/*.txt
 reports/results/preds_*.parquet
+models/*.pt
