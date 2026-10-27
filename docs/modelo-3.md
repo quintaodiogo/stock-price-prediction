@@ -105,8 +105,8 @@ transfer learning; retorno e direção entram no relatório como resultado negat
 
 - Pessoa C: cenário "ativo não visto" com `python src/models/tree.py --mode geral --exclude <ATIVOS>`
   (retirar junto os irmãos próximos, ex.: `SP500 NASDAQ DOWJONES`).
-- Pessoa B: rede sequencial (etapa 3), começando pela volatilidade; depois ajuste de hiperparâmetros
-  dentro do treino de cada fold (etapa 4).
+- Pessoa B: rede sequencial feita (etapa 3, seção 9: empata com o LightGBM geral); próximo é o
+  ajuste de hiperparâmetros dentro do treino de cada fold (etapa 4).
 
 ## 8. O que deu errado no caminho
 
@@ -116,3 +116,50 @@ transfer learning; retorno e direção entram no relatório como resultado negat
   Recriar o `.venv` com Python 3.12.
 - LightGBM no Mac sem `libomp`: `Library not loaded: @rpath/libomp.dylib`. Resolvido com
   `brew install libomp`.
+
+## 9. Rede sequencial (etapa 3)
+
+`src/models/seq.py`: uma GRU que, em vez de olhar só as features de hoje, olha as features dos
+**últimos 40 pregões** do ativo e prevê o alvo de hoje. É um modelo geral (todos os ativos juntos),
+o mesmo papel do `lgbm_geral`, e começa pela volatilidade (`y_vol_h5`).
+
+| Item | Escolha |
+|---|---|
+| Entrada | Janela de 40 pregões × as mesmas features `f_*` do painel, só do mesmo ativo e só até t |
+| Padronização | Média e desvio de cada feature calculados **só no treino** do fold; ausente vira 0 |
+| Rede | GRU de 1 camada, 32 unidades, dropout 0,1, uma saída linear |
+| Treino | Adam (lr 0,001), lotes de 512, até 30 épocas; perda MSE (direção: entropia binária) |
+| Parada | Early stopping pela perda na validação interna (mesma do `tree.py`), paciência 4; fica o peso da melhor época |
+| Semente | 42 |
+
+```
+pip install torch
+python src/models/seq.py                     # y_vol_h5, 17 folds (~10 min em CPU)
+python src/models/run_1b.py                  # a comparação passa a incluir gru_geral
+```
+
+Testes em `tests/test_seq.py`: a janela nunca mistura ativos nem usa linha posterior à data da
+previsão, e a padronização não muda quando os dados fora do treino mudam (verificado por mutação:
+calcular o desvio com todas as linhas faz o teste falhar).
+
+**Resultado com dados reais** (volatilidade, mesmas 15 dobras de 2012 a 2026 do experimento 1b):
+
+| Modelo | IC | IC desvio | RMSE | Vence ativo |
+|---|---|---|---|---|
+| vol_passada | 0,236 | 0,097 | 0,559 | 20% |
+| lgbm_ativo | 0,295 | 0,059 | 0,535 | — |
+| lgbm_geral | 0,342 | 0,069 | 0,517 | 87% |
+| **gru_geral** | **0,343** | 0,066 | 0,517 | 80% |
+
+**Conclusão: a rede empata com o LightGBM geral.** A diferença de IC (0,0003) e de RMSE (0,0001) é
+desprezível perto da variação entre folds (cerca de 0,07). Ver 40 dias de histórico não acrescentou
+nada ao que as features do painel já resumem (desvios de 5, 21 e 63 dias, médias, defasagens). O
+resultado reforça a conclusão do 1b: o ganho vem de **treinar com vários ativos**, não do tipo de
+modelo, já que dois modelos bem diferentes chegam ao mesmo IC.
+
+Consequências:
+- O LightGBM continua como modelo principal: mesmo resultado, ~10× mais rápido e mais simples de
+  usar no fine-tuning da Pessoa C.
+- A GRU fica como segunda arquitetura, útil para mostrar que a conclusão não depende do modelo.
+- Ressalva: a rede não foi ajustada (janela, tamanho, taxa de aprendizado). Testar janela maior ou a
+  série `z` crua como entrada, em vez das features já agregadas, é o que mais poderia mudar o resultado.
