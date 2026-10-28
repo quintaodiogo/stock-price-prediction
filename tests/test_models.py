@@ -11,6 +11,7 @@ sys.path.insert(0, str(ROOT / "src" / "models"))
 import baselines  # noqa: E402
 import common  # noqa: E402
 import features  # noqa: E402
+import tree  # noqa: E402
 from test_no_leakage import synthetic  # noqa: E402
 
 CUT = pd.Timestamp("2017-06-30")
@@ -60,3 +61,12 @@ def test_features_never_include_targets():
     panel = features.build_panel(_raw())
     cols = common.feature_cols(panel)
     assert cols and not any(c.startswith(("y_", "r_")) for c in cols)
+
+
+def test_tune_candidates_start_with_current_config():
+    import tune
+    cands = tune.candidates(8)
+    assert len(cands) == 9
+    assert cands[0] == {k: tree.PARAMS[k] for k in tune.TUNED_KEYS}
+    assert len({tuple(sorted(c.items())) for c in cands}) == 9      # sem repetição
+    assert all(set(c) == set(tune.GRID) for c in cands)
