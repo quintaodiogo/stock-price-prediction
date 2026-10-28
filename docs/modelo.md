@@ -105,8 +105,8 @@ transfer learning; retorno e direção entram no relatório como resultado negat
 
 - Pessoa C: cenário "ativo não visto" com `python src/models/tree.py --mode geral --exclude <ATIVOS>`
   (retirar junto os irmãos próximos, ex.: `SP500 NASDAQ DOWJONES`).
-- Pessoa B: rede sequencial feita (etapa 3, seção 9: empata com o LightGBM geral); próximo é o
-  ajuste de hiperparâmetros dentro do treino de cada fold (etapa 4).
+- Pessoa B: rede sequencial feita (etapa 3, seção 9: empata com o LightGBM geral); ajuste de
+  hiperparâmetros na seção 10 (etapa 4).
 
 ## 8. O que deu errado no caminho
 
@@ -163,3 +163,35 @@ Consequências:
 - A GRU fica como segunda arquitetura, útil para mostrar que a conclusão não depende do modelo.
 - Ressalva: a rede não foi ajustada (janela, tamanho, taxa de aprendizado). Testar janela maior ou a
   série `z` crua como entrada, em vez das features já agregadas, é o que mais poderia mudar o resultado.
+
+## 10. Ajuste de hiperparâmetros (etapa 4)
+
+`src/models/tune.py` ajusta o LightGBM **dentro de cada fold e de cada modo** (geral, classe,
+ativo), sem nunca olhar o ano de teste:
+
+1. o treino do fold é dividido em ajuste + validação interna (últimos 20% das datas, com embargo);
+2. 9 combinações são treinadas no ajuste, com early stopping na validação: a configuração atual do
+   `tree.py` mais 8 sorteadas (semente fixa) da grade abaixo;
+3. fica a de menor perda na validação; o modelo final é retreinado no treino inteiro e prevê o teste.
+
+| Hiperparâmetro | Valores |
+|---|---|
+| `num_leaves` | 7, 15, 31, 63 |
+| `min_child_samples` | 50, 200, 500 (reduzido em grupos pequenos, como no `tree.py`) |
+| `feature_fraction` | 0,6, 0,8, 1,0 |
+| `lambda_l2` | 0, 1, 10 |
+| `learning_rate` | 0,02, 0,05 |
+
+Como os três modos recebem o mesmo ajuste, isso também responde à ressalva da seção 6
+("hiperparâmetros fixos, iguais nos três modos"). As escolhas de cada fold ficam em
+`reports/results/run_lgbm_<modo>_tuned.json`.
+
+```
+python src/models/tune.py                    # os 3 modos, y_vol_h5 (~15 min)
+python src/models/run_1b.py --models vol_passada lgbm_ativo lgbm_geral lgbm_ativo_tuned \
+    lgbm_classe_tuned lgbm_geral_tuned --ref lgbm_ativo_tuned --out comparacao_tuned.csv
+```
+
+`--folds 0 8` faz um teste rápido e salva como `..._tuned_teste`, sem sobrescrever o resultado completo.
+
+**Resultado com dados reais:** *a preencher depois de rodar.*
