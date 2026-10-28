@@ -95,8 +95,8 @@ transfer learning; retorno e direção entram no relatório como resultado negat
 
 ## 6. Ressalvas
 
-- Hiperparâmetros fixos, iguais nos três modos (só `min_child_samples` diminui em grupos pequenos).
-  Um ajuste por modo pode mudar a distância entre eles.
+- ~~Hiperparâmetros fixos, iguais nos três modos.~~ Resolvido na seção 10: com ajuste por modo e por
+  fold, a vantagem do modelo geral se mantém.
 - Sem teste estatístico formal da diferença entre modelos; a contagem de folds vencidos é a evidência.
 - O IC é calculado sobre todas as linhas do fold (ativos e datas juntos), não por data.
 - Um único conjunto de ativos (`sem_minis_cripto`) e uma única normalização (`vol_scaled`).
@@ -105,8 +105,8 @@ transfer learning; retorno e direção entram no relatório como resultado negat
 
 - Pessoa C: cenário "ativo não visto" com `python src/models/tree.py --mode geral --exclude <ATIVOS>`
   (retirar junto os irmãos próximos, ex.: `SP500 NASDAQ DOWJONES`).
-- Pessoa B: rede sequencial feita (etapa 3, seção 9: empata com o LightGBM geral); ajuste de
-  hiperparâmetros na seção 10 (etapa 4).
+- Pessoa B: etapas 1 a 4 concluídas (seções 4, 9 e 10). Pendente só o apoio à Pessoa C (fine-tuning
+  a partir dos modelos salvos) e o relatório final.
 
 ## 8. O que deu errado no caminho
 
@@ -116,6 +116,9 @@ transfer learning; retorno e direção entram no relatório como resultado negat
   Recriar o `.venv` com Python 3.12.
 - LightGBM no Mac sem `libomp`: `Library not loaded: @rpath/libomp.dylib`. Resolvido com
   `brew install libomp`.
+- `pytest` caindo com `Segmentation fault` no Mac: LightGBM e PyTorch trazem cada um o seu OpenMP e
+  não convivem se o LightGBM carrega primeiro. `tests/conftest.py` importa o torch antes de tudo.
+- Downloads renomeados pelo Mac (`modelo-3.md`, `test_models-2.py`): conferir o nome antes de commitar.
 
 ## 9. Rede sequencial (etapa 3)
 
@@ -194,4 +197,25 @@ python src/models/run_1b.py --models vol_passada lgbm_ativo lgbm_geral lgbm_ativ
 
 `--folds 0 8` faz um teste rápido e salva como `..._tuned_teste`, sem sobrescrever o resultado completo.
 
-**Resultado com dados reais:** *a preencher depois de rodar.*
+**Resultado com dados reais** (volatilidade, mesmas 15 dobras de 2012 a 2026; `Vence ativo` aqui é
+contra o `lgbm_ativo_tuned`, o modelo por ativo **já ajustado**):
+
+| Modelo | IC | IC desvio | RMSE | Vence ativo ajustado |
+|---|---|---|---|---|
+| vol_passada | 0,236 | 0,097 | 0,559 | 20% |
+| lgbm_ativo (sem ajuste) | 0,295 | 0,059 | 0,535 | 27% |
+| lgbm_ativo_tuned | 0,299 | 0,057 | 0,533 | — |
+| lgbm_classe_tuned | 0,338 | 0,061 | 0,520 | **100%** |
+| lgbm_geral (sem ajuste) | 0,342 | 0,069 | 0,517 | 93% |
+| **lgbm_geral_tuned** | **0,346** | 0,071 | **0,517** | 87% |
+
+**Conclusões:**
+1. **O ajuste quase não muda nada.** O IC sobe 0,004 no modelo por ativo e 0,003 no geral, bem menos
+   que a variação entre folds (cerca de 0,06). A configuração original do `tree.py` já estava boa.
+2. **A vantagem do modelo geral sobrevive ao ajuste.** Mesmo com o modelo por ativo ajustado, o geral
+   ajustado vence em 13 dos 15 anos e o por classe em todos os 15. A diferença de IC entre geral e por
+   ativo continua em torno de 0,05.
+3. Com isso cai a ressalva da seção 6 sobre hiperparâmetros fixos: a conclusão do experimento 1b não
+   era efeito de uma configuração que favorecia o modelo geral.
+4. O `tree.py` sem ajuste continua sendo o modelo de referência para a Pessoa C: dá o mesmo
+   resultado e roda em uma fração do tempo.

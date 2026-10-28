@@ -1,0 +1,3433 @@
+{
+  "modelo": "lgbm_ativo_tuned",
+  "modo": "ativo",
+  "candidatas": [
+    {
+      "num_leaves": 15,
+      "min_child_samples": 200,
+      "feature_fraction": 0.8,
+      "lambda_l2": 1.0,
+      "learning_rate": 0.03
+    },
+    {
+      "num_leaves": 31,
+      "min_child_samples": 50,
+      "feature_fraction": 0.6,
+      "lambda_l2": 0.0,
+      "learning_rate": 0.02
+    },
+    {
+      "num_leaves": 63,
+      "min_child_samples": 500,
+      "feature_fraction": 0.8,
+      "lambda_l2": 0.0,
+      "learning_rate": 0.02
+    },
+    {
+      "num_leaves": 63,
+      "min_child_samples": 50,
+      "feature_fraction": 0.6,
+      "lambda_l2": 0.0,
+      "learning_rate": 0.02
+    },
+    {
+      "num_leaves": 31,
+      "min_child_samples": 50,
+      "feature_fraction": 0.8,
+      "lambda_l2": 10.0,
+      "learning_rate": 0.05
+    },
+    {
+      "num_leaves": 7,
+      "min_child_samples": 500,
+      "feature_fraction": 0.6,
+      "lambda_l2": 0.0,
+      "learning_rate": 0.05
+    },
+    {
+      "num_leaves": 7,
+      "min_child_samples": 50,
+      "feature_fraction": 0.8,
+      "lambda_l2": 0.0,
+      "learning_rate": 0.05
+    },
+    {
+      "num_leaves": 31,
+      "min_child_samples": 500,
+      "feature_fraction": 0.6,
+      "lambda_l2": 10.0,
+      "learning_rate": 0.02
+    },
+    {
+      "num_leaves": 7,
+      "min_child_samples": 500,
+      "feature_fraction": 0.8,
+      "lambda_l2": 10.0,
+      "learning_rate": 0.02
+    }
+  ],
+  "escolhas": [
+    {
+      "fold": 2,
+      "target": "y_vol_h5",
+      "grupo": "ABEV3",
+      "candidata": 4,
+      "arvores": 20,
+      "val": 0.100632
+    },
+    {
+      "fold": 2,
+      "target": "y_vol_h5",
+      "grupo": "B3SA3",
+      "candidata": 5,
+      "arvores": 10,
+      "val": 0.143299
+    },
+    {
+      "fold": 2,
+      "target": "y_vol_h5",
+      "grupo": "BBAS3",
+      "candidata": 7,
+      "arvores": 49,
+      "val": 0.293081
+    },
+    {
+      "fold": 2,
+      "target": "y_vol_h5",
+      "grupo": "BBDC4",
+      "candidata": 0,
+      "arvores": 21,
+      "val": 0.257296
+    },
+    {
+      "fold": 2,
+      "target": "y_vol_h5",
+      "grupo": "COPPER",
+      "candidata": 7,
+      "arvores": 64,
+      "val": 0.483723
+    },
+    {
+      "fold": 2,
+      "target": "y_vol_h5",
+      "grupo": "DAX",
+      "candidata": 7,
+      "arvores": 169,
+      "val": 0.4415
+    },
+    {
+      "fold": 2,
+      "target": "y_vol_h5",
+      "grupo": "DOWJONES",
+      "candidata": 5,
+      "arvores": 48,
+      "val": 0.602324
+    },
+    {
+      "fold": 2,
+      "target": "y_vol_h5",
+      "grupo": "EURUSD",
+      "candidata": 1,
+      "arvores": 20,
+      "val": 0.209616
+    },
+    {
+      "fold": 2,
+      "target": "y_vol_h5",
+      "grupo": "FTSE100",
+      "candidata": 1,
+      "arvores": 156,
+      "val": 0.321871
+    },
+    {
+      "fold": 2,
+      "target": "y_vol_h5",
+      "grupo": "GBPUSD",
+      "candidata": 8,
+      "arvores": 10,
+      "val": 0.089752
+    },
+    {
+      "fold": 2,
+      "target": "y_vol_h5",
+      "grupo": "GOLD",
+      "candidata": 6,
+      "arvores": 204,
+      "val": 1.137603
+    },
+    {
+      "fold": 2,
+      "target": "y_vol_h5",
+      "grupo": "HANGSENG",
+      "candidata": 5,
+      "arvores": 44,
+      "val": 0.556945
+    },
+    {
+      "fold": 2,
+      "target": "y_vol_h5",
+      "grupo": "IBOVESPA",
+      "candidata": 4,
+      "arvores": 76,
+      "val": 0.387238
+    },
+    {
+      "fold": 2,
+      "target": "y_vol_h5",
+      "grupo": "ITUB4",
+      "candidata": 4,
+      "arvores": 33,
+      "val": 0.300844
+    },
+    {
+      "fold": 2,
+      "target": "y_vol_h5",
+      "grupo": "NASDAQ",
+      "candidata": 4,
+      "arvores": 115,
+      "val": 0.532438
+    },
+    {
+      "fold": 2,
+      "target": "y_vol_h5",
+      "grupo": "NIKKEI225",
+      "candidata": 5,
+      "arvores": 10,
+      "val": 0.095545
+    },
+    {
+      "fold": 2,
+      "target": "y_vol_h5",
+      "grupo": "PETR4",
+      "candidata": 5,
+      "arvores": 13,
+      "val": 0.502054
+    },
+    {
+      "fold": 2,
+      "target": "y_vol_h5",
+      "grupo": "RENT3",
+      "candidata": 1,
+      "arvores": 11,
+      "val": 0.147402
+    },
+    {
+      "fold": 2,
+      "target": "y_vol_h5",
+      "grupo": "SILVER",
+      "candidata": 7,
+      "arvores": 108,
+      "val": 1.173973
+    },
+    {
+      "fold": 2,
+      "target": "y_vol_h5",
+      "grupo": "SP500",
+      "candidata": 7,
+      "arvores": 88,
+      "val": 0.602789
+    },
+    {
+      "fold": 2,
+      "target": "y_vol_h5",
+      "grupo": "US10Y",
+      "candidata": 5,
+      "arvores": 107,
+      "val": 0.196485
+    },
+    {
+      "fold": 2,
+      "target": "y_vol_h5",
+      "grupo": "USDBRL",
+      "candidata": 2,
+      "arvores": 26,
+      "val": 0.175662
+    },
+    {
+      "fold": 2,
+      "target": "y_vol_h5",
+      "grupo": "USDJPY",
+      "candidata": 7,
+      "arvores": 10,
+      "val": 0.329432
+    },
+    {
+      "fold": 2,
+      "target": "y_vol_h5",
+      "grupo": "VALE3",
+      "candidata": 6,
+      "arvores": 18,
+      "val": 0.430606
+    },
+    {
+      "fold": 2,
+      "target": "y_vol_h5",
+      "grupo": "VIX",
+      "candidata": 6,
+      "arvores": 69,
+      "val": 1.132736
+    },
+    {
+      "fold": 2,
+      "target": "y_vol_h5",
+      "grupo": "WEGE3",
+      "candidata": 5,
+      "arvores": 54,
+      "val": 0.299345
+    },
+    {
+      "fold": 2,
+      "target": "y_vol_h5",
+      "grupo": "WTI",
+      "candidata": 8,
+      "arvores": 221,
+      "val": 0.258938
+    },
+    {
+      "fold": 3,
+      "target": "y_vol_h5",
+      "grupo": "ABEV3",
+      "candidata": 6,
+      "arvores": 10,
+      "val": 0.380411
+    },
+    {
+      "fold": 3,
+      "target": "y_vol_h5",
+      "grupo": "B3SA3",
+      "candidata": 5,
+      "arvores": 42,
+      "val": 0.047661
+    },
+    {
+      "fold": 3,
+      "target": "y_vol_h5",
+      "grupo": "BBAS3",
+      "candidata": 6,
+      "arvores": 26,
+      "val": 0.170189
+    },
+    {
+      "fold": 3,
+      "target": "y_vol_h5",
+      "grupo": "BBDC4",
+      "candidata": 5,
+      "arvores": 10,
+      "val": 0.246048
+    },
+    {
+      "fold": 3,
+      "target": "y_vol_h5",
+      "grupo": "COPPER",
+      "candidata": 5,
+      "arvores": 26,
+      "val": 0.083192
+    },
+    {
+      "fold": 3,
+      "target": "y_vol_h5",
+      "grupo": "DAX",
+      "candidata": 7,
+      "arvores": 163,
+      "val": 0.083738
+    },
+    {
+      "fold": 3,
+      "target": "y_vol_h5",
+      "grupo": "DOWJONES",
+      "candidata": 5,
+      "arvores": 21,
+      "val": 0.094711
+    },
+    {
+      "fold": 3,
+      "target": "y_vol_h5",
+      "grupo": "EURUSD",
+      "candidata": 8,
+      "arvores": 10,
+      "val": 0.088913
+    },
+    {
+      "fold": 3,
+      "target": "y_vol_h5",
+      "grupo": "FTSE100",
+      "candidata": 5,
+      "arvores": 77,
+      "val": 0.068869
+    },
+    {
+      "fold": 3,
+      "target": "y_vol_h5",
+      "grupo": "GBPUSD",
+      "candidata": 8,
+      "arvores": 170,
+      "val": 0.107124
+    },
+    {
+      "fold": 3,
+      "target": "y_vol_h5",
+      "grupo": "GOLD",
+      "candidata": 5,
+      "arvores": 21,
+      "val": 0.078862
+    },
+    {
+      "fold": 3,
+      "target": "y_vol_h5",
+      "grupo": "HANGSENG",
+      "candidata": 8,
+      "arvores": 34,
+      "val": 0.091588
+    },
+    {
+      "fold": 3,
+      "target": "y_vol_h5",
+      "grupo": "IBOVESPA",
+      "candidata": 6,
+      "arvores": 21,
+      "val": 0.125567
+    },
+    {
+      "fold": 3,
+      "target": "y_vol_h5",
+      "grupo": "ITUB4",
+      "candidata": 4,
+      "arvores": 16,
+      "val": 0.15877
+    },
+    {
+      "fold": 3,
+      "target": "y_vol_h5",
+      "grupo": "NASDAQ",
+      "candidata": 5,
+      "arvores": 45,
+      "val": 0.065533
+    },
+    {
+      "fold": 3,
+      "target": "y_vol_h5",
+      "grupo": "NIKKEI225",
+      "candidata": 5,
+      "arvores": 10,
+      "val": 0.10404
+    },
+    {
+      "fold": 3,
+      "target": "y_vol_h5",
+      "grupo": "PETR4",
+      "candidata": 8,
+      "arvores": 169,
+      "val": 0.19511
+    },
+    {
+      "fold": 3,
+      "target": "y_vol_h5",
+      "grupo": "RENT3",
+      "candidata": 6,
+      "arvores": 15,
+      "val": 0.155873
+    },
+    {
+      "fold": 3,
+      "target": "y_vol_h5",
+      "grupo": "SILVER",
+      "candidata": 8,
+      "arvores": 124,
+      "val": 0.070972
+    },
+    {
+      "fold": 3,
+      "target": "y_vol_h5",
+      "grupo": "SP500",
+      "candidata": 6,
+      "arvores": 32,
+      "val": 0.083398
+    },
+    {
+      "fold": 3,
+      "target": "y_vol_h5",
+      "grupo": "US10Y",
+      "candidata": 5,
+      "arvores": 20,
+      "val": 0.10566
+    },
+    {
+      "fold": 3,
+      "target": "y_vol_h5",
+      "grupo": "USDBRL",
+      "candidata": 2,
+      "arvores": 27,
+      "val": 0.21896
+    },
+    {
+      "fold": 3,
+      "target": "y_vol_h5",
+      "grupo": "USDJPY",
+      "candidata": 2,
+      "arvores": 23,
+      "val": 0.153694
+    },
+    {
+      "fold": 3,
+      "target": "y_vol_h5",
+      "grupo": "VALE3",
+      "candidata": 4,
+      "arvores": 10,
+      "val": 0.105677
+    },
+    {
+      "fold": 3,
+      "target": "y_vol_h5",
+      "grupo": "VIX",
+      "candidata": 5,
+      "arvores": 30,
+      "val": 0.083484
+    },
+    {
+      "fold": 3,
+      "target": "y_vol_h5",
+      "grupo": "WEGE3",
+      "candidata": 4,
+      "arvores": 50,
+      "val": 0.130791
+    },
+    {
+      "fold": 3,
+      "target": "y_vol_h5",
+      "grupo": "WTI",
+      "candidata": 7,
+      "arvores": 135,
+      "val": 0.149183
+    },
+    {
+      "fold": 4,
+      "target": "y_vol_h5",
+      "grupo": "ABEV3",
+      "candidata": 4,
+      "arvores": 10,
+      "val": 0.101279
+    },
+    {
+      "fold": 4,
+      "target": "y_vol_h5",
+      "grupo": "B3SA3",
+      "candidata": 1,
+      "arvores": 106,
+      "val": 0.141091
+    },
+    {
+      "fold": 4,
+      "target": "y_vol_h5",
+      "grupo": "BBAS3",
+      "candidata": 7,
+      "arvores": 18,
+      "val": 0.13826
+    },
+    {
+      "fold": 4,
+      "target": "y_vol_h5",
+      "grupo": "BBDC4",
+      "candidata": 4,
+      "arvores": 19,
+      "val": 0.109861
+    },
+    {
+      "fold": 4,
+      "target": "y_vol_h5",
+      "grupo": "COPPER",
+      "candidata": 8,
+      "arvores": 65,
+      "val": 0.078586
+    },
+    {
+      "fold": 4,
+      "target": "y_vol_h5",
+      "grupo": "DAX",
+      "candidata": 5,
+      "arvores": 67,
+      "val": 0.083848
+    },
+    {
+      "fold": 4,
+      "target": "y_vol_h5",
+      "grupo": "DOWJONES",
+      "candidata": 7,
+      "arvores": 166,
+      "val": 0.132938
+    },
+    {
+      "fold": 4,
+      "target": "y_vol_h5",
+      "grupo": "EURUSD",
+      "candidata": 5,
+      "arvores": 10,
+      "val": 0.117624
+    },
+    {
+      "fold": 4,
+      "target": "y_vol_h5",
+      "grupo": "FTSE100",
+      "candidata": 7,
+      "arvores": 52,
+      "val": 0.133345
+    },
+    {
+      "fold": 4,
+      "target": "y_vol_h5",
+      "grupo": "GBPUSD",
+      "candidata": 1,
+      "arvores": 49,
+      "val": 0.171515
+    },
+    {
+      "fold": 4,
+      "target": "y_vol_h5",
+      "grupo": "GOLD",
+      "candidata": 7,
+      "arvores": 10,
+      "val": 0.65439
+    },
+    {
+      "fold": 4,
+      "target": "y_vol_h5",
+      "grupo": "HANGSENG",
+      "candidata": 5,
+      "arvores": 92,
+      "val": 0.130738
+    },
+    {
+      "fold": 4,
+      "target": "y_vol_h5",
+      "grupo": "IBOVESPA",
+      "candidata": 5,
+      "arvores": 18,
+      "val": 0.129372
+    },
+    {
+      "fold": 4,
+      "target": "y_vol_h5",
+      "grupo": "ITUB4",
+      "candidata": 5,
+      "arvores": 10,
+      "val": 0.235832
+    },
+    {
+      "fold": 4,
+      "target": "y_vol_h5",
+      "grupo": "NASDAQ",
+      "candidata": 7,
+      "arvores": 69,
+      "val": 0.134301
+    },
+    {
+      "fold": 4,
+      "target": "y_vol_h5",
+      "grupo": "NIKKEI225",
+      "candidata": 7,
+      "arvores": 61,
+      "val": 0.306376
+    },
+    {
+      "fold": 4,
+      "target": "y_vol_h5",
+      "grupo": "PETR4",
+      "candidata": 7,
+      "arvores": 10,
+      "val": 0.189212
+    },
+    {
+      "fold": 4,
+      "target": "y_vol_h5",
+      "grupo": "RENT3",
+      "candidata": 5,
+      "arvores": 23,
+      "val": 0.090617
+    },
+    {
+      "fold": 4,
+      "target": "y_vol_h5",
+      "grupo": "SILVER",
+      "candidata": 4,
+      "arvores": 10,
+      "val": 0.323068
+    },
+    {
+      "fold": 4,
+      "target": "y_vol_h5",
+      "grupo": "SP500",
+      "candidata": 7,
+      "arvores": 68,
+      "val": 0.138946
+    },
+    {
+      "fold": 4,
+      "target": "y_vol_h5",
+      "grupo": "US10Y",
+      "candidata": 6,
+      "arvores": 26,
+      "val": 0.102076
+    },
+    {
+      "fold": 4,
+      "target": "y_vol_h5",
+      "grupo": "USDBRL",
+      "candidata": 1,
+      "arvores": 48,
+      "val": 0.24201
+    },
+    {
+      "fold": 4,
+      "target": "y_vol_h5",
+      "grupo": "USDJPY",
+      "candidata": 0,
+      "arvores": 48,
+      "val": 0.323049
+    },
+    {
+      "fold": 4,
+      "target": "y_vol_h5",
+      "grupo": "VALE3",
+      "candidata": 8,
+      "arvores": 79,
+      "val": 0.115623
+    },
+    {
+      "fold": 4,
+      "target": "y_vol_h5",
+      "grupo": "VIX",
+      "candidata": 4,
+      "arvores": 10,
+      "val": 0.247752
+    },
+    {
+      "fold": 4,
+      "target": "y_vol_h5",
+      "grupo": "WEGE3",
+      "candidata": 7,
+      "arvores": 65,
+      "val": 0.23892
+    },
+    {
+      "fold": 4,
+      "target": "y_vol_h5",
+      "grupo": "WTI",
+      "candidata": 8,
+      "arvores": 10,
+      "val": 0.098004
+    },
+    {
+      "fold": 5,
+      "target": "y_vol_h5",
+      "grupo": "ABEV3",
+      "candidata": 8,
+      "arvores": 10,
+      "val": 0.115089
+    },
+    {
+      "fold": 5,
+      "target": "y_vol_h5",
+      "grupo": "B3SA3",
+      "candidata": 5,
+      "arvores": 29,
+      "val": 0.172876
+    },
+    {
+      "fold": 5,
+      "target": "y_vol_h5",
+      "grupo": "BBAS3",
+      "candidata": 8,
+      "arvores": 104,
+      "val": 0.318406
+    },
+    {
+      "fold": 5,
+      "target": "y_vol_h5",
+      "grupo": "BBDC4",
+      "candidata": 5,
+      "arvores": 17,
+      "val": 0.306424
+    },
+    {
+      "fold": 5,
+      "target": "y_vol_h5",
+      "grupo": "COPPER",
+      "candidata": 2,
+      "arvores": 10,
+      "val": 0.101467
+    },
+    {
+      "fold": 5,
+      "target": "y_vol_h5",
+      "grupo": "DAX",
+      "candidata": 5,
+      "arvores": 10,
+      "val": 0.201283
+    },
+    {
+      "fold": 5,
+      "target": "y_vol_h5",
+      "grupo": "DOWJONES",
+      "candidata": 1,
+      "arvores": 19,
+      "val": 0.229392
+    },
+    {
+      "fold": 5,
+      "target": "y_vol_h5",
+      "grupo": "EURUSD",
+      "candidata": 7,
+      "arvores": 64,
+      "val": 0.117962
+    },
+    {
+      "fold": 5,
+      "target": "y_vol_h5",
+      "grupo": "FTSE100",
+      "candidata": 4,
+      "arvores": 37,
+      "val": 0.210217
+    },
+    {
+      "fold": 5,
+      "target": "y_vol_h5",
+      "grupo": "GBPUSD",
+      "candidata": 8,
+      "arvores": 129,
+      "val": 0.088024
+    },
+    {
+      "fold": 5,
+      "target": "y_vol_h5",
+      "grupo": "GOLD",
+      "candidata": 4,
+      "arvores": 24,
+      "val": 0.077908
+    },
+    {
+      "fold": 5,
+      "target": "y_vol_h5",
+      "grupo": "HANGSENG",
+      "candidata": 6,
+      "arvores": 10,
+      "val": 0.123754
+    },
+    {
+      "fold": 5,
+      "target": "y_vol_h5",
+      "grupo": "IBOVESPA",
+      "candidata": 1,
+      "arvores": 70,
+      "val": 0.145988
+    },
+    {
+      "fold": 5,
+      "target": "y_vol_h5",
+      "grupo": "ITUB4",
+      "candidata": 8,
+      "arvores": 54,
+      "val": 0.190765
+    },
+    {
+      "fold": 5,
+      "target": "y_vol_h5",
+      "grupo": "NASDAQ",
+      "candidata": 1,
+      "arvores": 14,
+      "val": 0.248906
+    },
+    {
+      "fold": 5,
+      "target": "y_vol_h5",
+      "grupo": "NIKKEI225",
+      "candidata": 7,
+      "arvores": 37,
+      "val": 0.140437
+    },
+    {
+      "fold": 5,
+      "target": "y_vol_h5",
+      "grupo": "PETR4",
+      "candidata": 8,
+      "arvores": 221,
+      "val": 0.228519
+    },
+    {
+      "fold": 5,
+      "target": "y_vol_h5",
+      "grupo": "RENT3",
+      "candidata": 1,
+      "arvores": 97,
+      "val": 0.238507
+    },
+    {
+      "fold": 5,
+      "target": "y_vol_h5",
+      "grupo": "SILVER",
+      "candidata": 4,
+      "arvores": 33,
+      "val": 0.116741
+    },
+    {
+      "fold": 5,
+      "target": "y_vol_h5",
+      "grupo": "SP500",
+      "candidata": 4,
+      "arvores": 14,
+      "val": 0.217876
+    },
+    {
+      "fold": 5,
+      "target": "y_vol_h5",
+      "grupo": "US10Y",
+      "candidata": 6,
+      "arvores": 10,
+      "val": 0.087355
+    },
+    {
+      "fold": 5,
+      "target": "y_vol_h5",
+      "grupo": "USDBRL",
+      "candidata": 5,
+      "arvores": 30,
+      "val": 0.173913
+    },
+    {
+      "fold": 5,
+      "target": "y_vol_h5",
+      "grupo": "USDJPY",
+      "candidata": 4,
+      "arvores": 30,
+      "val": 0.157308
+    },
+    {
+      "fold": 5,
+      "target": "y_vol_h5",
+      "grupo": "VALE3",
+      "candidata": 8,
+      "arvores": 55,
+      "val": 0.134981
+    },
+    {
+      "fold": 5,
+      "target": "y_vol_h5",
+      "grupo": "VIX",
+      "candidata": 4,
+      "arvores": 44,
+      "val": 0.354954
+    },
+    {
+      "fold": 5,
+      "target": "y_vol_h5",
+      "grupo": "WEGE3",
+      "candidata": 4,
+      "arvores": 10,
+      "val": 0.121748
+    },
+    {
+      "fold": 5,
+      "target": "y_vol_h5",
+      "grupo": "WTI",
+      "candidata": 5,
+      "arvores": 77,
+      "val": 0.109463
+    },
+    {
+      "fold": 6,
+      "target": "y_vol_h5",
+      "grupo": "ABEV3",
+      "candidata": 7,
+      "arvores": 10,
+      "val": 0.168869
+    },
+    {
+      "fold": 6,
+      "target": "y_vol_h5",
+      "grupo": "B3SA3",
+      "candidata": 5,
+      "arvores": 39,
+      "val": 0.178475
+    },
+    {
+      "fold": 6,
+      "target": "y_vol_h5",
+      "grupo": "BBAS3",
+      "candidata": 7,
+      "arvores": 102,
+      "val": 0.296734
+    },
+    {
+      "fold": 6,
+      "target": "y_vol_h5",
+      "grupo": "BBDC4",
+      "candidata": 6,
+      "arvores": 55,
+      "val": 0.305653
+    },
+    {
+      "fold": 6,
+      "target": "y_vol_h5",
+      "grupo": "COPPER",
+      "candidata": 7,
+      "arvores": 76,
+      "val": 0.232322
+    },
+    {
+      "fold": 6,
+      "target": "y_vol_h5",
+      "grupo": "DAX",
+      "candidata": 7,
+      "arvores": 19,
+      "val": 0.283228
+    },
+    {
+      "fold": 6,
+      "target": "y_vol_h5",
+      "grupo": "DOWJONES",
+      "candidata": 7,
+      "arvores": 94,
+      "val": 0.434327
+    },
+    {
+      "fold": 6,
+      "target": "y_vol_h5",
+      "grupo": "EURUSD",
+      "candidata": 8,
+      "arvores": 133,
+      "val": 0.41646
+    },
+    {
+      "fold": 6,
+      "target": "y_vol_h5",
+      "grupo": "FTSE100",
+      "candidata": 4,
+      "arvores": 51,
+      "val": 0.318288
+    },
+    {
+      "fold": 6,
+      "target": "y_vol_h5",
+      "grupo": "GBPUSD",
+      "candidata": 5,
+      "arvores": 49,
+      "val": 0.212897
+    },
+    {
+      "fold": 6,
+      "target": "y_vol_h5",
+      "grupo": "GOLD",
+      "candidata": 0,
+      "arvores": 18,
+      "val": 0.126108
+    },
+    {
+      "fold": 6,
+      "target": "y_vol_h5",
+      "grupo": "HANGSENG",
+      "candidata": 5,
+      "arvores": 87,
+      "val": 0.309624
+    },
+    {
+      "fold": 6,
+      "target": "y_vol_h5",
+      "grupo": "IBOVESPA",
+      "candidata": 4,
+      "arvores": 29,
+      "val": 0.18761
+    },
+    {
+      "fold": 6,
+      "target": "y_vol_h5",
+      "grupo": "ITUB4",
+      "candidata": 6,
+      "arvores": 23,
+      "val": 0.228741
+    },
+    {
+      "fold": 6,
+      "target": "y_vol_h5",
+      "grupo": "NASDAQ",
+      "candidata": 1,
+      "arvores": 48,
+      "val": 0.321436
+    },
+    {
+      "fold": 6,
+      "target": "y_vol_h5",
+      "grupo": "NIKKEI225",
+      "candidata": 7,
+      "arvores": 96,
+      "val": 0.368469
+    },
+    {
+      "fold": 6,
+      "target": "y_vol_h5",
+      "grupo": "PETR4",
+      "candidata": 5,
+      "arvores": 101,
+      "val": 0.201612
+    },
+    {
+      "fold": 6,
+      "target": "y_vol_h5",
+      "grupo": "RENT3",
+      "candidata": 7,
+      "arvores": 34,
+      "val": 0.294304
+    },
+    {
+      "fold": 6,
+      "target": "y_vol_h5",
+      "grupo": "SILVER",
+      "candidata": 7,
+      "arvores": 38,
+      "val": 0.257508
+    },
+    {
+      "fold": 6,
+      "target": "y_vol_h5",
+      "grupo": "SP500",
+      "candidata": 7,
+      "arvores": 68,
+      "val": 0.431359
+    },
+    {
+      "fold": 6,
+      "target": "y_vol_h5",
+      "grupo": "US10Y",
+      "candidata": 5,
+      "arvores": 24,
+      "val": 0.218605
+    },
+    {
+      "fold": 6,
+      "target": "y_vol_h5",
+      "grupo": "USDBRL",
+      "candidata": 7,
+      "arvores": 71,
+      "val": 0.340726
+    },
+    {
+      "fold": 6,
+      "target": "y_vol_h5",
+      "grupo": "USDJPY",
+      "candidata": 0,
+      "arvores": 10,
+      "val": 0.291916
+    },
+    {
+      "fold": 6,
+      "target": "y_vol_h5",
+      "grupo": "VALE3",
+      "candidata": 6,
+      "arvores": 52,
+      "val": 0.434548
+    },
+    {
+      "fold": 6,
+      "target": "y_vol_h5",
+      "grupo": "VIX",
+      "candidata": 2,
+      "arvores": 59,
+      "val": 1.194339
+    },
+    {
+      "fold": 6,
+      "target": "y_vol_h5",
+      "grupo": "WEGE3",
+      "candidata": 5,
+      "arvores": 32,
+      "val": 0.223067
+    },
+    {
+      "fold": 6,
+      "target": "y_vol_h5",
+      "grupo": "WTI",
+      "candidata": 5,
+      "arvores": 102,
+      "val": 0.464338
+    },
+    {
+      "fold": 7,
+      "target": "y_vol_h5",
+      "grupo": "ABEV3",
+      "candidata": 6,
+      "arvores": 10,
+      "val": 0.156131
+    },
+    {
+      "fold": 7,
+      "target": "y_vol_h5",
+      "grupo": "B3SA3",
+      "candidata": 5,
+      "arvores": 17,
+      "val": 0.122133
+    },
+    {
+      "fold": 7,
+      "target": "y_vol_h5",
+      "grupo": "BBAS3",
+      "candidata": 6,
+      "arvores": 27,
+      "val": 0.248574
+    },
+    {
+      "fold": 7,
+      "target": "y_vol_h5",
+      "grupo": "BBDC4",
+      "candidata": 2,
+      "arvores": 80,
+      "val": 0.232023
+    },
+    {
+      "fold": 7,
+      "target": "y_vol_h5",
+      "grupo": "COPPER",
+      "candidata": 2,
+      "arvores": 39,
+      "val": 0.176878
+    },
+    {
+      "fold": 7,
+      "target": "y_vol_h5",
+      "grupo": "DAX",
+      "candidata": 4,
+      "arvores": 29,
+      "val": 0.212942
+    },
+    {
+      "fold": 7,
+      "target": "y_vol_h5",
+      "grupo": "DOWJONES",
+      "candidata": 7,
+      "arvores": 80,
+      "val": 0.411269
+    },
+    {
+      "fold": 7,
+      "target": "y_vol_h5",
+      "grupo": "EURUSD",
+      "candidata": 8,
+      "arvores": 44,
+      "val": 0.173699
+    },
+    {
+      "fold": 7,
+      "target": "y_vol_h5",
+      "grupo": "FTSE100",
+      "candidata": 7,
+      "arvores": 119,
+      "val": 0.309727
+    },
+    {
+      "fold": 7,
+      "target": "y_vol_h5",
+      "grupo": "GBPUSD",
+      "candidata": 8,
+      "arvores": 310,
+      "val": 0.762491
+    },
+    {
+      "fold": 7,
+      "target": "y_vol_h5",
+      "grupo": "GOLD",
+      "candidata": 6,
+      "arvores": 10,
+      "val": 0.267241
+    },
+    {
+      "fold": 7,
+      "target": "y_vol_h5",
+      "grupo": "HANGSENG",
+      "candidata": 6,
+      "arvores": 104,
+      "val": 0.289311
+    },
+    {
+      "fold": 7,
+      "target": "y_vol_h5",
+      "grupo": "IBOVESPA",
+      "candidata": 5,
+      "arvores": 31,
+      "val": 0.161425
+    },
+    {
+      "fold": 7,
+      "target": "y_vol_h5",
+      "grupo": "ITUB4",
+      "candidata": 5,
+      "arvores": 32,
+      "val": 0.187452
+    },
+    {
+      "fold": 7,
+      "target": "y_vol_h5",
+      "grupo": "NASDAQ",
+      "candidata": 4,
+      "arvores": 48,
+      "val": 0.34944
+    },
+    {
+      "fold": 7,
+      "target": "y_vol_h5",
+      "grupo": "NIKKEI225",
+      "candidata": 7,
+      "arvores": 106,
+      "val": 0.530458
+    },
+    {
+      "fold": 7,
+      "target": "y_vol_h5",
+      "grupo": "PETR4",
+      "candidata": 5,
+      "arvores": 24,
+      "val": 0.164148
+    },
+    {
+      "fold": 7,
+      "target": "y_vol_h5",
+      "grupo": "RENT3",
+      "candidata": 5,
+      "arvores": 12,
+      "val": 0.223605
+    },
+    {
+      "fold": 7,
+      "target": "y_vol_h5",
+      "grupo": "SILVER",
+      "candidata": 4,
+      "arvores": 10,
+      "val": 0.285225
+    },
+    {
+      "fold": 7,
+      "target": "y_vol_h5",
+      "grupo": "SP500",
+      "candidata": 8,
+      "arvores": 102,
+      "val": 0.422206
+    },
+    {
+      "fold": 7,
+      "target": "y_vol_h5",
+      "grupo": "US10Y",
+      "candidata": 4,
+      "arvores": 10,
+      "val": 0.260802
+    },
+    {
+      "fold": 7,
+      "target": "y_vol_h5",
+      "grupo": "USDBRL",
+      "candidata": 4,
+      "arvores": 38,
+      "val": 0.271646
+    },
+    {
+      "fold": 7,
+      "target": "y_vol_h5",
+      "grupo": "USDJPY",
+      "candidata": 0,
+      "arvores": 76,
+      "val": 0.4015
+    },
+    {
+      "fold": 7,
+      "target": "y_vol_h5",
+      "grupo": "VALE3",
+      "candidata": 4,
+      "arvores": 41,
+      "val": 0.197544
+    },
+    {
+      "fold": 7,
+      "target": "y_vol_h5",
+      "grupo": "VIX",
+      "candidata": 5,
+      "arvores": 20,
+      "val": 0.978013
+    },
+    {
+      "fold": 7,
+      "target": "y_vol_h5",
+      "grupo": "WEGE3",
+      "candidata": 5,
+      "arvores": 62,
+      "val": 0.226876
+    },
+    {
+      "fold": 7,
+      "target": "y_vol_h5",
+      "grupo": "WTI",
+      "candidata": 6,
+      "arvores": 82,
+      "val": 0.257577
+    },
+    {
+      "fold": 8,
+      "target": "y_vol_h5",
+      "grupo": "ABEV3",
+      "candidata": 6,
+      "arvores": 10,
+      "val": 0.135054
+    },
+    {
+      "fold": 8,
+      "target": "y_vol_h5",
+      "grupo": "B3SA3",
+      "candidata": 1,
+      "arvores": 26,
+      "val": 0.140662
+    },
+    {
+      "fold": 8,
+      "target": "y_vol_h5",
+      "grupo": "BBAS3",
+      "candidata": 8,
+      "arvores": 54,
+      "val": 0.250927
+    },
+    {
+      "fold": 8,
+      "target": "y_vol_h5",
+      "grupo": "BBDC4",
+      "candidata": 6,
+      "arvores": 10,
+      "val": 0.218756
+    },
+    {
+      "fold": 8,
+      "target": "y_vol_h5",
+      "grupo": "COPPER",
+      "candidata": 1,
+      "arvores": 26,
+      "val": 0.121426
+    },
+    {
+      "fold": 8,
+      "target": "y_vol_h5",
+      "grupo": "DAX",
+      "candidata": 5,
+      "arvores": 81,
+      "val": 0.12146
+    },
+    {
+      "fold": 8,
+      "target": "y_vol_h5",
+      "grupo": "DOWJONES",
+      "candidata": 1,
+      "arvores": 201,
+      "val": 0.135167
+    },
+    {
+      "fold": 8,
+      "target": "y_vol_h5",
+      "grupo": "EURUSD",
+      "candidata": 7,
+      "arvores": 73,
+      "val": 0.111618
+    },
+    {
+      "fold": 8,
+      "target": "y_vol_h5",
+      "grupo": "FTSE100",
+      "candidata": 4,
+      "arvores": 36,
+      "val": 0.10358
+    },
+    {
+      "fold": 8,
+      "target": "y_vol_h5",
+      "grupo": "GBPUSD",
+      "candidata": 5,
+      "arvores": 70,
+      "val": 0.650014
+    },
+    {
+      "fold": 8,
+      "target": "y_vol_h5",
+      "grupo": "GOLD",
+      "candidata": 4,
+      "arvores": 10,
+      "val": 0.108295
+    },
+    {
+      "fold": 8,
+      "target": "y_vol_h5",
+      "grupo": "HANGSENG",
+      "candidata": 5,
+      "arvores": 73,
+      "val": 0.114564
+    },
+    {
+      "fold": 8,
+      "target": "y_vol_h5",
+      "grupo": "IBOVESPA",
+      "candidata": 8,
+      "arvores": 89,
+      "val": 0.151826
+    },
+    {
+      "fold": 8,
+      "target": "y_vol_h5",
+      "grupo": "ITUB4",
+      "candidata": 8,
+      "arvores": 30,
+      "val": 0.164504
+    },
+    {
+      "fold": 8,
+      "target": "y_vol_h5",
+      "grupo": "NASDAQ",
+      "candidata": 6,
+      "arvores": 76,
+      "val": 0.175635
+    },
+    {
+      "fold": 8,
+      "target": "y_vol_h5",
+      "grupo": "NIKKEI225",
+      "candidata": 1,
+      "arvores": 130,
+      "val": 0.157189
+    },
+    {
+      "fold": 8,
+      "target": "y_vol_h5",
+      "grupo": "PETR4",
+      "candidata": 5,
+      "arvores": 64,
+      "val": 0.13321
+    },
+    {
+      "fold": 8,
+      "target": "y_vol_h5",
+      "grupo": "RENT3",
+      "candidata": 6,
+      "arvores": 35,
+      "val": 0.137777
+    },
+    {
+      "fold": 8,
+      "target": "y_vol_h5",
+      "grupo": "SILVER",
+      "candidata": 5,
+      "arvores": 12,
+      "val": 0.180324
+    },
+    {
+      "fold": 8,
+      "target": "y_vol_h5",
+      "grupo": "SP500",
+      "candidata": 6,
+      "arvores": 98,
+      "val": 0.14309
+    },
+    {
+      "fold": 8,
+      "target": "y_vol_h5",
+      "grupo": "US10Y",
+      "candidata": 6,
+      "arvores": 10,
+      "val": 0.126798
+    },
+    {
+      "fold": 8,
+      "target": "y_vol_h5",
+      "grupo": "USDBRL",
+      "candidata": 5,
+      "arvores": 53,
+      "val": 0.139716
+    },
+    {
+      "fold": 8,
+      "target": "y_vol_h5",
+      "grupo": "USDJPY",
+      "candidata": 6,
+      "arvores": 20,
+      "val": 0.141725
+    },
+    {
+      "fold": 8,
+      "target": "y_vol_h5",
+      "grupo": "VALE3",
+      "candidata": 8,
+      "arvores": 110,
+      "val": 0.123406
+    },
+    {
+      "fold": 8,
+      "target": "y_vol_h5",
+      "grupo": "VIX",
+      "candidata": 8,
+      "arvores": 79,
+      "val": 0.196413
+    },
+    {
+      "fold": 8,
+      "target": "y_vol_h5",
+      "grupo": "WEGE3",
+      "candidata": 8,
+      "arvores": 42,
+      "val": 0.162638
+    },
+    {
+      "fold": 8,
+      "target": "y_vol_h5",
+      "grupo": "WTI",
+      "candidata": 8,
+      "arvores": 144,
+      "val": 0.077992
+    },
+    {
+      "fold": 9,
+      "target": "y_vol_h5",
+      "grupo": "ABEV3",
+      "candidata": 8,
+      "arvores": 41,
+      "val": 0.260942
+    },
+    {
+      "fold": 9,
+      "target": "y_vol_h5",
+      "grupo": "B3SA3",
+      "candidata": 6,
+      "arvores": 73,
+      "val": 0.204432
+    },
+    {
+      "fold": 9,
+      "target": "y_vol_h5",
+      "grupo": "BBAS3",
+      "candidata": 7,
+      "arvores": 66,
+      "val": 0.242394
+    },
+    {
+      "fold": 9,
+      "target": "y_vol_h5",
+      "grupo": "BBDC4",
+      "candidata": 5,
+      "arvores": 18,
+      "val": 0.182662
+    },
+    {
+      "fold": 9,
+      "target": "y_vol_h5",
+      "grupo": "COPPER",
+      "candidata": 1,
+      "arvores": 14,
+      "val": 0.161884
+    },
+    {
+      "fold": 9,
+      "target": "y_vol_h5",
+      "grupo": "DAX",
+      "candidata": 2,
+      "arvores": 53,
+      "val": 0.172479
+    },
+    {
+      "fold": 9,
+      "target": "y_vol_h5",
+      "grupo": "DOWJONES",
+      "candidata": 5,
+      "arvores": 60,
+      "val": 0.835703
+    },
+    {
+      "fold": 9,
+      "target": "y_vol_h5",
+      "grupo": "EURUSD",
+      "candidata": 4,
+      "arvores": 10,
+      "val": 0.12957
+    },
+    {
+      "fold": 9,
+      "target": "y_vol_h5",
+      "grupo": "FTSE100",
+      "candidata": 2,
+      "arvores": 62,
+      "val": 0.214532
+    },
+    {
+      "fold": 9,
+      "target": "y_vol_h5",
+      "grupo": "GBPUSD",
+      "candidata": 6,
+      "arvores": 92,
+      "val": 0.115926
+    },
+    {
+      "fold": 9,
+      "target": "y_vol_h5",
+      "grupo": "GOLD",
+      "candidata": 2,
+      "arvores": 38,
+      "val": 0.125877
+    },
+    {
+      "fold": 9,
+      "target": "y_vol_h5",
+      "grupo": "HANGSENG",
+      "candidata": 1,
+      "arvores": 53,
+      "val": 0.273761
+    },
+    {
+      "fold": 9,
+      "target": "y_vol_h5",
+      "grupo": "IBOVESPA",
+      "candidata": 7,
+      "arvores": 64,
+      "val": 0.182048
+    },
+    {
+      "fold": 9,
+      "target": "y_vol_h5",
+      "grupo": "ITUB4",
+      "candidata": 7,
+      "arvores": 25,
+      "val": 0.194747
+    },
+    {
+      "fold": 9,
+      "target": "y_vol_h5",
+      "grupo": "NASDAQ",
+      "candidata": 5,
+      "arvores": 150,
+      "val": 0.427729
+    },
+    {
+      "fold": 9,
+      "target": "y_vol_h5",
+      "grupo": "NIKKEI225",
+      "candidata": 6,
+      "arvores": 58,
+      "val": 0.200126
+    },
+    {
+      "fold": 9,
+      "target": "y_vol_h5",
+      "grupo": "PETR4",
+      "candidata": 4,
+      "arvores": 55,
+      "val": 0.158874
+    },
+    {
+      "fold": 9,
+      "target": "y_vol_h5",
+      "grupo": "RENT3",
+      "candidata": 1,
+      "arvores": 103,
+      "val": 0.193437
+    },
+    {
+      "fold": 9,
+      "target": "y_vol_h5",
+      "grupo": "SILVER",
+      "candidata": 0,
+      "arvores": 14,
+      "val": 0.148921
+    },
+    {
+      "fold": 9,
+      "target": "y_vol_h5",
+      "grupo": "SP500",
+      "candidata": 5,
+      "arvores": 68,
+      "val": 0.705414
+    },
+    {
+      "fold": 9,
+      "target": "y_vol_h5",
+      "grupo": "US10Y",
+      "candidata": 5,
+      "arvores": 69,
+      "val": 0.155056
+    },
+    {
+      "fold": 9,
+      "target": "y_vol_h5",
+      "grupo": "USDBRL",
+      "candidata": 1,
+      "arvores": 92,
+      "val": 0.257522
+    },
+    {
+      "fold": 9,
+      "target": "y_vol_h5",
+      "grupo": "USDJPY",
+      "candidata": 5,
+      "arvores": 10,
+      "val": 0.133856
+    },
+    {
+      "fold": 9,
+      "target": "y_vol_h5",
+      "grupo": "VALE3",
+      "candidata": 6,
+      "arvores": 55,
+      "val": 0.093165
+    },
+    {
+      "fold": 9,
+      "target": "y_vol_h5",
+      "grupo": "VIX",
+      "candidata": 6,
+      "arvores": 74,
+      "val": 1.781016
+    },
+    {
+      "fold": 9,
+      "target": "y_vol_h5",
+      "grupo": "WEGE3",
+      "candidata": 5,
+      "arvores": 10,
+      "val": 0.214882
+    },
+    {
+      "fold": 9,
+      "target": "y_vol_h5",
+      "grupo": "WTI",
+      "candidata": 8,
+      "arvores": 86,
+      "val": 0.120965
+    },
+    {
+      "fold": 10,
+      "target": "y_vol_h5",
+      "grupo": "ABEV3",
+      "candidata": 8,
+      "arvores": 60,
+      "val": 0.335089
+    },
+    {
+      "fold": 10,
+      "target": "y_vol_h5",
+      "grupo": "B3SA3",
+      "candidata": 5,
+      "arvores": 72,
+      "val": 0.208354
+    },
+    {
+      "fold": 10,
+      "target": "y_vol_h5",
+      "grupo": "BBAS3",
+      "candidata": 4,
+      "arvores": 19,
+      "val": 0.18888
+    },
+    {
+      "fold": 10,
+      "target": "y_vol_h5",
+      "grupo": "BBDC4",
+      "candidata": 6,
+      "arvores": 25,
+      "val": 0.155532
+    },
+    {
+      "fold": 10,
+      "target": "y_vol_h5",
+      "grupo": "COPPER",
+      "candidata": 0,
+      "arvores": 21,
+      "val": 0.157594
+    },
+    {
+      "fold": 10,
+      "target": "y_vol_h5",
+      "grupo": "DAX",
+      "candidata": 0,
+      "arvores": 23,
+      "val": 0.206876
+    },
+    {
+      "fold": 10,
+      "target": "y_vol_h5",
+      "grupo": "DOWJONES",
+      "candidata": 5,
+      "arvores": 64,
+      "val": 0.801153
+    },
+    {
+      "fold": 10,
+      "target": "y_vol_h5",
+      "grupo": "EURUSD",
+      "candidata": 8,
+      "arvores": 73,
+      "val": 0.147555
+    },
+    {
+      "fold": 10,
+      "target": "y_vol_h5",
+      "grupo": "FTSE100",
+      "candidata": 1,
+      "arvores": 49,
+      "val": 0.278615
+    },
+    {
+      "fold": 10,
+      "target": "y_vol_h5",
+      "grupo": "GBPUSD",
+      "candidata": 7,
+      "arvores": 27,
+      "val": 0.179211
+    },
+    {
+      "fold": 10,
+      "target": "y_vol_h5",
+      "grupo": "GOLD",
+      "candidata": 1,
+      "arvores": 31,
+      "val": 0.216036
+    },
+    {
+      "fold": 10,
+      "target": "y_vol_h5",
+      "grupo": "HANGSENG",
+      "candidata": 1,
+      "arvores": 41,
+      "val": 0.262346
+    },
+    {
+      "fold": 10,
+      "target": "y_vol_h5",
+      "grupo": "IBOVESPA",
+      "candidata": 7,
+      "arvores": 46,
+      "val": 0.159392
+    },
+    {
+      "fold": 10,
+      "target": "y_vol_h5",
+      "grupo": "ITUB4",
+      "candidata": 6,
+      "arvores": 10,
+      "val": 0.179182
+    },
+    {
+      "fold": 10,
+      "target": "y_vol_h5",
+      "grupo": "NASDAQ",
+      "candidata": 6,
+      "arvores": 120,
+      "val": 0.410041
+    },
+    {
+      "fold": 10,
+      "target": "y_vol_h5",
+      "grupo": "NIKKEI225",
+      "candidata": 2,
+      "arvores": 50,
+      "val": 0.210632
+    },
+    {
+      "fold": 10,
+      "target": "y_vol_h5",
+      "grupo": "PETR4",
+      "candidata": 7,
+      "arvores": 63,
+      "val": 0.149982
+    },
+    {
+      "fold": 10,
+      "target": "y_vol_h5",
+      "grupo": "RENT3",
+      "candidata": 5,
+      "arvores": 26,
+      "val": 0.183453
+    },
+    {
+      "fold": 10,
+      "target": "y_vol_h5",
+      "grupo": "SILVER",
+      "candidata": 2,
+      "arvores": 54,
+      "val": 0.191461
+    },
+    {
+      "fold": 10,
+      "target": "y_vol_h5",
+      "grupo": "SP500",
+      "candidata": 5,
+      "arvores": 54,
+      "val": 0.694513
+    },
+    {
+      "fold": 10,
+      "target": "y_vol_h5",
+      "grupo": "US10Y",
+      "candidata": 4,
+      "arvores": 91,
+      "val": 0.220134
+    },
+    {
+      "fold": 10,
+      "target": "y_vol_h5",
+      "grupo": "USDBRL",
+      "candidata": 1,
+      "arvores": 64,
+      "val": 0.25929
+    },
+    {
+      "fold": 10,
+      "target": "y_vol_h5",
+      "grupo": "USDJPY",
+      "candidata": 4,
+      "arvores": 17,
+      "val": 0.166284
+    },
+    {
+      "fold": 10,
+      "target": "y_vol_h5",
+      "grupo": "VALE3",
+      "candidata": 5,
+      "arvores": 10,
+      "val": 0.409882
+    },
+    {
+      "fold": 10,
+      "target": "y_vol_h5",
+      "grupo": "VIX",
+      "candidata": 0,
+      "arvores": 180,
+      "val": 1.654236
+    },
+    {
+      "fold": 10,
+      "target": "y_vol_h5",
+      "grupo": "WEGE3",
+      "candidata": 2,
+      "arvores": 11,
+      "val": 0.197998
+    },
+    {
+      "fold": 10,
+      "target": "y_vol_h5",
+      "grupo": "WTI",
+      "candidata": 6,
+      "arvores": 17,
+      "val": 0.227538
+    },
+    {
+      "fold": 11,
+      "target": "y_vol_h5",
+      "grupo": "ABEV3",
+      "candidata": 8,
+      "arvores": 114,
+      "val": 0.402086
+    },
+    {
+      "fold": 11,
+      "target": "y_vol_h5",
+      "grupo": "B3SA3",
+      "candidata": 6,
+      "arvores": 212,
+      "val": 0.318809
+    },
+    {
+      "fold": 11,
+      "target": "y_vol_h5",
+      "grupo": "BBAS3",
+      "candidata": 5,
+      "arvores": 168,
+      "val": 0.334273
+    },
+    {
+      "fold": 11,
+      "target": "y_vol_h5",
+      "grupo": "BBDC4",
+      "candidata": 6,
+      "arvores": 85,
+      "val": 0.336542
+    },
+    {
+      "fold": 11,
+      "target": "y_vol_h5",
+      "grupo": "COPPER",
+      "candidata": 5,
+      "arvores": 58,
+      "val": 0.178651
+    },
+    {
+      "fold": 11,
+      "target": "y_vol_h5",
+      "grupo": "DAX",
+      "candidata": 5,
+      "arvores": 61,
+      "val": 0.480807
+    },
+    {
+      "fold": 11,
+      "target": "y_vol_h5",
+      "grupo": "DOWJONES",
+      "candidata": 2,
+      "arvores": 267,
+      "val": 0.492273
+    },
+    {
+      "fold": 11,
+      "target": "y_vol_h5",
+      "grupo": "EURUSD",
+      "candidata": 8,
+      "arvores": 177,
+      "val": 0.217777
+    },
+    {
+      "fold": 11,
+      "target": "y_vol_h5",
+      "grupo": "FTSE100",
+      "candidata": 6,
+      "arvores": 72,
+      "val": 0.486204
+    },
+    {
+      "fold": 11,
+      "target": "y_vol_h5",
+      "grupo": "GBPUSD",
+      "candidata": 6,
+      "arvores": 23,
+      "val": 0.287627
+    },
+    {
+      "fold": 11,
+      "target": "y_vol_h5",
+      "grupo": "GOLD",
+      "candidata": 2,
+      "arvores": 37,
+      "val": 0.521592
+    },
+    {
+      "fold": 11,
+      "target": "y_vol_h5",
+      "grupo": "HANGSENG",
+      "candidata": 5,
+      "arvores": 24,
+      "val": 0.149624
+    },
+    {
+      "fold": 11,
+      "target": "y_vol_h5",
+      "grupo": "IBOVESPA",
+      "candidata": 6,
+      "arvores": 114,
+      "val": 0.484421
+    },
+    {
+      "fold": 11,
+      "target": "y_vol_h5",
+      "grupo": "ITUB4",
+      "candidata": 5,
+      "arvores": 143,
+      "val": 0.25063
+    },
+    {
+      "fold": 11,
+      "target": "y_vol_h5",
+      "grupo": "NASDAQ",
+      "candidata": 5,
+      "arvores": 115,
+      "val": 0.342819
+    },
+    {
+      "fold": 11,
+      "target": "y_vol_h5",
+      "grupo": "NIKKEI225",
+      "candidata": 5,
+      "arvores": 75,
+      "val": 0.250145
+    },
+    {
+      "fold": 11,
+      "target": "y_vol_h5",
+      "grupo": "PETR4",
+      "candidata": 6,
+      "arvores": 83,
+      "val": 0.750409
+    },
+    {
+      "fold": 11,
+      "target": "y_vol_h5",
+      "grupo": "RENT3",
+      "candidata": 2,
+      "arvores": 320,
+      "val": 0.376364
+    },
+    {
+      "fold": 11,
+      "target": "y_vol_h5",
+      "grupo": "SILVER",
+      "candidata": 6,
+      "arvores": 95,
+      "val": 0.812931
+    },
+    {
+      "fold": 11,
+      "target": "y_vol_h5",
+      "grupo": "SP500",
+      "candidata": 6,
+      "arvores": 141,
+      "val": 0.495641
+    },
+    {
+      "fold": 11,
+      "target": "y_vol_h5",
+      "grupo": "SUZB3",
+      "candidata": 4,
+      "arvores": 10,
+      "val": 0.129943
+    },
+    {
+      "fold": 11,
+      "target": "y_vol_h5",
+      "grupo": "US10Y",
+      "candidata": 6,
+      "arvores": 66,
+      "val": 0.539993
+    },
+    {
+      "fold": 11,
+      "target": "y_vol_h5",
+      "grupo": "USDBRL",
+      "candidata": 5,
+      "arvores": 19,
+      "val": 0.309875
+    },
+    {
+      "fold": 11,
+      "target": "y_vol_h5",
+      "grupo": "USDJPY",
+      "candidata": 7,
+      "arvores": 216,
+      "val": 0.341222
+    },
+    {
+      "fold": 11,
+      "target": "y_vol_h5",
+      "grupo": "VALE3",
+      "candidata": 6,
+      "arvores": 65,
+      "val": 0.633244
+    },
+    {
+      "fold": 11,
+      "target": "y_vol_h5",
+      "grupo": "VIX",
+      "candidata": 0,
+      "arvores": 106,
+      "val": 0.54038
+    },
+    {
+      "fold": 11,
+      "target": "y_vol_h5",
+      "grupo": "WEGE3",
+      "candidata": 5,
+      "arvores": 83,
+      "val": 0.626528
+    },
+    {
+      "fold": 11,
+      "target": "y_vol_h5",
+      "grupo": "WTI",
+      "candidata": 5,
+      "arvores": 49,
+      "val": 0.725102
+    },
+    {
+      "fold": 12,
+      "target": "y_vol_h5",
+      "grupo": "ABEV3",
+      "candidata": 5,
+      "arvores": 52,
+      "val": 0.273768
+    },
+    {
+      "fold": 12,
+      "target": "y_vol_h5",
+      "grupo": "B3SA3",
+      "candidata": 0,
+      "arvores": 154,
+      "val": 0.308364
+    },
+    {
+      "fold": 12,
+      "target": "y_vol_h5",
+      "grupo": "BBAS3",
+      "candidata": 5,
+      "arvores": 187,
+      "val": 0.248414
+    },
+    {
+      "fold": 12,
+      "target": "y_vol_h5",
+      "grupo": "BBDC4",
+      "candidata": 6,
+      "arvores": 79,
+      "val": 0.321357
+    },
+    {
+      "fold": 12,
+      "target": "y_vol_h5",
+      "grupo": "COPPER",
+      "candidata": 5,
+      "arvores": 70,
+      "val": 0.219404
+    },
+    {
+      "fold": 12,
+      "target": "y_vol_h5",
+      "grupo": "DAX",
+      "candidata": 6,
+      "arvores": 102,
+      "val": 0.41398
+    },
+    {
+      "fold": 12,
+      "target": "y_vol_h5",
+      "grupo": "DOWJONES",
+      "candidata": 5,
+      "arvores": 231,
+      "val": 0.429648
+    },
+    {
+      "fold": 12,
+      "target": "y_vol_h5",
+      "grupo": "EURUSD",
+      "candidata": 7,
+      "arvores": 160,
+      "val": 0.210082
+    },
+    {
+      "fold": 12,
+      "target": "y_vol_h5",
+      "grupo": "FTSE100",
+      "candidata": 6,
+      "arvores": 136,
+      "val": 0.36413
+    },
+    {
+      "fold": 12,
+      "target": "y_vol_h5",
+      "grupo": "GBPUSD",
+      "candidata": 5,
+      "arvores": 83,
+      "val": 0.222243
+    },
+    {
+      "fold": 12,
+      "target": "y_vol_h5",
+      "grupo": "GOLD",
+      "candidata": 0,
+      "arvores": 25,
+      "val": 0.49585
+    },
+    {
+      "fold": 12,
+      "target": "y_vol_h5",
+      "grupo": "HANGSENG",
+      "candidata": 0,
+      "arvores": 37,
+      "val": 0.189958
+    },
+    {
+      "fold": 12,
+      "target": "y_vol_h5",
+      "grupo": "IBOVESPA",
+      "candidata": 6,
+      "arvores": 175,
+      "val": 0.451362
+    },
+    {
+      "fold": 12,
+      "target": "y_vol_h5",
+      "grupo": "ITUB4",
+      "candidata": 8,
+      "arvores": 424,
+      "val": 0.309304
+    },
+    {
+      "fold": 12,
+      "target": "y_vol_h5",
+      "grupo": "NASDAQ",
+      "candidata": 6,
+      "arvores": 148,
+      "val": 0.261443
+    },
+    {
+      "fold": 12,
+      "target": "y_vol_h5",
+      "grupo": "NIKKEI225",
+      "candidata": 5,
+      "arvores": 65,
+      "val": 0.267312
+    },
+    {
+      "fold": 12,
+      "target": "y_vol_h5",
+      "grupo": "PETR4",
+      "candidata": 5,
+      "arvores": 83,
+      "val": 0.686824
+    },
+    {
+      "fold": 12,
+      "target": "y_vol_h5",
+      "grupo": "RENT3",
+      "candidata": 6,
+      "arvores": 203,
+      "val": 0.318252
+    },
+    {
+      "fold": 12,
+      "target": "y_vol_h5",
+      "grupo": "SILVER",
+      "candidata": 5,
+      "arvores": 144,
+      "val": 0.788915
+    },
+    {
+      "fold": 12,
+      "target": "y_vol_h5",
+      "grupo": "SP500",
+      "candidata": 6,
+      "arvores": 168,
+      "val": 0.390777
+    },
+    {
+      "fold": 12,
+      "target": "y_vol_h5",
+      "grupo": "SUZB3",
+      "candidata": 2,
+      "arvores": 21,
+      "val": 0.12749
+    },
+    {
+      "fold": 12,
+      "target": "y_vol_h5",
+      "grupo": "US10Y",
+      "candidata": 5,
+      "arvores": 51,
+      "val": 0.468981
+    },
+    {
+      "fold": 12,
+      "target": "y_vol_h5",
+      "grupo": "USDBRL",
+      "candidata": 5,
+      "arvores": 23,
+      "val": 0.194609
+    },
+    {
+      "fold": 12,
+      "target": "y_vol_h5",
+      "grupo": "USDJPY",
+      "candidata": 6,
+      "arvores": 49,
+      "val": 0.292342
+    },
+    {
+      "fold": 12,
+      "target": "y_vol_h5",
+      "grupo": "VALE3",
+      "candidata": 8,
+      "arvores": 137,
+      "val": 0.324231
+    },
+    {
+      "fold": 12,
+      "target": "y_vol_h5",
+      "grupo": "VIX",
+      "candidata": 0,
+      "arvores": 142,
+      "val": 0.529037
+    },
+    {
+      "fold": 12,
+      "target": "y_vol_h5",
+      "grupo": "WEGE3",
+      "candidata": 6,
+      "arvores": 57,
+      "val": 0.552904
+    },
+    {
+      "fold": 12,
+      "target": "y_vol_h5",
+      "grupo": "WTI",
+      "candidata": 4,
+      "arvores": 65,
+      "val": 0.663982
+    },
+    {
+      "fold": 13,
+      "target": "y_vol_h5",
+      "grupo": "ABEV3",
+      "candidata": 6,
+      "arvores": 59,
+      "val": 0.220478
+    },
+    {
+      "fold": 13,
+      "target": "y_vol_h5",
+      "grupo": "B3SA3",
+      "candidata": 5,
+      "arvores": 135,
+      "val": 0.332607
+    },
+    {
+      "fold": 13,
+      "target": "y_vol_h5",
+      "grupo": "BBAS3",
+      "candidata": 5,
+      "arvores": 273,
+      "val": 0.311986
+    },
+    {
+      "fold": 13,
+      "target": "y_vol_h5",
+      "grupo": "BBDC4",
+      "candidata": 8,
+      "arvores": 291,
+      "val": 0.420734
+    },
+    {
+      "fold": 13,
+      "target": "y_vol_h5",
+      "grupo": "COPPER",
+      "candidata": 4,
+      "arvores": 15,
+      "val": 0.257346
+    },
+    {
+      "fold": 13,
+      "target": "y_vol_h5",
+      "grupo": "DAX",
+      "candidata": 5,
+      "arvores": 122,
+      "val": 0.459622
+    },
+    {
+      "fold": 13,
+      "target": "y_vol_h5",
+      "grupo": "DOWJONES",
+      "candidata": 5,
+      "arvores": 107,
+      "val": 0.504534
+    },
+    {
+      "fold": 13,
+      "target": "y_vol_h5",
+      "grupo": "EURUSD",
+      "candidata": 7,
+      "arvores": 85,
+      "val": 0.298877
+    },
+    {
+      "fold": 13,
+      "target": "y_vol_h5",
+      "grupo": "FTSE100",
+      "candidata": 5,
+      "arvores": 140,
+      "val": 0.389704
+    },
+    {
+      "fold": 13,
+      "target": "y_vol_h5",
+      "grupo": "GBPUSD",
+      "candidata": 6,
+      "arvores": 91,
+      "val": 0.328157
+    },
+    {
+      "fold": 13,
+      "target": "y_vol_h5",
+      "grupo": "GOLD",
+      "candidata": 6,
+      "arvores": 64,
+      "val": 0.404186
+    },
+    {
+      "fold": 13,
+      "target": "y_vol_h5",
+      "grupo": "HANGSENG",
+      "candidata": 7,
+      "arvores": 354,
+      "val": 0.275064
+    },
+    {
+      "fold": 13,
+      "target": "y_vol_h5",
+      "grupo": "IBOVESPA",
+      "candidata": 6,
+      "arvores": 146,
+      "val": 0.479343
+    },
+    {
+      "fold": 13,
+      "target": "y_vol_h5",
+      "grupo": "ITUB4",
+      "candidata": 5,
+      "arvores": 78,
+      "val": 0.295229
+    },
+    {
+      "fold": 13,
+      "target": "y_vol_h5",
+      "grupo": "NASDAQ",
+      "candidata": 5,
+      "arvores": 94,
+      "val": 0.311474
+    },
+    {
+      "fold": 13,
+      "target": "y_vol_h5",
+      "grupo": "NIKKEI225",
+      "candidata": 1,
+      "arvores": 130,
+      "val": 0.286784
+    },
+    {
+      "fold": 13,
+      "target": "y_vol_h5",
+      "grupo": "PETR4",
+      "candidata": 5,
+      "arvores": 50,
+      "val": 0.675854
+    },
+    {
+      "fold": 13,
+      "target": "y_vol_h5",
+      "grupo": "RENT3",
+      "candidata": 1,
+      "arvores": 409,
+      "val": 0.356444
+    },
+    {
+      "fold": 13,
+      "target": "y_vol_h5",
+      "grupo": "SILVER",
+      "candidata": 5,
+      "arvores": 68,
+      "val": 0.754955
+    },
+    {
+      "fold": 13,
+      "target": "y_vol_h5",
+      "grupo": "SP500",
+      "candidata": 6,
+      "arvores": 101,
+      "val": 0.453639
+    },
+    {
+      "fold": 13,
+      "target": "y_vol_h5",
+      "grupo": "SUZB3",
+      "candidata": 4,
+      "arvores": 16,
+      "val": 0.125146
+    },
+    {
+      "fold": 13,
+      "target": "y_vol_h5",
+      "grupo": "US10Y",
+      "candidata": 6,
+      "arvores": 67,
+      "val": 0.574715
+    },
+    {
+      "fold": 13,
+      "target": "y_vol_h5",
+      "grupo": "USDBRL",
+      "candidata": 5,
+      "arvores": 21,
+      "val": 0.205847
+    },
+    {
+      "fold": 13,
+      "target": "y_vol_h5",
+      "grupo": "USDJPY",
+      "candidata": 6,
+      "arvores": 70,
+      "val": 0.43022
+    },
+    {
+      "fold": 13,
+      "target": "y_vol_h5",
+      "grupo": "VALE3",
+      "candidata": 6,
+      "arvores": 73,
+      "val": 0.362883
+    },
+    {
+      "fold": 13,
+      "target": "y_vol_h5",
+      "grupo": "VIX",
+      "candidata": 2,
+      "arvores": 171,
+      "val": 0.521131
+    },
+    {
+      "fold": 13,
+      "target": "y_vol_h5",
+      "grupo": "WEGE3",
+      "candidata": 5,
+      "arvores": 68,
+      "val": 0.530704
+    },
+    {
+      "fold": 13,
+      "target": "y_vol_h5",
+      "grupo": "WTI",
+      "candidata": 5,
+      "arvores": 53,
+      "val": 0.656505
+    },
+    {
+      "fold": 14,
+      "target": "y_vol_h5",
+      "grupo": "ABEV3",
+      "candidata": 5,
+      "arvores": 21,
+      "val": 0.131553
+    },
+    {
+      "fold": 14,
+      "target": "y_vol_h5",
+      "grupo": "B3SA3",
+      "candidata": 1,
+      "arvores": 34,
+      "val": 0.16136
+    },
+    {
+      "fold": 14,
+      "target": "y_vol_h5",
+      "grupo": "BBAS3",
+      "candidata": 6,
+      "arvores": 14,
+      "val": 0.180187
+    },
+    {
+      "fold": 14,
+      "target": "y_vol_h5",
+      "grupo": "BBDC4",
+      "candidata": 5,
+      "arvores": 33,
+      "val": 0.228559
+    },
+    {
+      "fold": 14,
+      "target": "y_vol_h5",
+      "grupo": "COPPER",
+      "candidata": 4,
+      "arvores": 12,
+      "val": 0.195718
+    },
+    {
+      "fold": 14,
+      "target": "y_vol_h5",
+      "grupo": "DAX",
+      "candidata": 8,
+      "arvores": 189,
+      "val": 0.221187
+    },
+    {
+      "fold": 14,
+      "target": "y_vol_h5",
+      "grupo": "DOWJONES",
+      "candidata": 7,
+      "arvores": 95,
+      "val": 0.157094
+    },
+    {
+      "fold": 14,
+      "target": "y_vol_h5",
+      "grupo": "EURUSD",
+      "candidata": 7,
+      "arvores": 70,
+      "val": 0.187747
+    },
+    {
+      "fold": 14,
+      "target": "y_vol_h5",
+      "grupo": "FTSE100",
+      "candidata": 1,
+      "arvores": 116,
+      "val": 0.207201
+    },
+    {
+      "fold": 14,
+      "target": "y_vol_h5",
+      "grupo": "GBPUSD",
+      "candidata": 1,
+      "arvores": 134,
+      "val": 0.236766
+    },
+    {
+      "fold": 14,
+      "target": "y_vol_h5",
+      "grupo": "GOLD",
+      "candidata": 7,
+      "arvores": 70,
+      "val": 0.138959
+    },
+    {
+      "fold": 14,
+      "target": "y_vol_h5",
+      "grupo": "HANGSENG",
+      "candidata": 1,
+      "arvores": 295,
+      "val": 0.243775
+    },
+    {
+      "fold": 14,
+      "target": "y_vol_h5",
+      "grupo": "IBOVESPA",
+      "candidata": 7,
+      "arvores": 52,
+      "val": 0.163035
+    },
+    {
+      "fold": 14,
+      "target": "y_vol_h5",
+      "grupo": "ITUB4",
+      "candidata": 7,
+      "arvores": 38,
+      "val": 0.178832
+    },
+    {
+      "fold": 14,
+      "target": "y_vol_h5",
+      "grupo": "NASDAQ",
+      "candidata": 7,
+      "arvores": 96,
+      "val": 0.143499
+    },
+    {
+      "fold": 14,
+      "target": "y_vol_h5",
+      "grupo": "NIKKEI225",
+      "candidata": 7,
+      "arvores": 32,
+      "val": 0.17237
+    },
+    {
+      "fold": 14,
+      "target": "y_vol_h5",
+      "grupo": "PETR4",
+      "candidata": 0,
+      "arvores": 41,
+      "val": 0.135034
+    },
+    {
+      "fold": 14,
+      "target": "y_vol_h5",
+      "grupo": "RENT3",
+      "candidata": 4,
+      "arvores": 12,
+      "val": 0.135417
+    },
+    {
+      "fold": 14,
+      "target": "y_vol_h5",
+      "grupo": "SILVER",
+      "candidata": 5,
+      "arvores": 74,
+      "val": 0.196401
+    },
+    {
+      "fold": 14,
+      "target": "y_vol_h5",
+      "grupo": "SP500",
+      "candidata": 4,
+      "arvores": 73,
+      "val": 0.156072
+    },
+    {
+      "fold": 14,
+      "target": "y_vol_h5",
+      "grupo": "SUZB3",
+      "candidata": 0,
+      "arvores": 10,
+      "val": 0.089528
+    },
+    {
+      "fold": 14,
+      "target": "y_vol_h5",
+      "grupo": "US10Y",
+      "candidata": 5,
+      "arvores": 87,
+      "val": 0.275132
+    },
+    {
+      "fold": 14,
+      "target": "y_vol_h5",
+      "grupo": "USDBRL",
+      "candidata": 8,
+      "arvores": 59,
+      "val": 0.12077
+    },
+    {
+      "fold": 14,
+      "target": "y_vol_h5",
+      "grupo": "USDJPY",
+      "candidata": 6,
+      "arvores": 45,
+      "val": 0.289164
+    },
+    {
+      "fold": 14,
+      "target": "y_vol_h5",
+      "grupo": "VALE3",
+      "candidata": 4,
+      "arvores": 32,
+      "val": 0.160525
+    },
+    {
+      "fold": 14,
+      "target": "y_vol_h5",
+      "grupo": "VIX",
+      "candidata": 7,
+      "arvores": 37,
+      "val": 0.191824
+    },
+    {
+      "fold": 14,
+      "target": "y_vol_h5",
+      "grupo": "WEGE3",
+      "candidata": 5,
+      "arvores": 36,
+      "val": 0.172479
+    },
+    {
+      "fold": 14,
+      "target": "y_vol_h5",
+      "grupo": "WTI",
+      "candidata": 5,
+      "arvores": 25,
+      "val": 0.228953
+    },
+    {
+      "fold": 15,
+      "target": "y_vol_h5",
+      "grupo": "ABEV3",
+      "candidata": 5,
+      "arvores": 10,
+      "val": 0.188218
+    },
+    {
+      "fold": 15,
+      "target": "y_vol_h5",
+      "grupo": "B3SA3",
+      "candidata": 1,
+      "arvores": 33,
+      "val": 0.148824
+    },
+    {
+      "fold": 15,
+      "target": "y_vol_h5",
+      "grupo": "BBAS3",
+      "candidata": 5,
+      "arvores": 11,
+      "val": 0.165833
+    },
+    {
+      "fold": 15,
+      "target": "y_vol_h5",
+      "grupo": "BBDC4",
+      "candidata": 8,
+      "arvores": 14,
+      "val": 0.303212
+    },
+    {
+      "fold": 15,
+      "target": "y_vol_h5",
+      "grupo": "COPPER",
+      "candidata": 4,
+      "arvores": 13,
+      "val": 0.181497
+    },
+    {
+      "fold": 15,
+      "target": "y_vol_h5",
+      "grupo": "DAX",
+      "candidata": 7,
+      "arvores": 70,
+      "val": 0.239613
+    },
+    {
+      "fold": 15,
+      "target": "y_vol_h5",
+      "grupo": "DOWJONES",
+      "candidata": 4,
+      "arvores": 20,
+      "val": 0.195768
+    },
+    {
+      "fold": 15,
+      "target": "y_vol_h5",
+      "grupo": "EURUSD",
+      "candidata": 1,
+      "arvores": 67,
+      "val": 0.203841
+    },
+    {
+      "fold": 15,
+      "target": "y_vol_h5",
+      "grupo": "FTSE100",
+      "candidata": 1,
+      "arvores": 40,
+      "val": 0.206632
+    },
+    {
+      "fold": 15,
+      "target": "y_vol_h5",
+      "grupo": "GBPUSD",
+      "candidata": 1,
+      "arvores": 134,
+      "val": 0.229411
+    },
+    {
+      "fold": 15,
+      "target": "y_vol_h5",
+      "grupo": "GOLD",
+      "candidata": 6,
+      "arvores": 25,
+      "val": 0.142511
+    },
+    {
+      "fold": 15,
+      "target": "y_vol_h5",
+      "grupo": "HANGSENG",
+      "candidata": 8,
+      "arvores": 220,
+      "val": 0.257071
+    },
+    {
+      "fold": 15,
+      "target": "y_vol_h5",
+      "grupo": "IBOVESPA",
+      "candidata": 7,
+      "arvores": 49,
+      "val": 0.139201
+    },
+    {
+      "fold": 15,
+      "target": "y_vol_h5",
+      "grupo": "ITUB4",
+      "candidata": 5,
+      "arvores": 19,
+      "val": 0.128705
+    },
+    {
+      "fold": 15,
+      "target": "y_vol_h5",
+      "grupo": "NASDAQ",
+      "candidata": 7,
+      "arvores": 92,
+      "val": 0.160015
+    },
+    {
+      "fold": 15,
+      "target": "y_vol_h5",
+      "grupo": "NIKKEI225",
+      "candidata": 7,
+      "arvores": 48,
+      "val": 0.197394
+    },
+    {
+      "fold": 15,
+      "target": "y_vol_h5",
+      "grupo": "PETR4",
+      "candidata": 5,
+      "arvores": 11,
+      "val": 0.150569
+    },
+    {
+      "fold": 15,
+      "target": "y_vol_h5",
+      "grupo": "RENT3",
+      "candidata": 5,
+      "arvores": 14,
+      "val": 0.282616
+    },
+    {
+      "fold": 15,
+      "target": "y_vol_h5",
+      "grupo": "SILVER",
+      "candidata": 5,
+      "arvores": 33,
+      "val": 0.180004
+    },
+    {
+      "fold": 15,
+      "target": "y_vol_h5",
+      "grupo": "SP500",
+      "candidata": 1,
+      "arvores": 70,
+      "val": 0.195078
+    },
+    {
+      "fold": 15,
+      "target": "y_vol_h5",
+      "grupo": "SUZB3",
+      "candidata": 0,
+      "arvores": 35,
+      "val": 0.287076
+    },
+    {
+      "fold": 15,
+      "target": "y_vol_h5",
+      "grupo": "US10Y",
+      "candidata": 5,
+      "arvores": 32,
+      "val": 0.287454
+    },
+    {
+      "fold": 15,
+      "target": "y_vol_h5",
+      "grupo": "USDBRL",
+      "candidata": 6,
+      "arvores": 20,
+      "val": 0.142381
+    },
+    {
+      "fold": 15,
+      "target": "y_vol_h5",
+      "grupo": "USDJPY",
+      "candidata": 5,
+      "arvores": 65,
+      "val": 0.277265
+    },
+    {
+      "fold": 15,
+      "target": "y_vol_h5",
+      "grupo": "VALE3",
+      "candidata": 4,
+      "arvores": 26,
+      "val": 0.191
+    },
+    {
+      "fold": 15,
+      "target": "y_vol_h5",
+      "grupo": "VIX",
+      "candidata": 8,
+      "arvores": 734,
+      "val": 0.805011
+    },
+    {
+      "fold": 15,
+      "target": "y_vol_h5",
+      "grupo": "WEGE3",
+      "candidata": 1,
+      "arvores": 11,
+      "val": 0.250165
+    },
+    {
+      "fold": 15,
+      "target": "y_vol_h5",
+      "grupo": "WTI",
+      "candidata": 5,
+      "arvores": 17,
+      "val": 0.23471
+    },
+    {
+      "fold": 16,
+      "target": "y_vol_h5",
+      "grupo": "ABEV3",
+      "candidata": 5,
+      "arvores": 10,
+      "val": 0.186912
+    },
+    {
+      "fold": 16,
+      "target": "y_vol_h5",
+      "grupo": "B3SA3",
+      "candidata": 0,
+      "arvores": 10,
+      "val": 0.160884
+    },
+    {
+      "fold": 16,
+      "target": "y_vol_h5",
+      "grupo": "BBAS3",
+      "candidata": 5,
+      "arvores": 14,
+      "val": 0.359033
+    },
+    {
+      "fold": 16,
+      "target": "y_vol_h5",
+      "grupo": "BBDC4",
+      "candidata": 8,
+      "arvores": 13,
+      "val": 0.328512
+    },
+    {
+      "fold": 16,
+      "target": "y_vol_h5",
+      "grupo": "COPPER",
+      "candidata": 5,
+      "arvores": 40,
+      "val": 0.531072
+    },
+    {
+      "fold": 16,
+      "target": "y_vol_h5",
+      "grupo": "DAX",
+      "candidata": 6,
+      "arvores": 150,
+      "val": 0.221883
+    },
+    {
+      "fold": 16,
+      "target": "y_vol_h5",
+      "grupo": "DOWJONES",
+      "candidata": 4,
+      "arvores": 48,
+      "val": 0.436763
+    },
+    {
+      "fold": 16,
+      "target": "y_vol_h5",
+      "grupo": "EURUSD",
+      "candidata": 8,
+      "arvores": 122,
+      "val": 0.177059
+    },
+    {
+      "fold": 16,
+      "target": "y_vol_h5",
+      "grupo": "FTSE100",
+      "candidata": 7,
+      "arvores": 113,
+      "val": 0.296972
+    },
+    {
+      "fold": 16,
+      "target": "y_vol_h5",
+      "grupo": "GBPUSD",
+      "candidata": 5,
+      "arvores": 64,
+      "val": 0.206482
+    },
+    {
+      "fold": 16,
+      "target": "y_vol_h5",
+      "grupo": "GOLD",
+      "candidata": 7,
+      "arvores": 79,
+      "val": 0.235204
+    },
+    {
+      "fold": 16,
+      "target": "y_vol_h5",
+      "grupo": "HANGSENG",
+      "candidata": 5,
+      "arvores": 28,
+      "val": 0.200221
+    },
+    {
+      "fold": 16,
+      "target": "y_vol_h5",
+      "grupo": "IBOVESPA",
+      "candidata": 7,
+      "arvores": 63,
+      "val": 0.168559
+    },
+    {
+      "fold": 16,
+      "target": "y_vol_h5",
+      "grupo": "ITUB4",
+      "candidata": 2,
+      "arvores": 27,
+      "val": 0.139504
+    },
+    {
+      "fold": 16,
+      "target": "y_vol_h5",
+      "grupo": "NASDAQ",
+      "candidata": 5,
+      "arvores": 119,
+      "val": 0.273239
+    },
+    {
+      "fold": 16,
+      "target": "y_vol_h5",
+      "grupo": "NIKKEI225",
+      "candidata": 6,
+      "arvores": 31,
+      "val": 0.216027
+    },
+    {
+      "fold": 16,
+      "target": "y_vol_h5",
+      "grupo": "PETR4",
+      "candidata": 5,
+      "arvores": 10,
+      "val": 0.204841
+    },
+    {
+      "fold": 16,
+      "target": "y_vol_h5",
+      "grupo": "RENT3",
+      "candidata": 1,
+      "arvores": 38,
+      "val": 0.273859
+    },
+    {
+      "fold": 16,
+      "target": "y_vol_h5",
+      "grupo": "SILVER",
+      "candidata": 5,
+      "arvores": 60,
+      "val": 0.239904
+    },
+    {
+      "fold": 16,
+      "target": "y_vol_h5",
+      "grupo": "SP500",
+      "candidata": 0,
+      "arvores": 103,
+      "val": 0.407476
+    },
+    {
+      "fold": 16,
+      "target": "y_vol_h5",
+      "grupo": "SUZB3",
+      "candidata": 7,
+      "arvores": 75,
+      "val": 0.257168
+    },
+    {
+      "fold": 16,
+      "target": "y_vol_h5",
+      "grupo": "US10Y",
+      "candidata": 6,
+      "arvores": 88,
+      "val": 0.167458
+    },
+    {
+      "fold": 16,
+      "target": "y_vol_h5",
+      "grupo": "USDBRL",
+      "candidata": 8,
+      "arvores": 99,
+      "val": 0.157313
+    },
+    {
+      "fold": 16,
+      "target": "y_vol_h5",
+      "grupo": "USDJPY",
+      "candidata": 8,
+      "arvores": 86,
+      "val": 0.244846
+    },
+    {
+      "fold": 16,
+      "target": "y_vol_h5",
+      "grupo": "VALE3",
+      "candidata": 8,
+      "arvores": 83,
+      "val": 0.193008
+    },
+    {
+      "fold": 16,
+      "target": "y_vol_h5",
+      "grupo": "VIX",
+      "candidata": 5,
+      "arvores": 432,
+      "val": 1.032651
+    },
+    {
+      "fold": 16,
+      "target": "y_vol_h5",
+      "grupo": "WEGE3",
+      "candidata": 8,
+      "arvores": 10,
+      "val": 0.378153
+    },
+    {
+      "fold": 16,
+      "target": "y_vol_h5",
+      "grupo": "WTI",
+      "candidata": 6,
+      "arvores": 15,
+      "val": 0.204104
+    }
+  ],
+  "vezes_escolhida": {
+    "0": 19,
+    "1": 36,
+    "2": 19,
+    "4": 45,
+    "5": 116,
+    "6": 70,
+    "7": 59,
+    "8": 47
+  },
+  "params_fixos": {
+    "learning_rate": 0.03,
+    "num_leaves": 15,
+    "min_child_samples": 200,
+    "feature_fraction": 0.8,
+    "bagging_fraction": 0.8,
+    "bagging_freq": 1,
+    "lambda_l2": 1.0,
+    "verbose": -1,
+    "seed": 42,
+    "deterministic": true,
+    "num_threads": 0
+  },
+  "painel": {
+    "linhas": 81472,
+    "ativos": [
+      "ABEV3",
+      "B3SA3",
+      "BBAS3",
+      "BBDC4",
+      "COPPER",
+      "DAX",
+      "DOWJONES",
+      "EURUSD",
+      "FTSE100",
+      "GBPUSD",
+      "GOLD",
+      "HANGSENG",
+      "IBOVESPA",
+      "ITUB4",
+      "NASDAQ",
+      "NIKKEI225",
+      "PETR4",
+      "RENT3",
+      "SILVER",
+      "SP500",
+      "SUZB3",
+      "US10Y",
+      "USDBRL",
+      "USDJPY",
+      "VALE3",
+      "VIX",
+      "WEGE3",
+      "WTI"
+    ],
+    "inicio": "2008-09-24",
+    "fim": "2026-10-14",
+    "folds": 17,
+    "features": [
+      "f_z_lag0",
+      "f_z_lag1",
+      "f_z_lag2",
+      "f_z_lag3",
+      "f_z_lag4",
+      "f_z_std5",
+      "f_z_std21",
+      "f_z_std63",
+      "f_z_mean21",
+      "f_z_mean63",
+      "f_rsi14",
+      "f_range",
+      "f_volrel"
+    ]
+  }
+}
