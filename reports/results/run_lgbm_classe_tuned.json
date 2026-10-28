@@ -1,0 +1,818 @@
+{
+  "modelo": "lgbm_classe_tuned",
+  "modo": "classe",
+  "candidatas": [
+    {
+      "num_leaves": 15,
+      "min_child_samples": 200,
+      "feature_fraction": 0.8,
+      "lambda_l2": 1.0,
+      "learning_rate": 0.03
+    },
+    {
+      "num_leaves": 31,
+      "min_child_samples": 50,
+      "feature_fraction": 0.6,
+      "lambda_l2": 0.0,
+      "learning_rate": 0.02
+    },
+    {
+      "num_leaves": 63,
+      "min_child_samples": 500,
+      "feature_fraction": 0.8,
+      "lambda_l2": 0.0,
+      "learning_rate": 0.02
+    },
+    {
+      "num_leaves": 63,
+      "min_child_samples": 50,
+      "feature_fraction": 0.6,
+      "lambda_l2": 0.0,
+      "learning_rate": 0.02
+    },
+    {
+      "num_leaves": 31,
+      "min_child_samples": 50,
+      "feature_fraction": 0.8,
+      "lambda_l2": 10.0,
+      "learning_rate": 0.05
+    },
+    {
+      "num_leaves": 7,
+      "min_child_samples": 500,
+      "feature_fraction": 0.6,
+      "lambda_l2": 0.0,
+      "learning_rate": 0.05
+    },
+    {
+      "num_leaves": 7,
+      "min_child_samples": 50,
+      "feature_fraction": 0.8,
+      "lambda_l2": 0.0,
+      "learning_rate": 0.05
+    },
+    {
+      "num_leaves": 31,
+      "min_child_samples": 500,
+      "feature_fraction": 0.6,
+      "lambda_l2": 10.0,
+      "learning_rate": 0.02
+    },
+    {
+      "num_leaves": 7,
+      "min_child_samples": 500,
+      "feature_fraction": 0.8,
+      "lambda_l2": 10.0,
+      "learning_rate": 0.02
+    }
+  ],
+  "escolhas": [
+    {
+      "fold": 0,
+      "target": "y_vol_h5",
+      "grupo": "acao_br",
+      "candidata": 7,
+      "arvores": 94,
+      "val": 0.107953
+    },
+    {
+      "fold": 0,
+      "target": "y_vol_h5",
+      "grupo": "commodity",
+      "candidata": 8,
+      "arvores": 207,
+      "val": 0.046056
+    },
+    {
+      "fold": 0,
+      "target": "y_vol_h5",
+      "grupo": "indice",
+      "candidata": 0,
+      "arvores": 465,
+      "val": 0.03332
+    },
+    {
+      "fold": 0,
+      "target": "y_vol_h5",
+      "grupo": "cambio",
+      "candidata": 8,
+      "arvores": 149,
+      "val": 0.060851
+    },
+    {
+      "fold": 1,
+      "target": "y_vol_h5",
+      "grupo": "acao_br",
+      "candidata": 4,
+      "arvores": 12,
+      "val": 0.140227
+    },
+    {
+      "fold": 1,
+      "target": "y_vol_h5",
+      "grupo": "commodity",
+      "candidata": 2,
+      "arvores": 66,
+      "val": 0.190392
+    },
+    {
+      "fold": 1,
+      "target": "y_vol_h5",
+      "grupo": "indice",
+      "candidata": 2,
+      "arvores": 37,
+      "val": 0.090775
+    },
+    {
+      "fold": 1,
+      "target": "y_vol_h5",
+      "grupo": "cambio",
+      "candidata": 7,
+      "arvores": 18,
+      "val": 0.15649
+    },
+    {
+      "fold": 1,
+      "target": "y_vol_h5",
+      "grupo": "juros",
+      "candidata": 6,
+      "arvores": 20,
+      "val": 0.11835
+    },
+    {
+      "fold": 2,
+      "target": "y_vol_h5",
+      "grupo": "acao_br",
+      "candidata": 1,
+      "arvores": 43,
+      "val": 0.291523
+    },
+    {
+      "fold": 2,
+      "target": "y_vol_h5",
+      "grupo": "commodity",
+      "candidata": 7,
+      "arvores": 588,
+      "val": 0.742968
+    },
+    {
+      "fold": 2,
+      "target": "y_vol_h5",
+      "grupo": "indice",
+      "candidata": 7,
+      "arvores": 87,
+      "val": 0.455579
+    },
+    {
+      "fold": 2,
+      "target": "y_vol_h5",
+      "grupo": "cambio",
+      "candidata": 2,
+      "arvores": 23,
+      "val": 0.224167
+    },
+    {
+      "fold": 2,
+      "target": "y_vol_h5",
+      "grupo": "juros",
+      "candidata": 2,
+      "arvores": 460,
+      "val": 0.72987
+    },
+    {
+      "fold": 3,
+      "target": "y_vol_h5",
+      "grupo": "acao_br",
+      "candidata": 1,
+      "arvores": 90,
+      "val": 0.181786
+    },
+    {
+      "fold": 3,
+      "target": "y_vol_h5",
+      "grupo": "commodity",
+      "candidata": 6,
+      "arvores": 57,
+      "val": 0.085612
+    },
+    {
+      "fold": 3,
+      "target": "y_vol_h5",
+      "grupo": "indice",
+      "candidata": 5,
+      "arvores": 52,
+      "val": 0.089049
+    },
+    {
+      "fold": 3,
+      "target": "y_vol_h5",
+      "grupo": "cambio",
+      "candidata": 6,
+      "arvores": 32,
+      "val": 0.125484
+    },
+    {
+      "fold": 3,
+      "target": "y_vol_h5",
+      "grupo": "juros",
+      "candidata": 8,
+      "arvores": 82,
+      "val": 0.09986
+    },
+    {
+      "fold": 4,
+      "target": "y_vol_h5",
+      "grupo": "acao_br",
+      "candidata": 7,
+      "arvores": 74,
+      "val": 0.154536
+    },
+    {
+      "fold": 4,
+      "target": "y_vol_h5",
+      "grupo": "commodity",
+      "candidata": 7,
+      "arvores": 14,
+      "val": 0.290759
+    },
+    {
+      "fold": 4,
+      "target": "y_vol_h5",
+      "grupo": "indice",
+      "candidata": 7,
+      "arvores": 68,
+      "val": 0.156214
+    },
+    {
+      "fold": 4,
+      "target": "y_vol_h5",
+      "grupo": "cambio",
+      "candidata": 1,
+      "arvores": 71,
+      "val": 0.212435
+    },
+    {
+      "fold": 4,
+      "target": "y_vol_h5",
+      "grupo": "juros",
+      "candidata": 2,
+      "arvores": 36,
+      "val": 0.178513
+    },
+    {
+      "fold": 5,
+      "target": "y_vol_h5",
+      "grupo": "acao_br",
+      "candidata": 5,
+      "arvores": 101,
+      "val": 0.202915
+    },
+    {
+      "fold": 5,
+      "target": "y_vol_h5",
+      "grupo": "commodity",
+      "candidata": 5,
+      "arvores": 53,
+      "val": 0.110005
+    },
+    {
+      "fold": 5,
+      "target": "y_vol_h5",
+      "grupo": "indice",
+      "candidata": 3,
+      "arvores": 68,
+      "val": 0.176446
+    },
+    {
+      "fold": 5,
+      "target": "y_vol_h5",
+      "grupo": "cambio",
+      "candidata": 7,
+      "arvores": 64,
+      "val": 0.136355
+    },
+    {
+      "fold": 5,
+      "target": "y_vol_h5",
+      "grupo": "juros",
+      "candidata": 4,
+      "arvores": 20,
+      "val": 0.259066
+    },
+    {
+      "fold": 6,
+      "target": "y_vol_h5",
+      "grupo": "acao_br",
+      "candidata": 6,
+      "arvores": 84,
+      "val": 0.253972
+    },
+    {
+      "fold": 6,
+      "target": "y_vol_h5",
+      "grupo": "commodity",
+      "candidata": 5,
+      "arvores": 57,
+      "val": 0.294152
+    },
+    {
+      "fold": 6,
+      "target": "y_vol_h5",
+      "grupo": "indice",
+      "candidata": 3,
+      "arvores": 68,
+      "val": 0.321156
+    },
+    {
+      "fold": 6,
+      "target": "y_vol_h5",
+      "grupo": "cambio",
+      "candidata": 0,
+      "arvores": 72,
+      "val": 0.310493
+    },
+    {
+      "fold": 6,
+      "target": "y_vol_h5",
+      "grupo": "juros",
+      "candidata": 4,
+      "arvores": 20,
+      "val": 0.736487
+    },
+    {
+      "fold": 7,
+      "target": "y_vol_h5",
+      "grupo": "acao_br",
+      "candidata": 1,
+      "arvores": 111,
+      "val": 0.186471
+    },
+    {
+      "fold": 7,
+      "target": "y_vol_h5",
+      "grupo": "commodity",
+      "candidata": 7,
+      "arvores": 56,
+      "val": 0.269842
+    },
+    {
+      "fold": 7,
+      "target": "y_vol_h5",
+      "grupo": "indice",
+      "candidata": 5,
+      "arvores": 70,
+      "val": 0.328992
+    },
+    {
+      "fold": 7,
+      "target": "y_vol_h5",
+      "grupo": "cambio",
+      "candidata": 7,
+      "arvores": 102,
+      "val": 0.416917
+    },
+    {
+      "fold": 7,
+      "target": "y_vol_h5",
+      "grupo": "juros",
+      "candidata": 8,
+      "arvores": 28,
+      "val": 0.639085
+    },
+    {
+      "fold": 8,
+      "target": "y_vol_h5",
+      "grupo": "acao_br",
+      "candidata": 6,
+      "arvores": 111,
+      "val": 0.157962
+    },
+    {
+      "fold": 8,
+      "target": "y_vol_h5",
+      "grupo": "commodity",
+      "candidata": 6,
+      "arvores": 24,
+      "val": 0.128484
+    },
+    {
+      "fold": 8,
+      "target": "y_vol_h5",
+      "grupo": "indice",
+      "candidata": 7,
+      "arvores": 186,
+      "val": 0.134739
+    },
+    {
+      "fold": 8,
+      "target": "y_vol_h5",
+      "grupo": "cambio",
+      "candidata": 5,
+      "arvores": 36,
+      "val": 0.269126
+    },
+    {
+      "fold": 8,
+      "target": "y_vol_h5",
+      "grupo": "juros",
+      "candidata": 4,
+      "arvores": 19,
+      "val": 0.174339
+    },
+    {
+      "fold": 9,
+      "target": "y_vol_h5",
+      "grupo": "acao_br",
+      "candidata": 7,
+      "arvores": 117,
+      "val": 0.284475
+    },
+    {
+      "fold": 9,
+      "target": "y_vol_h5",
+      "grupo": "commodity",
+      "candidata": 6,
+      "arvores": 22,
+      "val": 0.145518
+    },
+    {
+      "fold": 9,
+      "target": "y_vol_h5",
+      "grupo": "indice",
+      "candidata": 4,
+      "arvores": 81,
+      "val": 0.360497
+    },
+    {
+      "fold": 9,
+      "target": "y_vol_h5",
+      "grupo": "cambio",
+      "candidata": 6,
+      "arvores": 39,
+      "val": 0.170036
+    },
+    {
+      "fold": 9,
+      "target": "y_vol_h5",
+      "grupo": "juros",
+      "candidata": 6,
+      "arvores": 211,
+      "val": 1.01566
+    },
+    {
+      "fold": 10,
+      "target": "y_vol_h5",
+      "grupo": "acao_br",
+      "candidata": 1,
+      "arvores": 97,
+      "val": 0.298899
+    },
+    {
+      "fold": 10,
+      "target": "y_vol_h5",
+      "grupo": "commodity",
+      "candidata": 1,
+      "arvores": 53,
+      "val": 0.201504
+    },
+    {
+      "fold": 10,
+      "target": "y_vol_h5",
+      "grupo": "indice",
+      "candidata": 6,
+      "arvores": 237,
+      "val": 0.375118
+    },
+    {
+      "fold": 10,
+      "target": "y_vol_h5",
+      "grupo": "cambio",
+      "candidata": 6,
+      "arvores": 25,
+      "val": 0.19595
+    },
+    {
+      "fold": 10,
+      "target": "y_vol_h5",
+      "grupo": "juros",
+      "candidata": 3,
+      "arvores": 328,
+      "val": 0.984721
+    },
+    {
+      "fold": 11,
+      "target": "y_vol_h5",
+      "grupo": "acao_br",
+      "candidata": 6,
+      "arvores": 117,
+      "val": 0.394118
+    },
+    {
+      "fold": 11,
+      "target": "y_vol_h5",
+      "grupo": "commodity",
+      "candidata": 8,
+      "arvores": 515,
+      "val": 0.555678
+    },
+    {
+      "fold": 11,
+      "target": "y_vol_h5",
+      "grupo": "indice",
+      "candidata": 6,
+      "arvores": 121,
+      "val": 0.378871
+    },
+    {
+      "fold": 11,
+      "target": "y_vol_h5",
+      "grupo": "cambio",
+      "candidata": 6,
+      "arvores": 103,
+      "val": 0.266109
+    },
+    {
+      "fold": 11,
+      "target": "y_vol_h5",
+      "grupo": "juros",
+      "candidata": 3,
+      "arvores": 224,
+      "val": 0.529112
+    },
+    {
+      "fold": 12,
+      "target": "y_vol_h5",
+      "grupo": "acao_br",
+      "candidata": 6,
+      "arvores": 101,
+      "val": 0.32822
+    },
+    {
+      "fold": 12,
+      "target": "y_vol_h5",
+      "grupo": "commodity",
+      "candidata": 5,
+      "arvores": 138,
+      "val": 0.543479
+    },
+    {
+      "fold": 12,
+      "target": "y_vol_h5",
+      "grupo": "indice",
+      "candidata": 6,
+      "arvores": 152,
+      "val": 0.325318
+    },
+    {
+      "fold": 12,
+      "target": "y_vol_h5",
+      "grupo": "cambio",
+      "candidata": 6,
+      "arvores": 113,
+      "val": 0.204315
+    },
+    {
+      "fold": 12,
+      "target": "y_vol_h5",
+      "grupo": "juros",
+      "candidata": 4,
+      "arvores": 72,
+      "val": 0.524298
+    },
+    {
+      "fold": 13,
+      "target": "y_vol_h5",
+      "grupo": "acao_br",
+      "candidata": 6,
+      "arvores": 141,
+      "val": 0.344828
+    },
+    {
+      "fold": 13,
+      "target": "y_vol_h5",
+      "grupo": "commodity",
+      "candidata": 8,
+      "arvores": 424,
+      "val": 0.521465
+    },
+    {
+      "fold": 13,
+      "target": "y_vol_h5",
+      "grupo": "indice",
+      "candidata": 6,
+      "arvores": 153,
+      "val": 0.368593
+    },
+    {
+      "fold": 13,
+      "target": "y_vol_h5",
+      "grupo": "cambio",
+      "candidata": 6,
+      "arvores": 113,
+      "val": 0.290038
+    },
+    {
+      "fold": 13,
+      "target": "y_vol_h5",
+      "grupo": "juros",
+      "candidata": 6,
+      "arvores": 132,
+      "val": 0.532299
+    },
+    {
+      "fold": 14,
+      "target": "y_vol_h5",
+      "grupo": "acao_br",
+      "candidata": 7,
+      "arvores": 59,
+      "val": 0.158861
+    },
+    {
+      "fold": 14,
+      "target": "y_vol_h5",
+      "grupo": "commodity",
+      "candidata": 7,
+      "arvores": 97,
+      "val": 0.184796
+    },
+    {
+      "fold": 14,
+      "target": "y_vol_h5",
+      "grupo": "indice",
+      "candidata": 3,
+      "arvores": 89,
+      "val": 0.181055
+    },
+    {
+      "fold": 14,
+      "target": "y_vol_h5",
+      "grupo": "cambio",
+      "candidata": 6,
+      "arvores": 70,
+      "val": 0.202401
+    },
+    {
+      "fold": 14,
+      "target": "y_vol_h5",
+      "grupo": "juros",
+      "candidata": 1,
+      "arvores": 88,
+      "val": 0.225422
+    },
+    {
+      "fold": 15,
+      "target": "y_vol_h5",
+      "grupo": "acao_br",
+      "candidata": 7,
+      "arvores": 44,
+      "val": 0.200274
+    },
+    {
+      "fold": 15,
+      "target": "y_vol_h5",
+      "grupo": "commodity",
+      "candidata": 7,
+      "arvores": 67,
+      "val": 0.18099
+    },
+    {
+      "fold": 15,
+      "target": "y_vol_h5",
+      "grupo": "indice",
+      "candidata": 7,
+      "arvores": 69,
+      "val": 0.199015
+    },
+    {
+      "fold": 15,
+      "target": "y_vol_h5",
+      "grupo": "cambio",
+      "candidata": 6,
+      "arvores": 63,
+      "val": 0.21223
+    },
+    {
+      "fold": 15,
+      "target": "y_vol_h5",
+      "grupo": "juros",
+      "candidata": 6,
+      "arvores": 247,
+      "val": 0.580814
+    },
+    {
+      "fold": 16,
+      "target": "y_vol_h5",
+      "grupo": "acao_br",
+      "candidata": 2,
+      "arvores": 28,
+      "val": 0.244201
+    },
+    {
+      "fold": 16,
+      "target": "y_vol_h5",
+      "grupo": "commodity",
+      "candidata": 5,
+      "arvores": 82,
+      "val": 0.296616
+    },
+    {
+      "fold": 16,
+      "target": "y_vol_h5",
+      "grupo": "indice",
+      "candidata": 4,
+      "arvores": 44,
+      "val": 0.283177
+    },
+    {
+      "fold": 16,
+      "target": "y_vol_h5",
+      "grupo": "cambio",
+      "candidata": 7,
+      "arvores": 127,
+      "val": 0.201199
+    },
+    {
+      "fold": 16,
+      "target": "y_vol_h5",
+      "grupo": "juros",
+      "candidata": 5,
+      "arvores": 333,
+      "val": 0.661774
+    }
+  ],
+  "vezes_escolhida": {
+    "0": 2,
+    "1": 7,
+    "2": 6,
+    "3": 5,
+    "4": 7,
+    "5": 9,
+    "6": 24,
+    "7": 18,
+    "8": 6
+  },
+  "params_fixos": {
+    "learning_rate": 0.03,
+    "num_leaves": 15,
+    "min_child_samples": 200,
+    "feature_fraction": 0.8,
+    "bagging_fraction": 0.8,
+    "bagging_freq": 1,
+    "lambda_l2": 1.0,
+    "verbose": -1,
+    "seed": 42,
+    "deterministic": true,
+    "num_threads": 0
+  },
+  "painel": {
+    "linhas": 81472,
+    "ativos": [
+      "ABEV3",
+      "B3SA3",
+      "BBAS3",
+      "BBDC4",
+      "COPPER",
+      "DAX",
+      "DOWJONES",
+      "EURUSD",
+      "FTSE100",
+      "GBPUSD",
+      "GOLD",
+      "HANGSENG",
+      "IBOVESPA",
+      "ITUB4",
+      "NASDAQ",
+      "NIKKEI225",
+      "PETR4",
+      "RENT3",
+      "SILVER",
+      "SP500",
+      "SUZB3",
+      "US10Y",
+      "USDBRL",
+      "USDJPY",
+      "VALE3",
+      "VIX",
+      "WEGE3",
+      "WTI"
+    ],
+    "inicio": "2008-09-24",
+    "fim": "2026-10-14",
+    "folds": 17,
+    "features": [
+      "f_z_lag0",
+      "f_z_lag1",
+      "f_z_lag2",
+      "f_z_lag3",
+      "f_z_lag4",
+      "f_z_std5",
+      "f_z_std21",
+      "f_z_std63",
+      "f_z_mean21",
+      "f_z_mean63",
+      "f_rsi14",
+      "f_range",
+      "f_volrel"
+    ]
+  }
+}

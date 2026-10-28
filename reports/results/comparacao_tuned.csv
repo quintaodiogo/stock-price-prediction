@@ -1,0 +1,13 @@
+target,model,ic,ic_std,rmse,auc,vence_ativo_pct,folds
+y_dir_h1,lgbm_ativo,0.0309,0.0259,0.5003,0.5178,,15
+y_dir_h1,lgbm_geral,0.0275,0.0263,0.4995,0.5159,,15
+y_ret_h1,lgbm_ativo,0.0162,0.0261,1.0337,,,15
+y_ret_h1,lgbm_geral,0.0199,0.0154,1.0322,,,15
+y_ret_h5,lgbm_ativo,0.021,0.0354,1.0166,,,15
+y_ret_h5,lgbm_geral,0.0051,0.0417,1.0107,,,15
+y_vol_h5,vol_passada,0.2362,0.0967,0.5586,,20.0,15
+y_vol_h5,lgbm_ativo,0.2946,0.0593,0.5346,,26.6667,15
+y_vol_h5,lgbm_geral,0.3424,0.0687,0.5168,,93.3333,15
+y_vol_h5,lgbm_ativo_tuned,0.2991,0.0572,0.5326,,,15
+y_vol_h5,lgbm_classe_tuned,0.3376,0.0611,0.5199,,100.0,15
+y_vol_h5,lgbm_geral_tuned,0.3456,0.071,0.5168,,86.6667,15

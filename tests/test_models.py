@@ -11,7 +11,6 @@ sys.path.insert(0, str(ROOT / "src" / "models"))
 import baselines  # noqa: E402
 import common  # noqa: E402
 import features  # noqa: E402
-import tree  # noqa: E402
 from test_no_leakage import synthetic  # noqa: E402
 
 CUT = pd.Timestamp("2017-06-30")
@@ -64,6 +63,7 @@ def test_features_never_include_targets():
 
 
 def test_tune_candidates_start_with_current_config():
+    import tree
     import tune
     cands = tune.candidates(8)
     assert len(cands) == 9
