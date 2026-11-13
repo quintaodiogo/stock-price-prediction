@@ -180,7 +180,9 @@ def main(argv: list[str] | None = None) -> None:
     ap.add_argument("--epochs", type=int, default=None, help="máximo de épocas (padrão 30)")
     ap.add_argument("--window", type=int, default=None, help="pregões por janela (padrão 40)")
     ap.add_argument("--no-save-models", action="store_true")
+    common.add_universe_arg(ap)
     args = ap.parse_args(argv)
+    common.use_universe(args.universe)
 
     cfg = {**CONFIG, **{k: v for k, v in (("max_epochs", args.epochs), ("window", args.window)) if v}}
     torch.set_num_threads(max(1, torch.get_num_threads()))

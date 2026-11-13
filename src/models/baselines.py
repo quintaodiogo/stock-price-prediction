@@ -7,6 +7,7 @@
 
 Uso: python src/models/baselines.py   ->  reports/results/preds_<baseline>.parquet
 """
+import argparse
 import sys
 from pathlib import Path
 
@@ -59,7 +60,10 @@ def run(panel: pd.DataFrame, folds: list[dict]) -> dict[str, list[pd.DataFrame]]
     return out
 
 
-def main() -> None:
+def main(argv: list[str] | None = None) -> None:
+    ap = argparse.ArgumentParser()
+    common.add_universe_arg(ap)
+    common.use_universe(ap.parse_args(argv).universe)
     panel, folds = common.load_panel(), common.load_folds()
     info = {"painel": common.panel_signature(panel, folds)}
     for name, frames in run(panel, folds).items():

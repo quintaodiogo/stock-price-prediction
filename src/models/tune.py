@@ -114,7 +114,9 @@ def main(argv: list[str] | None = None) -> None:
     ap.add_argument("--targets", nargs="+", default=["y_vol_h5"], choices=common.TARGETS)
     ap.add_argument("--folds", nargs="*", type=int, default=None, help="só estes folds (teste rápido)")
     ap.add_argument("--n", type=int, default=N_CANDIDATES, help="combinações sorteadas além da atual")
+    common.add_universe_arg(ap)
     args = ap.parse_args(argv)
+    common.use_universe(args.universe)
 
     panel, all_folds = common.load_panel(), common.load_folds()
     folds = [f for f in all_folds if args.folds is None or f["fold"] in args.folds]
