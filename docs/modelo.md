@@ -219,3 +219,133 @@ contra o `lgbm_ativo_tuned`, o modelo por ativo **já ajustado**):
    era efeito de uma configuração que favorecia o modelo geral.
 4. O `tree.py` sem ajuste continua sendo o modelo de referência para a Pessoa C: dá o mesmo
    resultado e roda em uma fração do tempo.
+
+## 11. Com e sem minis e cripto
+
+Os resultados das seções 4 a 10 usam `sem_minis_cripto` (28 ativos, desde 2008). Para medir o efeito de
+incluir BTC, ETH, WIN e WDO, cada conjunto de ativos agora tem **pastas próprias**, sem sobrescrever os outros:
+`data/processed/<conjunto>/`, `reports/results/<conjunto>/` e `models/<conjunto>/`.
+
+| Conjunto | Ativos | Painel começa | Folds |
+|---|---|---|---|
+| `sem_minis_cripto` | 28 | 2008 | 17 (2010 a 2026) |
+| `sem_minis` | 30 (+ BTC, ETH) | 2018 | 8 (2019 a 2026) |
+| `todos` | 32 (+ BTC, ETH, WIN, WDO) | 2021 | 5 (2022 a 2026) |
+
+(datas e folds de `docs/dados.md` e `docs/normalizacao.md`; conferir na saída do `prepare_universe.py`)
+
+```
+# 0. dados: cripto vem do Yahoo; minis precisam de data/intraday/WIN_M1.csv e WDO_M1.csv (MT5, Pessoa A)
+python src/download_data.py
+python src/minis_to_daily.py
+# 1. um painel por conjunto, cada um na sua pasta
+python src/models/prepare_universe.py --universe sem_minis_cripto
+python src/models/prepare_universe.py --universe todos
+# 2. os mesmos modelos em cada conjunto (vale para baselines, tree, seq, tune e run_1b)
+python src/models/run_1b.py --universe sem_minis_cripto
+python src/models/run_1b.py --universe todos
+# 3. a comparação
+python src/models/compare_universes.py --a sem_minis_cripto --b todos
+```
+
+`compare_universes.py` responde duas perguntas:
+
+1. **Perdemos ou ganhamos ao incluir os ativos novos?** Cada modelo é comparado consigo mesmo nos dois
+   conjuntos, **nas mesmas linhas**: mesma data, mesmo ativo (só os 28 que existem nos dois) e mesmo alvo.
+   Assim a diferença vem só do treino: o conjunto maior tem mais ativos, mas bem menos anos de histórico.
+   Saída: IC e RMSE por ano nos dois conjuntos, a diferença e em quantos anos o conjunto B venceu.
+   `--strict` exige as mesmas linhas para todos os modelos ao mesmo tempo.
+2. **Como o modelo se sai nos ativos novos?** IC de cada modelo em BTC, ETH, WIN e WDO, com o período e o
+   número de dias de cada um.
+
+Arquivos: `reports/results/comparacao_<a>_vs_<b>.csv` e `..._novos.csv`.
+
+Cuidados ao ler:
+- Em `todos`, o modelo **por ativo** quase não existe: ele precisa de 500 dias de treino por ativo, e o
+  painel começa em 2021. Ele só aparece nos últimos folds, então as comparações com ele cobrem poucos anos.
+  Isso também é um resultado: com pouco histórico, só o modelo geral ou por classe consegue ser treinado.
+- A comparação da pergunta 1 cobre só os anos em que os dois conjuntos têm teste (a partir de 2021 ou 2022).
+  Ela não mede a perda de 2010 a 2021, que simplesmente não existe no conjunto maior.
+- Com 5 folds, uma diferença precisa ser grande e repetida na maioria dos anos para valer algo.
+- Os minis têm a rolagem de contrato sem tratamento e buracos em 2023 (`docs/dados.md`, seção 3), e o WDO
+  termina em 01/04/2026, o que encurta o painel `todos`.
+
+**Resultado com dados reais** (`sem_minis_cripto` × `todos`; 5 anos de teste, 2022 a 2026; os mesmos 28 ativos e os mesmos dias nos dois):
+
+*Pergunta 1: nos 28 ativos originais, incluir minis e cripto ajudou?* Volatilidade (`y_vol_h5`):
+
+| Modelo | IC sem minis/cripto | IC com tudo | Diferença | Anos em que "todos" venceu |
+|---|---|---|---|---|
+| vol_passada | 0,200 | 0,200 | 0,000 | 40% |
+| lgbm_classe | 0,298 | 0,231 | −0,067 | 20% |
+| lgbm_geral | 0,314 | 0,247 | −0,067 | 60% |
+| lgbm_ativo (só 2026) | 0,337 | 0,261 | −0,075 | 0% (1 ano) |
+
+- **Piorou.** O modelo geral perde cerca de 0,07 de IC na volatilidade, e o RMSE sobe de 0,560 para 0,581. O
+  por classe perde o mesmo e vence em só 1 dos 5 anos. A régua `vol_passada`, que não treina nada, não muda:
+  a diferença vem do treino.
+- O geral com tudo vence em 3 dos 5 anos, mas perde por mais nos outros dois. Com 5 anos e desvio de cerca de
+  0,06 entre eles, a perda é consistente na média, mas não em todo ano.
+- **A causa provável é o histórico, não os ativos novos em si.** Para incluir os minis, o treino passa a
+  começar em 2021 em vez de 2008: em 2022 o modelo estuda 1 ano, não 14. Este teste não separa os dois
+  efeitos (mais ativos × menos anos); ver "Próximo teste".
+- Direção e retorno: diferenças de IC entre −0,03 e +0,07 em valores perto de zero, com AUC perto de 0,5 nos
+  dois. É ruído, como nas seções 4 e 5.
+
+*Pergunta 2: como os modelos se saem nos ativos novos?* Volatilidade, IC ao longo do tempo de cada ativo,
+jan/2022 a mar/2026 (cerca de 617 dias):
+
+| Ativo | lgbm_geral | lgbm_classe | vol_passada | media_historica |
+|---|---|---|---|---|
+| WIN | **0,375** | 0,316 | 0,241 | −0,085 |
+| WDO | 0,175 | **0,211** | 0,159 | −0,275 |
+| BTC | 0,080 | −0,135 | **0,188** | −0,156 |
+| ETH | 0,058 | 0,073 | 0,090 | **0,122** |
+
+- **Nos minis o modelo geral funciona bem**: no WIN ganha com folga da régua (0,375 × 0,241), e no WDO o
+  por classe e o geral ficam acima dela. Faz sentido: os minis acompanham o Ibovespa e o dólar, que o modelo
+  já conhece.
+- **Na cripto, não**: no BTC e no ETH o modelo geral perde para a régua de agitação recente. A cripto se
+  comporta diferente dos outros mercados (negocia todo dia, oscila muito mais), e o padrão aprendido nos
+  outros ativos não se transfere bem.
+- A coluna `lgbm_ativo` desta tabela foi omitida: em `todos` o modelo por ativo só existe em 2026 (cerca de
+  40 dias por ativo), então o IC dele não é comparável com o dos outros, que cobrem 4 anos.
+- Este IC é calculado ao longo do tempo de um único ativo; não é o mesmo número do IC das seções 4 a 10
+  (vários ativos e dias juntos). Compare os números só dentro desta tabela.
+
+**Decisão sugerida:** manter `sem_minis_cripto` como resultado principal (17 anos de teste) e apresentar
+`todos` como análise complementar: incluir minis e cripto custa histórico e piora a volatilidade dos 28 ativos;
+o modelo geral funciona nos minis e não funciona na cripto.
+
+### 11.1 Manter minis e cripto sem perder histórico: painel sem alinhar
+
+A perda acima vem de o painel ser **alinhado**: ele só guarda os dias em que *todos* os ativos negociaram,
+então o ativo que começa mais tarde (os minis, em 2020) corta o histórico de todos. Com
+`prepare_universe.py --no-align`, cada ativo entra com o **próprio** histórico: os 28 desde 2008, a cripto
+desde 2014/2017 e os minis desde 2020, e o painel volta a ter 17 folds. Com a normalização `vol_scaled`, as
+features e os alvos de um ativo dependem só dele, então os 28 ativos ficam **idênticos** com e sem os ativos
+novos (há um teste para isso) e a única diferença é o modelo geral treinar também com eles.
+
+```
+python src/models/prepare_universe.py --universe sem_minis_cripto --no-align   # -> sem_minis_cripto_sem_alinhar
+python src/models/prepare_universe.py --universe todos --no-align              # -> todos_sem_alinhar
+python src/models/run_1b.py --universe sem_minis_cripto_sem_alinhar
+python src/models/run_1b.py --universe todos_sem_alinhar
+python src/models/compare_universes.py --a sem_minis_cripto_sem_alinhar --b todos_sem_alinhar
+```
+
+Cuidados:
+- **Não compare painel alinhado com não alinhado.** O alinhado descarta os dias em que algum mercado estava
+  fechado (feriados diferentes em cada país): sobram cerca de 164 pregões por ano em vez de cerca de 250, e
+  "a volatilidade dos próximos 5 dias" vira outra conta. O `compare_universes.py` avisa quando os alvos não batem.
+- Os números sem alinhar **não são comparáveis** com os das seções 4 a 10 (alinhadas), pelo mesmo motivo.
+  Se o grupo adotar o painel sem alinhar, as comparações principais precisam ser refeitas nele.
+- Por ativo e por classe não mudam com os ativos novos (eles ficam em classes próprias); só o geral muda.
+- O alinhamento é decisão da Pessoa A (contrato do painel); usar `--no-align` como padrão deve ser combinado com o grupo.
+- Cripto negocia todos os dias: sem alinhar, "5 dias" na cripto são 5 dias corridos, e nos outros, 5 pregões.
+
+**Resultado com dados reais (sem alinhar):** *a preencher depois de rodar.*
+
+**Próximo teste (separar os dois efeitos):** rodar os 28 ativos com o treino começando também em 2021. Se a
+perda de 0,07 aparecer ali também, a causa é o histórico mais curto, e não os ativos novos. O conjunto
+`sem_minis` (com cripto, desde 2018) ajuda a separar o efeito da cripto do dos minis.

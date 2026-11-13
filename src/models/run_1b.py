@@ -30,7 +30,7 @@ MODELS = BASE_MODELS + OPTIONAL_MODELS
 def ensure_preds(rerun: bool) -> None:
     path = lambda m: common.RESULTS_DIR / f"preds_{m}.parquet"  # noqa: E731
     if rerun or not all(path(m).exists() for m in ("zero", "media_historica", "vol_passada")):
-        baselines.main()
+        baselines.main([])
     for mode in ("ativo", "classe", "geral"):
         if rerun or not path(f"lgbm_{mode}").exists():
             tree.main(["--mode", mode])
@@ -79,7 +79,9 @@ def main() -> None:
     ap.add_argument("--ref", default="lgbm_ativo", choices=MODELS,
                     help="modelo de referência da coluna vence_ativo_pct")
     ap.add_argument("--out", default="comparacao_1b.csv")
+    common.add_universe_arg(ap)
     args = ap.parse_args()
+    common.use_universe(args.universe)
     ensure_preds(args.rerun)
     models = args.models and list(dict.fromkeys(args.models + [args.ref]))
     table = summarize(per_fold(load_all(models)), args.ref)

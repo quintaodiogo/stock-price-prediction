@@ -8,3 +8,6 @@ data/processed/
 models/*.txt
 reports/results/preds_*.parquet
 models/*.pt
+models/**/*.txt
+models/**/*.pt
+reports/results/**/preds_*.parquet

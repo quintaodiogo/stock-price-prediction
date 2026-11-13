@@ -114,7 +114,9 @@ def main(argv: list[str] | None = None) -> None:
     ap.add_argument("--targets", nargs="+", default=common.TARGETS, choices=common.TARGETS)
     ap.add_argument("--exclude", nargs="*", default=[], help="ativos fora do treino (cenário 'ativo não visto')")
     ap.add_argument("--no-save-models", action="store_true")
+    common.add_universe_arg(ap)
     args = ap.parse_args(argv)
+    common.use_universe(args.universe)
 
     panel, folds = common.load_panel(), common.load_folds()
     unknown = set(args.exclude) - set(panel["asset"])

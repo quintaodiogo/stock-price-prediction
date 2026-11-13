@@ -17,15 +17,41 @@ PANEL_PATH = ROOT / "data" / "processed" / "panel.parquet"
 FOLDS_PATH = ROOT / "data" / "processed" / "folds.json"
 RESULTS_DIR = ROOT / "reports" / "results"
 MODELS_DIR = ROOT / "models"
+UNIVERSE: str | None = None   # None = pastas padrão acima (o painel gerado por src/features.py)
 
 TARGETS = ["y_ret_h1", "y_ret_h5", "y_dir_h1", "y_vol_h5"]
 PRED_COLUMNS = ["date", "asset", "fold", "target", "y_true", "y_pred"]
 SEED = 42
 
 
+def use_universe(name: str | None) -> None:
+    """Separa painel, resultados e modelos de um conjunto de ativos em pastas próprias.
+
+    Com `name` (ex.: "todos"), tudo passa a ler e gravar em data/processed/<name>/,
+    reports/results/<name>/ e models/<name>/, sem sobrescrever os outros conjuntos.
+    Com None, nada muda (pastas padrão).
+    """
+    global PANEL_PATH, FOLDS_PATH, RESULTS_DIR, MODELS_DIR, UNIVERSE
+    if not name:
+        return
+    UNIVERSE = name
+    PANEL_PATH = ROOT / "data" / "processed" / name / "panel.parquet"
+    FOLDS_PATH = ROOT / "data" / "processed" / name / "folds.json"
+    RESULTS_DIR = ROOT / "reports" / "results" / name
+    MODELS_DIR = ROOT / "models" / name
+
+
+def add_universe_arg(ap) -> None:
+    ap.add_argument("--universe", default=None,
+                    help="conjunto de ativos (todos, sem_minis, sem_minis_cripto); usa as pastas desse conjunto. "
+                         "Gere antes o painel com: python src/models/prepare_universe.py --universe <nome>")
+
+
 def load_panel() -> pd.DataFrame:
     if not PANEL_PATH.exists():
-        sys.exit(f"Painel não encontrado em {PANEL_PATH}. Rode antes: python src/features.py --universe sem_minis_cripto")
+        how = (f"python src/models/prepare_universe.py --universe {UNIVERSE}" if UNIVERSE
+               else "python src/features.py --universe sem_minis_cripto")
+        sys.exit(f"Painel não encontrado em {PANEL_PATH}. Rode antes: {how}")
     return pd.read_parquet(PANEL_PATH)
 
 

@@ -70,3 +70,39 @@ def test_tune_candidates_start_with_current_config():
     assert cands[0] == {k: tree.PARAMS[k] for k in tune.TUNED_KEYS}
     assert len({tuple(sorted(c.items())) for c in cands}) == 9      # sem repetição
     assert all(set(c) == set(tune.GRID) for c in cands)
+
+
+def test_universe_folders_do_not_overwrite_each_other():
+    import importlib
+    c = importlib.reload(common)
+    default = (c.PANEL_PATH, c.RESULTS_DIR, c.MODELS_DIR)
+    c.use_universe(None)                                   # sem conjunto: nada muda
+    assert (c.PANEL_PATH, c.RESULTS_DIR, c.MODELS_DIR) == default
+    c.use_universe("todos")
+    assert c.PANEL_PATH.parent.name == "todos" and c.RESULTS_DIR.name == "todos" and c.MODELS_DIR.name == "todos"
+    importlib.reload(common)                               # volta ao padrão para os outros testes
+
+
+def test_compare_universes_uses_same_rows_per_model():
+    import compare_universes as cu
+    d = pd.to_datetime(["2022-01-03", "2022-01-04", "2022-01-05"])
+    row = lambda m, dates, asset="SP500": pd.DataFrame(  # noqa: E731
+        {"date": dates, "asset": asset, "fold": 0, "target": "y_vol_h5", "y_true": 1.0, "y_pred": 1.0, "model": m})
+    a = pd.concat([row("lgbm_geral", d), row("lgbm_ativo", d[:1])])
+    b = pd.concat([row("lgbm_geral", d[1:]), row("lgbm_ativo", d), row("lgbm_geral", d, asset="BTC")])
+    ra, rb = cu.common_rows(a, b)                           # modelo a modelo
+    assert set(ra.loc[ra.model == "lgbm_geral", "date"]) == set(d[1:])   # só os dias dos dois lados
+    assert set(ra.loc[ra.model == "lgbm_ativo", "date"]) == set(d[:1])
+    assert "BTC" not in set(rb["asset"])                    # ativo que só existe em B fica fora
+    sa, sb = cu.common_rows(a, b, strict=True)              # todos os modelos juntos: só o dia comum a todos
+    assert sa["date"].nunique() == 0 or set(sa["date"]) <= set(d[:1])
+
+
+def test_unaligned_panel_keeps_each_asset_independent():
+    """Sem alinhar, incluir um ativo novo não muda nenhuma linha dos outros (base da comparação justa)."""
+    raw = _raw()
+    small = {k: v for k, v in raw.items() if k != "BTC"}
+    p_all = features.build_panel(raw, align=False)
+    p_small = features.build_panel(small, align=False)
+    a = p_all[p_all["asset"] != "BTC"].reset_index(drop=True)
+    pd.testing.assert_frame_equal(a, p_small.reset_index(drop=True))
