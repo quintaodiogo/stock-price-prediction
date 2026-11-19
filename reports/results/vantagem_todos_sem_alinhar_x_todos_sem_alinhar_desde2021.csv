@@ -1,0 +1,5 @@
+target,painel,model,ic,ic_std,rmse,vantagem,anos,vence_regua
+y_vol_h5,todos_sem_alinhar,lgbm_geral,0.3178,0.0491,0.5105,0.0686,5,5 de 5
+y_vol_h5,todos_sem_alinhar,vol_passada,0.2492,0.0456,0.5473,,5,régua
+y_vol_h5,todos_sem_alinhar_desde2021,lgbm_geral,0.3122,0.0464,0.5145,0.0631,5,5 de 5
+y_vol_h5,todos_sem_alinhar_desde2021,vol_passada,0.2492,0.0456,0.5473,,5,régua

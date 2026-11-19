@@ -11,7 +11,7 @@ Requer **Python 3.10 ou mais novo** (o código usa `int | None`). No Mac, o Ligh
 ```
 python src/download_data.py
 python src/features.py --universe sem_minis_cripto
-python -m pytest tests                     # 38 testes (1 pulado sem PyTorch), incluindo os da Pessoa B
+python -m pytest tests                     # todos devem passar (1 pulado sem PyTorch)
 python src/models/run_1b.py                # baselines + LightGBM nos 3 modos + comparação (~10 min)
 ```
 
@@ -44,7 +44,9 @@ Os minis (WIN, WDO) e a cripto ficaram de fora porque, com as datas comuns, encu
 | `importance.py` | Importância das features no modelo geral (seção 14) |
 | `market.py` | Features de mercado e a comparação com e sem elas (seção 15) |
 | `boundary.py` | Condições de contorno: bordas dos dados e IC por regime, classe, histórico e ano (seção 16) |
-| `report.py` | Junta os resultados das seções 12 a 16 numa página HTML com gráficos, como ler cada tabela e o que aconteceu |
+| `report.py` | Junta os resultados das seções 12 a 19 numa página HTML com gráficos, como ler cada tabela e o que aconteceu |
+| `simple.py` | Modelos mais simples (regressão linear/logística e uma árvore de decisão) para comparar com o LightGBM (seção 18) |
+| `window.py` | Treina o geral só com os últimos N anos antes de cada prova: quanto dado é preciso (seção 19) |
 | `tests/test_models.py` | Vol. passada não usa o futuro; previsões no formato e no período certos; alvos nunca entram como feature; validação interna com embargo |
 
 **LightGBM.** Hiperparâmetros fixos (`learning_rate` 0,03, `num_leaves` 15, `min_child_samples` 200,
@@ -685,7 +687,7 @@ Pessoa A:
 - falta de amplitude (máxima e mínima) em trechos antigos: US10Y 48,5%, NIKKEI225 37,2%, SP500 33,9%; o modelo
   lida com isso (seção 2.6 de `docs/features.md`).
 
-## 17. Como ler os resultados das seções 12 a 16
+## 17. Como ler os resultados das seções 12 a 19
 
 ```
 python src/models/report.py --universe todos_sem_alinhar --cut todos_sem_alinhar_desde2008
@@ -695,3 +697,110 @@ Gera `reports/results/todos_sem_alinhar/relatorio_pendencias.html`. Para cada pe
 como ler e uma frase do que aconteceu, por regras fixas: diferença menor que 0,005 de IC = praticamente igual;
 "consistente" = mesmo sinal em pelo menos 70% dos anos de teste; na ablação, só conta o que passa do ruído.
 As frases são ponto de partida: conferir sempre com a tabela.
+
+## 18. Modelos mais simples que o LightGBM
+
+Pedido do professor: comparar com modelos mais simples, para justificar a escolha do LightGBM. Dois modelos,
+cada um na versão certa para o tipo de alvo (`src/models/simple.py`):
+
+| Modelo | Alvos numéricos (retornos, volatilidade) | Direção (sobe ou cai: classificação) |
+|---|---|---|
+| linear | regressão linear com penalização (Ridge) | regressão logística |
+| árvore | uma árvore de regressão (CART) | uma árvore de classificação |
+
+O LightGBM é uma soma de centenas de árvores como essa; a regressão linear supõe que cada feature tem um efeito
+fixo e somado. Mesmas regras de sempre: mesmo walk-forward, mesmas 13 features, nada do ano de teste usado para
+escolher nada. Um hiperparâmetro por modelo é escolhido na validação interna (igual ao `tree.py`): força da
+penalização (Ridge: alpha em 0,1; 1; 10; 100; logística: C em 0,01; 0,1; 1) ou profundidade da árvore (3, 5, 7,
+9, com pelo menos 1% das linhas em cada folha). Valores vazios (amplitude, volume) = mediana do treino + uma
+coluna avisando que estava vazio; a regressão linear recebe as features padronizadas com média e desvio do treino.
+
+```
+python src/models/simple.py --model linear --universe todos_sem_alinhar
+python src/models/simple.py --model arvore --universe todos_sem_alinhar
+python src/models/simple.py --compare --universe todos_sem_alinhar
+```
+
+Como decidir: se o LightGBM melhora de forma consistente (≥ 0,005 de IC e em pelo menos 70% dos anos) sobre os
+dois, a escolha está justificada. Se a regressão linear ficar praticamente igual na volatilidade, isso deve ser
+dito: o ganho do projeto viria de juntar ativos, não da complexidade do modelo (coerente com a seção 9, em que a
+rede neural empatou com o LightGBM).
+
+### 18.1 Resultado com dados reais
+
+Volatilidade (`y_vol_h5`), 17 anos de prova, mesmas linhas para todos os modelos:
+
+| Modelo | IC | LightGBM − modelo | Anos com LightGBM melhor |
+|---|---|---|---|
+| média histórica | 0,011 | 0,370 | 17 de 17 |
+| régua (vol. passada) | 0,308 | 0,073 | 17 de 17 |
+| linear (Ridge) | 0,334 | 0,047 | 17 de 17 |
+| uma árvore de decisão | 0,348 | 0,033 | 17 de 17 |
+| **LightGBM geral** | **0,381** | — | — |
+
+- **A escolha do LightGBM está justificada:** ganhou da regressão linear (+0,047) e da árvore única (+0,033)
+  em todos os 17 anos. A regressão linear ganha da régua só por 0,026; o LightGBM, por 0,073, quase três vezes
+  mais.
+- **Isso afina uma conclusão anterior** (seção 9, "o ganho vem dos dados, não do tipo de modelo"): o modelo
+  precisa ser **flexível** (não linear). Entre dois modelos flexíveis bem diferentes (LightGBM e rede neural
+  GRU) o resultado empatou; um modelo linear ou uma árvore só ficam abaixo.
+- **Retornos e direção:** todos perto de zero (IC entre −0,014 e 0,019) ou de 0,5 (AUC entre 0,502 e 0,516).
+  Não há sinal para nenhum modelo. A média histórica tem AUC 0,516 na direção, um pouco acima dos outros; isso
+  provavelmente vem de diferenças de tendência média entre ativos ao longo do tempo, e não de previsão do dia
+  seguinte. Não usar como resultado.
+- O IC do LightGBM aqui (0,381) difere do da seção 12.1 (0,374) porque cada tabela usa as linhas comuns aos
+  modelos que compara.
+
+
+## 19. Quanto dado é preciso para treinar
+
+Pedido do professor: qual a menor quantidade de dados que podemos usar para treinar o modelo sem perder
+desempenho, testando um corte na época da pandemia (2021). Dois testes:
+
+1. **Corte fixo em 2021-01-01** (`prepare_universe.py --start`). O modelo só estuda dados a partir de 2021,
+   então só pode ser avaliado de 2022 a 2026 (5 anos de prova), com 1 a 5 anos de treino. A comparação com o
+   painel completo usa as mesmas linhas desses 5 anos. O modelo por ativo não existe em 2022 (precisa de 500
+   dias do próprio ativo), por isso a comparação usa só a régua e o geral.
+2. **Janela de treino** (`window.py`): em cada um dos 17 anos de prova, o geral estuda só os últimos N anos
+   (N = 1, 2, 3, 5, 10). Responde à mesma pergunta em todos os anos, e não só depois de 2021.
+
+```
+python src/models/prepare_universe.py --universe todos --no-align --start 2021-01-01
+python src/models/baselines.py --universe todos_sem_alinhar_desde2021
+python src/models/tree.py --mode geral --targets y_vol_h5 --universe todos_sem_alinhar_desde2021
+python src/models/edge_report.py --panels todos_sem_alinhar todos_sem_alinhar_desde2021 --models vol_passada lgbm_geral
+python src/models/window.py --universe todos_sem_alinhar
+```
+
+Leitura: a menor janela "praticamente igual" (diferença menor que 0,005 de IC) a usar todo o passado é a
+quantidade mínima de dados. Atenção: a janela curta perde as crises antigas (2008, 2020) do treino, então o
+resultado em anos de crise pode piorar mais que a média.
+
+### 19.1 Resultado com dados reais
+
+**Janela de treino** (volatilidade, 17 anos de prova; diferença para o treino com todo o passado):
+
+| Treino com | IC | Diferença | Anos pior | Leitura |
+|---|---|---|---|---|
+| todo o passado | 0,381 | — | — | referência |
+| últimos 10 anos | 0,382 | +0,001 | 8 de 17 | praticamente igual |
+| últimos 5 anos | 0,379 | −0,003 | 11 de 17 | praticamente igual |
+| últimos 3 anos | 0,375 | −0,006 | 11 de 17 | empate (muda de sinal entre os anos) |
+| últimos 2 anos | 0,370 | −0,011 | 12 de 17 | perde de forma consistente |
+| último 1 ano | 0,339 | −0,043 | 17 de 17 | perde de forma consistente |
+| régua (não treina) | 0,308 | −0,073 | — | piso |
+
+**Corte em 2021** (só os anos de prova 2022 a 2026): geral 0,312 contra 0,318 com todo o passado (−0,006;
+melhor em 2 de 5 anos: empate pela regra). A vantagem sobre a régua cai de 0,069 para 0,063 e o geral continua
+ganhando dela nos 5 anos.
+
+- **Resposta ao professor: cerca de 5 anos de histórico bastam.** Com 5 ou 10 anos, o modelo fica praticamente
+  igual a estudar todo o passado. Com 3 anos começa a perder um pouco; com 1 ou 2 anos, perde de forma
+  consistente (−0,043 com 1 ano).
+- O corte em 2021 concorda: em 2022 o modelo tinha só 1 ano para estudar e em 2026, 5 anos; no conjunto,
+  perde pouco (−0,006) e ainda ganha da régua em todos os anos.
+- Por que 5 anos bastam: o modelo geral junta os 32 ativos; 5 anos são cerca de 40 mil linhas de treino
+  (32 ativos × cerca de 250 pregões × 5), o bastante para aprender o padrão. O ganho de juntar ativos é,
+  em parte, ganho de quantidade de dados.
+- Isso também é coerente com a seção 12.1: cortar em 2008 (mais de 5 anos antes de cada prova) não mudou nada.
+

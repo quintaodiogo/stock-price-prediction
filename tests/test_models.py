@@ -173,3 +173,42 @@ def test_edge_report_detects_same_targets():
     p = pd.DataFrame({"date": d, "asset": "A", "target": "y_vol_h5", "y_true": np.arange(50.0), "y_pred": 1.0})
     assert er.same_targets({"x": p, "y": p.iloc[10:]})
     assert not er.same_targets({"x": p, "y": p.assign(y_true=p["y_true"] * 2)})
+
+
+# ---------------------------------------------------------------- sugestões finais do professor
+def _small_panel_and_folds():
+    panel = features.build_panel(_raw(), align=False)
+    folds = features.make_folds(panel["date"].max(), first_year=2017)
+    return panel, folds
+
+
+def test_simple_models_follow_contract():
+    """Linear (Ridge/logística) e árvore: previsões no formato do contrato; direção vira probabilidade."""
+    import simple
+    panel, folds = _small_panel_and_folds()
+    for model in ("linear", "arvore"):
+        frames, chosen = simple.run(panel, folds[:1], model, "geral", ["y_vol_h5", "y_dir_h1"])
+        p = pd.concat(frames)
+        assert list(p.columns) == common.PRED_COLUMNS
+        assert set(p["target"]) == {"y_vol_h5", "y_dir_h1"}
+        d = p[p["target"] == "y_dir_h1"]["y_pred"]
+        assert d.between(0, 1).all() and p["y_pred"].notna().all()
+        assert all(c["parametro"] in simple.GRID[(model, simple.kind(c["target"]))] for c in chosen)
+
+
+def test_train_years_keeps_only_recent_past(monkeypatch):
+    """--train-years N: o treino de cada prova só tem datas dos últimos N anos antes do fim do treino."""
+    import tree
+    panel, folds = _small_panel_and_folds()
+    seen = []
+
+    def fake_fit(train, test, target, feats, min_rows=500):
+        seen.append((train["date"].min(), train["date"].max()))
+        return np.zeros(len(test)), None
+
+    monkeypatch.setattr(tree, "fit_predict", fake_fit)
+    tree.run(panel, folds[:1], "geral", ["y_vol_h5"], [], save_models=False, train_years=1)
+    end = pd.Timestamp(folds[0]["train_end"])
+    lo, hi = seen[0]
+    assert lo > end - pd.DateOffset(years=1) and hi <= end
+    assert tree.tag("geral", [], False, 3) == "geral_janela3a"

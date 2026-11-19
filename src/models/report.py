@@ -1,4 +1,4 @@
-"""Relatório para LER os resultados das pendências do professor (seções 12 a 16 de docs/modelo.md).
+"""Relatório para LER os resultados dos pedidos do professor (seções 12 a 19 de docs/modelo.md).
 
 Junta numa página HTML as tabelas que os scripts gravaram, com um gráfico por pergunta, uma explicação de
 como ler cada tabela e uma frase automática do que aconteceu, seguindo regras fixas (abaixo). A frase é um
@@ -313,6 +313,95 @@ def sec_boundary(universe: str) -> str:
     return "".join(out)
 
 
+# ------------------------------------------------------------------ seção 18: modelos simples
+SIMPLE_LABEL = {"linear_geral": "linear (Ridge; logística na direção)", "arvore_geral": "uma árvore de decisão",
+                "vol_passada": "régua (vol. passada)", "media_historica": "média histórica"}
+TARGET_LABEL = {"y_vol_h5": "volatilidade, 5 pregões", "y_ret_h1": "retorno, 1 pregão",
+                "y_ret_h5": "retorno, 5 pregões", "y_dir_h1": "direção, 1 pregão"}
+
+
+def sec_simple(universe: str) -> str:
+    out = ["<h2>18. Modelos mais simples que o LightGBM</h2>",
+           "<p><b>Pergunta.</b> Um modelo mais simples faria o mesmo trabalho? Comparamos o LightGBM geral com uma "
+           "regressão linear (Ridge; regressão logística na direção, que é classificação) e com uma única árvore de "
+           "decisão (de regressão ou de classificação), nas mesmas linhas. <i>Vantagem do LightGBM</i> = medida do "
+           "LightGBM menos a do modelo simples, ano a ano (IC; AUC na direção, onde 0,5 = chute).</p>"]
+    t = read(common.RESULTS_DIR / "modelos_simples.csv")
+    if t is None:
+        return "".join(out) + missing(f"python src/models/simple.py --compare --universe {universe}")
+    t["alvo"] = t["target"].map(TARGET_LABEL).fillna(t["target"])
+    t["modelo_"] = t["modelo"].map(SIMPLE_LABEL).fillna(t["modelo"])
+    out.append(table(t, {"alvo": "Alvo", "modelo_": "Modelo simples", "medida": "Medida", "valor_modelo": "Simples",
+                         "valor_lgbm_geral": "LightGBM", "vantagem_lgbm_geral": "Vantagem do LightGBM",
+                         "anos_lgbm_geral_melhor": "Anos com LightGBM melhor"}, 4))
+    v = t[t["target"] == "y_vol_h5"]
+    lines = []
+    for r in v.itertuples():
+        k, n = frac(r.anos_lgbm_geral_melhor)
+        lines.append(f"contra {SIMPLE_LABEL.get(r.modelo, r.modelo)}, o LightGBM {verdict(r.vantagem_lgbm_geral, k, n)} "
+                     f"(vantagem {num(r.vantagem_lgbm_geral, 4)}, melhor em {k} de {n} anos)")
+    if lines:
+        out.append("<p class='leitura'><b>O que aconteceu (volatilidade):</b> " + "; ".join(lines) + ".</p>")
+    out.append("<p class='nota'>Leitura: se o LightGBM melhora de forma consistente sobre os dois, a escolha dele está "
+               "justificada. Se a regressão linear fica praticamente igual, o modelo simples bastaria para a volatilidade, "
+               "e isso deve ser dito no trabalho. Nos retornos e na direção, todos ficam perto de zero (IC) ou de 0,5 "
+               "(AUC): não há sinal para nenhum modelo.</p>")
+    return "".join(out)
+
+
+# ------------------------------------------------------------------ seção 19: quantidade de dados
+def sec_data(universe: str, cut: str) -> str:
+    out = ["<h2>19. Quanto dado é preciso para treinar</h2>",
+           "<p><b>Pergunta.</b> Qual a menor quantidade de dados que o modelo geral precisa estudar sem perder "
+           "desempenho? Dois testes: (1) o corte fixo em 2021, depois da pandemia, que só pode ser avaliado de 2022 "
+           "a 2026; (2) a janela de treino: em cada ano de prova, o modelo estuda só os últimos N anos.</p>"]
+    res = common.ROOT / "reports" / "results"
+    diff = read(res / f"vantagem_{universe}_x_{cut}_diferenca.csv")
+    out.append(f"<h3>Corte em 2021 ({html.escape(cut)})</h3>")
+    if diff is None:
+        out.append(missing(f"python src/models/edge_report.py --panels {universe} {cut} --models vol_passada lgbm_geral"))
+    else:
+        g = diff[(diff["target"] == "y_vol_h5") & (diff["model"] == "lgbm_geral")]
+        if len(g):
+            k, n = frac(g["anos_melhor"].iloc[0])
+            out.append(f"<p class='leitura'><b>O que aconteceu:</b> treinando só a partir de 2021, o resultado do modelo "
+                       f"geral foi: {verdict(g['dif_ic'].iloc[0], k, n)}, em relação ao treino com todo o passado (diferença "
+                       f"{num(g['dif_ic'].iloc[0], 4)}, melhor em {k} de {n} anos; só os anos de prova 2022 a 2026).</p>")
+        summ = read(res / f"vantagem_{universe}_x_{cut}.csv")
+        if summ is not None:
+            s = summ[summ["target"] == "y_vol_h5"].copy()
+            s["modelo"] = s["model"].map(LABEL).fillna(s["model"])
+            out.append(table(s, {"painel": "Painel", "modelo": "Modelo", "ic": "IC", "vantagem": "Vantagem sobre a régua",
+                                 "vence_regua": "Vence a régua", "anos": "Anos de prova"}))
+    out.append("<h3>Janela de treino (todos os 17 anos de prova)</h3>")
+    w = read(common.RESULTS_DIR / "janela_treino.csv")
+    if w is None:
+        return "".join(out) + missing(f"python src/models/window.py --universe {universe}")
+    out.append(table(w, {"janela": "Treino com", "ic": "IC", "dif_vs_completo": "Diferença para todo o passado",
+                         "anos_pior": "Anos pior", "leitura": "Leitura"}, 4))
+    ok = w[(w["leitura"] == "praticamente igual") & w["anos"].notna()]
+    if len(ok):
+        out.append(f"<p class='leitura'><b>O que aconteceu:</b> a menor janela praticamente igual a usar todo o passado "
+                   f"foi de {int(ok['anos'].min())} ano(s) (diferença menor que 0,005 de IC).</p>")
+    else:
+        out.append("<p class='leitura'><b>O que aconteceu:</b> nenhuma janela testada ficou praticamente igual a usar "
+                   "todo o passado: estudar mais história ajuda.</p>")
+    by_year = read(common.RESULTS_DIR / "janela_treino_por_ano.csv", index_col=0)
+    if by_year is not None:
+        plt = plt_setup()
+        cols = [c for c in by_year.columns if c.startswith("lgbm_geral_janela")]
+        fig, ax = plt.subplots(figsize=(7, 2.8))
+        ax.plot(by_year.index, by_year["lgbm_geral"], color="#1f4e79", lw=1.8, marker="o", ms=3, label="todo o passado")
+        shades = ["#d9d9d9", "#bdbdbd", "#969696", "#737373", "#525252"]
+        for c, col in zip(cols, shades):
+            ax.plot(by_year.index, by_year[c], color=col, lw=1, label=c.replace("lgbm_geral_janela", "últimos ").replace("a", " anos"))
+        if "vol_passada" in by_year:
+            ax.plot(by_year.index, by_year["vol_passada"], color="#999", ls="--", lw=1, label="régua")
+        ax.set_xlabel("ano de prova (1 = o primeiro, 2010 no painel oficial)"); ax.set_ylabel("IC"); ax.legend(frameon=False, fontsize=7, ncol=3)
+        out.append(svg(fig))
+    return "".join(out)
+
+
 CSS = """body{font-family:Georgia,'Times New Roman',serif;max-width:900px;margin:24px auto;padding:0 16px;color:#111;background:#fff;line-height:1.45}
 h1{font-size:20px}h2{font-size:17px;border-bottom:1px solid #444;padding-bottom:2px;margin-top:32px}h3{font-size:14px;margin-top:20px}
 table{border-collapse:collapse;font-family:Arial,sans-serif;font-size:12px;margin:8px 0;display:block;overflow-x:auto}
@@ -325,14 +414,16 @@ def main(argv: list[str] | None = None) -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--universe", default="todos_sem_alinhar")
     ap.add_argument("--cut", default="todos_sem_alinhar_desde2008", help="painel cortado (seção 12)")
+    ap.add_argument("--cut2021", default="todos_sem_alinhar_desde2021", help="painel cortado em 2021 (seção 19)")
     args = ap.parse_args(argv)
     common.use_universe(args.universe)
-    body = [f"<h1>Resultados das pendências do professor — painel {html.escape(args.universe)}</h1>",
+    body = [f"<h1>Resultados dos pedidos do professor — painel {html.escape(args.universe)}</h1>",
             "<p class='nota'>Alvo: volatilidade dos próximos 5 pregões (y_vol_h5), onde há sinal. As frases nas caixas cinzas seguem "
             "regras fixas (topo de src/models/report.py): consistente = mesmo sinal em pelo menos 70% dos anos; diferença menor que 0,005 de IC = praticamente igual. Confira "
             "sempre com a tabela.</p>",
             sec_panel(args.universe, args.cut), sec_ablation(args.universe), sec_importance(args.universe),
-            sec_market(args.universe), sec_boundary(args.universe)]
+            sec_market(args.universe), sec_boundary(args.universe), sec_simple(args.universe),
+            sec_data(args.universe, args.cut2021)]
     page = f"<!doctype html><html lang='pt-BR'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'>" \
            f"<title>Resultados das pendências</title><style>{CSS}</style></head><body>{''.join(body)}</body></html>"
     out = common.RESULTS_DIR / "relatorio_pendencias.html"
