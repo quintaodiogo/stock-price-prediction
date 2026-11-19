@@ -1,0 +1,8 @@
+janela,anos,ic,dif_vs_completo,anos_pior,leitura
+todo o passado,,0.3811,0.0,—,referência
+últimos 1 ano,1.0,0.3385,-0.0427,17 de 17,perde de forma consistente
+últimos 2 anos,2.0,0.3703,-0.0109,12 de 17,perde de forma consistente
+últimos 3 anos,3.0,0.3752,-0.006,11 de 17,empate (muda de sinal entre os anos)
+últimos 5 anos,5.0,0.3786,-0.0025,11 de 17,praticamente igual
+últimos 10 anos,10.0,0.3817,0.0006,8 de 17,praticamente igual
+régua (não treina),,0.3082,-0.0729,—,piso

@@ -13,7 +13,8 @@ Uso:
   python src/models/tree.py --mode geral --exclude IBOVESPA      (cenário "ativo não visto")
   python src/models/tree.py --mode ativo --targets y_vol_h5
   python src/models/tree.py --mode geral --market   (+ features de mercado, src/models/market.py)
--> reports/results/preds_lgbm_<modo>[_mercado][_sem_<ativos>].parquet  (modelos gerais em models/)
+  python src/models/tree.py --mode geral --train-years 3   (treina só com os 3 anos antes de cada prova)
+-> reports/results/preds_lgbm_<modo>[_mercado][_janela<N>a][_sem_<ativos>].parquet  (modelos gerais em models/)
 """
 import argparse
 import sys
@@ -81,13 +82,17 @@ def fit_predict(train: pd.DataFrame, test: pd.DataFrame, target: str, feats: lis
 
 
 def run(panel: pd.DataFrame, folds: list[dict], mode: str, targets: list[str],
-        exclude: list[str], save_models: bool, market: bool = False) -> list[pd.DataFrame]:
+        exclude: list[str], save_models: bool, market: bool = False,
+        train_years: int | None = None) -> list[pd.DataFrame]:
     feats = common.feature_cols(panel)
     group_col = GROUP_COL[mode]
     frames = []
     for fold in folds:
         train, test = common.split(panel, fold)
         train = train[~train["asset"].isin(exclude)]          # ativo não visto: fora do treino
+        if train_years:                                         # janela: só os últimos N anos antes da prova
+            start = pd.Timestamp(fold["train_end"]) - pd.DateOffset(years=train_years)
+            train = train[train["date"] > start]
         if mode != "geral":                                     # por classe/ativo: só grupos com treino
             test = test[test[group_col].isin(train[group_col].unique())]
         for target in targets:
@@ -100,13 +105,14 @@ def run(panel: pd.DataFrame, folds: list[dict], mode: str, targets: list[str],
                 frames.append(common.preds_frame(te, fold, target, pred))
                 if save_models and mode == "geral":
                     common.MODELS_DIR.mkdir(exist_ok=True)
-                    model.save_model(str(common.MODELS_DIR / f"lgbm_{tag(mode, exclude, market)}_{target}_fold{fold['fold']}.txt"))
+                    model.save_model(str(common.MODELS_DIR / f"lgbm_{tag(mode, exclude, market, train_years)}_{target}_fold{fold['fold']}.txt"))
         print(f"  fold {fold['fold']:2d} ({fold['test_start'][:4]}) ok", flush=True)
     return frames
 
 
-def tag(mode: str, exclude: list[str], market: bool = False) -> str:
-    return mode + ("_mercado" if market else "") + (f"_sem_{'-'.join(sorted(exclude))}" if exclude else "")
+def tag(mode: str, exclude: list[str], market: bool = False, train_years: int | None = None) -> str:
+    return (mode + ("_mercado" if market else "") + (f"_janela{train_years}a" if train_years else "")
+            + (f"_sem_{'-'.join(sorted(exclude))}" if exclude else ""))
 
 
 def main(argv: list[str] | None = None) -> None:
@@ -117,6 +123,8 @@ def main(argv: list[str] | None = None) -> None:
     ap.add_argument("--no-save-models", action="store_true")
     ap.add_argument("--market", action="store_true",
                     help="acrescenta as features de mercado (agitação dos outros ativos; src/models/market.py)")
+    ap.add_argument("--train-years", type=int, default=None,
+                    help="treina só com os últimos N anos antes de cada ano de prova (padrão: todo o passado)")
     common.add_universe_arg(ap)
     args = ap.parse_args(argv)
     common.use_universe(args.universe)
@@ -128,11 +136,13 @@ def main(argv: list[str] | None = None) -> None:
     unknown = set(args.exclude) - set(panel["asset"])
     if unknown:
         sys.exit(f"Ativos fora do painel: {sorted(unknown)}")
-    name = "lgbm_" + tag(args.mode, args.exclude, args.market)
+    name = "lgbm_" + tag(args.mode, args.exclude, args.market, args.train_years)
     print(f"{name}: {len(folds)} folds, alvos {args.targets}")
     t0 = time.time()
-    frames = run(panel, folds, args.mode, args.targets, args.exclude, not args.no_save_models, args.market)
-    info = {"modelo": name, "modo": args.mode, "excluidos": args.exclude, "mercado": args.market, "params": PARAMS,
+    frames = run(panel, folds, args.mode, args.targets, args.exclude, not args.no_save_models, args.market,
+                 args.train_years)
+    info = {"modelo": name, "modo": args.mode, "excluidos": args.exclude, "mercado": args.market,
+            "anos_de_treino": args.train_years, "params": PARAMS,
             "max_trees": MAX_TREES, "early_stop": EARLY_STOP, "val_frac": VAL_FRAC,
             "painel": common.panel_signature(panel, folds)}
     path = common.save_preds(frames, name, info)

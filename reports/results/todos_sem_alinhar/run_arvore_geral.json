@@ -1,0 +1,482 @@
+{
+  "modelo": "arvore_geral",
+  "grid": {
+    "arvore_reg": [
+      3,
+      5,
+      7,
+      9
+    ],
+    "arvore_clf": [
+      3,
+      5,
+      7,
+      9
+    ]
+  },
+  "escolhidos": [
+    {
+      "fold": 0,
+      "target": "y_ret_h1",
+      "grupo": null,
+      "parametro": 3
+    },
+    {
+      "fold": 0,
+      "target": "y_ret_h5",
+      "grupo": null,
+      "parametro": 3
+    },
+    {
+      "fold": 0,
+      "target": "y_dir_h1",
+      "grupo": null,
+      "parametro": 3
+    },
+    {
+      "fold": 0,
+      "target": "y_vol_h5",
+      "grupo": null,
+      "parametro": 9
+    },
+    {
+      "fold": 1,
+      "target": "y_ret_h1",
+      "grupo": null,
+      "parametro": 3
+    },
+    {
+      "fold": 1,
+      "target": "y_ret_h5",
+      "grupo": null,
+      "parametro": 3
+    },
+    {
+      "fold": 1,
+      "target": "y_dir_h1",
+      "grupo": null,
+      "parametro": 3
+    },
+    {
+      "fold": 1,
+      "target": "y_vol_h5",
+      "grupo": null,
+      "parametro": 9
+    },
+    {
+      "fold": 2,
+      "target": "y_ret_h1",
+      "grupo": null,
+      "parametro": 3
+    },
+    {
+      "fold": 2,
+      "target": "y_ret_h5",
+      "grupo": null,
+      "parametro": 3
+    },
+    {
+      "fold": 2,
+      "target": "y_dir_h1",
+      "grupo": null,
+      "parametro": 3
+    },
+    {
+      "fold": 2,
+      "target": "y_vol_h5",
+      "grupo": null,
+      "parametro": 9
+    },
+    {
+      "fold": 3,
+      "target": "y_ret_h1",
+      "grupo": null,
+      "parametro": 3
+    },
+    {
+      "fold": 3,
+      "target": "y_ret_h5",
+      "grupo": null,
+      "parametro": 3
+    },
+    {
+      "fold": 3,
+      "target": "y_dir_h1",
+      "grupo": null,
+      "parametro": 3
+    },
+    {
+      "fold": 3,
+      "target": "y_vol_h5",
+      "grupo": null,
+      "parametro": 9
+    },
+    {
+      "fold": 4,
+      "target": "y_ret_h1",
+      "grupo": null,
+      "parametro": 3
+    },
+    {
+      "fold": 4,
+      "target": "y_ret_h5",
+      "grupo": null,
+      "parametro": 3
+    },
+    {
+      "fold": 4,
+      "target": "y_dir_h1",
+      "grupo": null,
+      "parametro": 3
+    },
+    {
+      "fold": 4,
+      "target": "y_vol_h5",
+      "grupo": null,
+      "parametro": 9
+    },
+    {
+      "fold": 5,
+      "target": "y_ret_h1",
+      "grupo": null,
+      "parametro": 3
+    },
+    {
+      "fold": 5,
+      "target": "y_ret_h5",
+      "grupo": null,
+      "parametro": 3
+    },
+    {
+      "fold": 5,
+      "target": "y_dir_h1",
+      "grupo": null,
+      "parametro": 3
+    },
+    {
+      "fold": 5,
+      "target": "y_vol_h5",
+      "grupo": null,
+      "parametro": 7
+    },
+    {
+      "fold": 6,
+      "target": "y_ret_h1",
+      "grupo": null,
+      "parametro": 3
+    },
+    {
+      "fold": 6,
+      "target": "y_ret_h5",
+      "grupo": null,
+      "parametro": 3
+    },
+    {
+      "fold": 6,
+      "target": "y_dir_h1",
+      "grupo": null,
+      "parametro": 3
+    },
+    {
+      "fold": 6,
+      "target": "y_vol_h5",
+      "grupo": null,
+      "parametro": 9
+    },
+    {
+      "fold": 7,
+      "target": "y_ret_h1",
+      "grupo": null,
+      "parametro": 3
+    },
+    {
+      "fold": 7,
+      "target": "y_ret_h5",
+      "grupo": null,
+      "parametro": 3
+    },
+    {
+      "fold": 7,
+      "target": "y_dir_h1",
+      "grupo": null,
+      "parametro": 3
+    },
+    {
+      "fold": 7,
+      "target": "y_vol_h5",
+      "grupo": null,
+      "parametro": 9
+    },
+    {
+      "fold": 8,
+      "target": "y_ret_h1",
+      "grupo": null,
+      "parametro": 3
+    },
+    {
+      "fold": 8,
+      "target": "y_ret_h5",
+      "grupo": null,
+      "parametro": 5
+    },
+    {
+      "fold": 8,
+      "target": "y_dir_h1",
+      "grupo": null,
+      "parametro": 3
+    },
+    {
+      "fold": 8,
+      "target": "y_vol_h5",
+      "grupo": null,
+      "parametro": 9
+    },
+    {
+      "fold": 9,
+      "target": "y_ret_h1",
+      "grupo": null,
+      "parametro": 3
+    },
+    {
+      "fold": 9,
+      "target": "y_ret_h5",
+      "grupo": null,
+      "parametro": 3
+    },
+    {
+      "fold": 9,
+      "target": "y_dir_h1",
+      "grupo": null,
+      "parametro": 3
+    },
+    {
+      "fold": 9,
+      "target": "y_vol_h5",
+      "grupo": null,
+      "parametro": 9
+    },
+    {
+      "fold": 10,
+      "target": "y_ret_h1",
+      "grupo": null,
+      "parametro": 5
+    },
+    {
+      "fold": 10,
+      "target": "y_ret_h5",
+      "grupo": null,
+      "parametro": 3
+    },
+    {
+      "fold": 10,
+      "target": "y_dir_h1",
+      "grupo": null,
+      "parametro": 3
+    },
+    {
+      "fold": 10,
+      "target": "y_vol_h5",
+      "grupo": null,
+      "parametro": 9
+    },
+    {
+      "fold": 11,
+      "target": "y_ret_h1",
+      "grupo": null,
+      "parametro": 3
+    },
+    {
+      "fold": 11,
+      "target": "y_ret_h5",
+      "grupo": null,
+      "parametro": 3
+    },
+    {
+      "fold": 11,
+      "target": "y_dir_h1",
+      "grupo": null,
+      "parametro": 3
+    },
+    {
+      "fold": 11,
+      "target": "y_vol_h5",
+      "grupo": null,
+      "parametro": 9
+    },
+    {
+      "fold": 12,
+      "target": "y_ret_h1",
+      "grupo": null,
+      "parametro": 3
+    },
+    {
+      "fold": 12,
+      "target": "y_ret_h5",
+      "grupo": null,
+      "parametro": 3
+    },
+    {
+      "fold": 12,
+      "target": "y_dir_h1",
+      "grupo": null,
+      "parametro": 3
+    },
+    {
+      "fold": 12,
+      "target": "y_vol_h5",
+      "grupo": null,
+      "parametro": 9
+    },
+    {
+      "fold": 13,
+      "target": "y_ret_h1",
+      "grupo": null,
+      "parametro": 3
+    },
+    {
+      "fold": 13,
+      "target": "y_ret_h5",
+      "grupo": null,
+      "parametro": 5
+    },
+    {
+      "fold": 13,
+      "target": "y_dir_h1",
+      "grupo": null,
+      "parametro": 3
+    },
+    {
+      "fold": 13,
+      "target": "y_vol_h5",
+      "grupo": null,
+      "parametro": 9
+    },
+    {
+      "fold": 14,
+      "target": "y_ret_h1",
+      "grupo": null,
+      "parametro": 3
+    },
+    {
+      "fold": 14,
+      "target": "y_ret_h5",
+      "grupo": null,
+      "parametro": 3
+    },
+    {
+      "fold": 14,
+      "target": "y_dir_h1",
+      "grupo": null,
+      "parametro": 3
+    },
+    {
+      "fold": 14,
+      "target": "y_vol_h5",
+      "grupo": null,
+      "parametro": 9
+    },
+    {
+      "fold": 15,
+      "target": "y_ret_h1",
+      "grupo": null,
+      "parametro": 3
+    },
+    {
+      "fold": 15,
+      "target": "y_ret_h5",
+      "grupo": null,
+      "parametro": 3
+    },
+    {
+      "fold": 15,
+      "target": "y_dir_h1",
+      "grupo": null,
+      "parametro": 3
+    },
+    {
+      "fold": 15,
+      "target": "y_vol_h5",
+      "grupo": null,
+      "parametro": 7
+    },
+    {
+      "fold": 16,
+      "target": "y_ret_h1",
+      "grupo": null,
+      "parametro": 3
+    },
+    {
+      "fold": 16,
+      "target": "y_ret_h5",
+      "grupo": null,
+      "parametro": 5
+    },
+    {
+      "fold": 16,
+      "target": "y_dir_h1",
+      "grupo": null,
+      "parametro": 3
+    },
+    {
+      "fold": 16,
+      "target": "y_vol_h5",
+      "grupo": null,
+      "parametro": 9
+    }
+  ],
+  "painel": {
+    "linhas": 241510,
+    "ativos": [
+      "ABEV3",
+      "B3SA3",
+      "BBAS3",
+      "BBDC4",
+      "BTC",
+      "COPPER",
+      "DAX",
+      "DOWJONES",
+      "ETH",
+      "EURUSD",
+      "FTSE100",
+      "GBPUSD",
+      "GOLD",
+      "HANGSENG",
+      "IBOVESPA",
+      "ITUB4",
+      "NASDAQ",
+      "NIKKEI225",
+      "PETR4",
+      "RENT3",
+      "SILVER",
+      "SP500",
+      "SUZB3",
+      "US10Y",
+      "USDBRL",
+      "USDJPY",
+      "VALE3",
+      "VIX",
+      "WDO",
+      "WEGE3",
+      "WIN",
+      "WTI"
+    ],
+    "inicio": "1928-06-13",
+    "fim": "2026-11-06",
+    "folds": 17,
+    "features": [
+      "f_z_lag0",
+      "f_z_lag1",
+      "f_z_lag2",
+      "f_z_lag3",
+      "f_z_lag4",
+      "f_z_std5",
+      "f_z_std21",
+      "f_z_std63",
+      "f_z_mean21",
+      "f_z_mean63",
+      "f_rsi14",
+      "f_range",
+      "f_volrel"
+    ]
+  }
+}
