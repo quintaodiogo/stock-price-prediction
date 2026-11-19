@@ -1,0 +1,6 @@
+model,sharpe,retorno_medio_dia,acerto_pct,dias
+zero,,0.0,,5790
+media_historica,0.3677,0.0124,51.6907,5790
+lgbm_ativo,0.6421,0.0186,51.7688,5790
+lgbm_classe,0.7253,0.0235,51.9159,5790
+lgbm_geral,0.6678,0.0218,51.4319,5790

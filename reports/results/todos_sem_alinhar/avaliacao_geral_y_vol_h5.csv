@@ -1,0 +1,9 @@
+model,ic,ic_std,rmse,vence_so_ativo_pct,vence_geral_pct,folds
+media_historica,0.0031,0.0572,0.5612,0.0,0.0,17
+vol_passada,0.3039,0.0984,0.5439,0.0,0.0,17
+lgbm_ativo,0.3639,0.0832,0.5113,,23.5294,17
+lgbm_classe,0.3868,0.0823,0.5032,100.0,76.4706,17
+lgbm_geral,0.3776,0.088,0.5029,76.4706,,17
+transfer_zero_shot,0.3776,0.088,0.5029,76.4706,0.0,17
+transfer_fine_tune,0.3888,0.0844,0.5001,100.0,100.0,17
+transfer_unseen,0.3721,0.0882,0.5054,58.8235,0.0,17
