@@ -1,0 +1,11 @@
+target,painel,model,ic,ic_std,rmse,vantagem,anos,vence_regua
+y_vol_h5,todos_sem_alinhar,lgbm_ativo,0.3594,0.086,0.4997,0.0635,15,14 de 15
+y_vol_h5,todos_sem_alinhar,lgbm_classe,0.3818,0.0851,0.4913,0.0859,15,15 de 15
+y_vol_h5,todos_sem_alinhar,lgbm_geral,0.3702,0.0903,0.4907,0.0743,15,15 de 15
+y_vol_h5,todos_sem_alinhar,media_historica,-0.0015,0.0568,0.5495,-0.2974,15,0 de 15
+y_vol_h5,todos_sem_alinhar,vol_passada,0.2958,0.1009,0.5325,,15,régua
+y_vol_h5,todos_sem_alinhar_desde2008,lgbm_ativo,0.3478,0.0781,0.5047,0.0519,15,13 de 15
+y_vol_h5,todos_sem_alinhar_desde2008,lgbm_classe,0.3794,0.0875,0.4947,0.0836,15,15 de 15
+y_vol_h5,todos_sem_alinhar_desde2008,lgbm_geral,0.3712,0.0905,0.4917,0.0753,15,15 de 15
+y_vol_h5,todos_sem_alinhar_desde2008,media_historica,-0.0142,0.0662,0.5504,-0.31,15,0 de 15
+y_vol_h5,todos_sem_alinhar_desde2008,vol_passada,0.2958,0.1009,0.5325,,15,régua

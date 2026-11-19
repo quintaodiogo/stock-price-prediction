@@ -44,6 +44,7 @@ Os minis (WIN, WDO) e a cripto ficaram de fora porque, com as datas comuns, encu
 | `importance.py` | Importância das features no modelo geral (seção 14) |
 | `market.py` | Features de mercado e a comparação com e sem elas (seção 15) |
 | `boundary.py` | Condições de contorno: bordas dos dados e IC por regime, classe, histórico e ano (seção 16) |
+| `report.py` | Junta os resultados das seções 12 a 16 numa página HTML com gráficos, como ler cada tabela e o que aconteceu |
 | `tests/test_models.py` | Vol. passada não usa o futuro; previsões no formato e no período certos; alvos nunca entram como feature; validação interna com embargo |
 
 **LightGBM.** Hiperparâmetros fixos (`learning_rate` 0,03, `num_leaves` 15, `min_child_samples` 200,
@@ -402,7 +403,9 @@ todos os ativos, mesmas linhas para todos os modelos). Volatilidade:
   0,106 no alinhado; 0,377 − 0,304 = 0,073 aqui). Duas hipóteses, testadas na seção 12: (a) sem alinhar, os
   ativos com décadas de histórico (o S&P 500 desde 1927, o Nikkei desde 1965) dominam o treino do modelo
   geral, com dados de mercados muito diferentes dos atuais; (b) os anos de teste não são os mesmos (2012 a
-  2026 no alinhado, 2010 a 2026 aqui).
+  2026 no alinhado, 2010 a 2026 aqui). **Resultado (seção 12): as duas foram descartadas.** O mais provável é
+  que as vantagens dos dois painéis simplesmente não sejam comparáveis, porque os alvos são diferentes (ver
+  seção 12.1).
   *(Versão anterior deste item, errada: "o modelo por ativo tem mais dados e precisa menos da ajuda dos
   outros". Os números acima mostram que o por ativo não ganhou nada sobre a régua.)*
 - Por classe e geral empatam (0,387 × 0,377, diferença bem menor que o desvio entre anos, cerca de 0,08), mas
@@ -417,7 +420,7 @@ modelo por classe e o geral como principais. Antes de adotá-lo como padrão: (1
 do contrato do painel; (2) a Pessoa C refazer as comparações dela nesse painel; (3) não misturar números
 alinhados e não alinhados no relatório.
 
-**Próximo teste:** seção 12 (cortar o histórico antigo e ver se a vantagem do geral volta).
+**Teste feito:** seção 12 (cortar o histórico antigo). A vantagem do geral não voltou; ver 12.1.
 
 ## 12. Qual painel usar: histórico completo ou cortado
 
@@ -450,7 +453,43 @@ Como decidir:
 - a data de corte não deve ser escolhida olhando o resultado do teste (isso seria ajustar ao teste). 2008 foi
   fixado antes, por ser o início do painel alinhado e incluir a crise de 2008 no treino.
 
-**Resultado com dados reais:** *a preencher.*
+### 12.1 Resultado com dados reais
+
+Volatilidade (`y_vol_h5`), 17 anos de teste (2010 a 2026), mesmas linhas nos dois painéis.
+
+| Painel | Modelo | IC | Desvio entre anos | RMSE | Vantagem sobre a régua | Vence a régua |
+|---|---|---|---|---|---|---|
+| completo | régua (vol. passada) | 0,300 | 0,098 | 0,542 | — | — |
+| completo | por ativo | 0,361 | 0,082 | 0,509 | 0,061 | 16 de 17 |
+| completo | por classe | 0,383 | 0,083 | 0,501 | 0,082 | 17 de 17 |
+| completo | geral | 0,374 | 0,088 | 0,500 | 0,074 | 17 de 17 |
+| desde 2008 | régua (vol. passada) | 0,300 | 0,098 | 0,542 | — | — |
+| desde 2008 | por ativo | 0,343 | 0,080 | 0,515 | 0,042 | 13 de 17 |
+| desde 2008 | por classe | 0,378 | 0,084 | 0,507 | 0,077 | 17 de 17 |
+| desde 2008 | geral | 0,375 | 0,087 | 0,503 | 0,074 | 17 de 17 |
+
+Diferença cortado − completo, ano a ano: geral 0,000 (cortado melhor em 8 de 17 anos); por classe −0,005
+(7 de 17); por ativo −0,019 (5 de 17).
+
+- **Geral:** cortar não muda nada (diferença 0,000; a vantagem sobre a régua é 0,074 nos dois painéis).
+- **Por ativo:** cortar piora (−0,019, melhor em só 5 de 17 anos). Faz sentido: ele só tem os dados do próprio
+  ativo, e o corte tira parte deles.
+- **Decisão: painel oficial = `todos_sem_alinhar`, sem corte.** O histórico antigo não atrapalha o modelo
+  geral e ajuda o por ativo; cortar seria uma escolha a mais sem ganho.
+
+**Hipóteses da seção 11.1.**
+- (a) "o histórico antigo domina o treino e atrapalha": **descartada** pelo resultado acima.
+- (b) "os anos de teste são diferentes": **descartada**. Média do Geral − régua só em 2012 a 2026 (os anos do
+  painel alinhado), com os valores da tabela por ano da seção 16.1:
+  0,088 + 0,120 + 0,064 + 0,081 + 0,081 + 0,052 + 0,067 + 0,094 + 0,024 + 0,099 + 0,083 + 0,071 + 0,055 +
+  0,068 + 0,064 = 1,111; 1,111 / 15 = **0,074**, igual à dos 17 anos.
+- **O que sobra (explicação provável, não provada):** os dois painéis medem coisas diferentes. No alinhado,
+  "5 pregões" são 5 datas em que todos os ativos negociaram, o que pode cobrir duas semanas reais, e até a
+  régua muda (0,236 no alinhado, 0,300 aqui). Por isso as vantagens dos dois painéis não devem ser comparadas
+  entre si; vale comparar modelos dentro de um mesmo painel.
+
+**Números um pouco diferentes da seção 11.1** (régua 0,304 → 0,300; geral 0,377 → 0,374; por ativo 0,364 →
+0,361): o painel foi refeito com dados até novembro de 2026. As conclusões não mudam.
 
 ## 13. Impacto de cada ativo (tirar um por vez)
 
@@ -474,7 +513,21 @@ Só a volatilidade, por padrão: em retorno e direção não há sinal para perd
 Expectativa honesta: com 31 outros ativos, tirar um só deve mudar pouco; a tabela por classe mostra efeitos
 maiores, se existirem.
 
-**Resultado com dados reais:** *a preencher.*
+### 13.1 Resultado com dados reais
+
+- **Nenhum ativo sozinho importa.** Tirar qualquer um dos 32 ativos muda o IC dos outros em no máximo 0,0012
+  (HANGSENG +0,0012, WEGE3 −0,0011, SP500 +0,0011), mais de 4 vezes abaixo do limite prático de 0,005. O ganho
+  do modelo geral vem do **conjunto** de ativos, não de um ativo específico.
+- 13 ativos passaram do ruído medido, mas por diferenças desprezíveis; o ruído foi medido com só 2
+  sementes extras e tende a ser subestimado. *(A primeira versão do relatório contou esses ativos como "ajudam" e
+  "atrapalham"; o `report.py` foi corrigido para exigir também a diferença mínima de 0,005.)*
+- Padrão pequeno, mas que se repete: os ativos cuja saída **melhora** os outros são índices de histórico muito
+  longo (SP500 desde 1928: os outros melhoraram em 15 de 17 anos; também NIKKEI225 e HANGSENG). Eles pesam um
+  pouco demais no treino, mas o efeito (≈ 0,001) não muda nenhuma conclusão.
+- **Ativo nunca visto (interessa à Pessoa C):** prevendo um ativo que ficou fora do treino, o IC quase não cai:
+  em 30 dos 32 ativos a queda é menor que 0,006. As exceções são **SUZB3** (0,415 → 0,385, −0,030) e **VIX**
+  (0,322 → 0,298, −0,024). O VIX é um nível de volatilidade, diferente de um preço; o SUZB3 tem problema de
+  dados (seção 16.1).
 
 ## 14. Como as features são calculadas e nomes técnicos
 
@@ -485,7 +538,31 @@ da série. Os nomes no código não mudaram. Importância de cada feature no mod
 python src/models/importance.py --universe todos_sem_alinhar
 ```
 
-**Resultado com dados reais:** *a preencher.*
+### 14.1 Resultado com dados reais (modelo geral, `y_vol_h5`)
+
+| Feature | Nome técnico | Importância (%) | Desvio entre anos (%) |
+|---|---|---|---|
+| `f_z_std21` | Volatilidade realizada relativa, 21 pregões | 37,3 | 1,1 |
+| `f_range` | Amplitude diária relativa | 13,0 | 2,9 |
+| `f_z_mean21` | Momentum ajustado ao risco, 21 pregões | 11,8 | 1,2 |
+| `f_z_std5` | Volatilidade realizada relativa, 5 pregões | 10,8 | 0,4 |
+| `f_rsi14` | Índice de força relativa, 14 pregões | 5,3 | 0,3 |
+| `f_z_mean63` | Momentum ajustado ao risco, 63 pregões | 4,8 | 0,5 |
+| `f_z_std63` | Volatilidade realizada relativa, 63 pregões | 4,7 | 0,5 |
+| `f_z_lag0` | Retorno normalizado (t) | 4,7 | 0,4 |
+| `f_z_lag1` | Retorno normalizado (t−1) | 3,0 | 0,2 |
+| `f_volrel` | Volume relativo, 21 pregões | 1,8 | 0,6 |
+| `f_z_lag2` | Retorno normalizado (t−2) | 1,5 | 0,1 |
+| `f_z_lag3` | Retorno normalizado (t−3) | 0,8 | 0,1 |
+| `f_z_lag4` | Retorno normalizado (t−4) | 0,6 | 0,1 |
+
+- A volatilidade recente do próprio ativo (5, 21 e 63 pregões) soma 52,8%: a agitação de amanhã se parece com a
+  de agora.
+- A **amplitude diária** é a segunda: a oscilação dentro do dia traz informação que o fechamento não mostra.
+- O **momentum de 21 pregões** (11,8%) provavelmente reflete o efeito alavancagem: depois de quedas, a
+  volatilidade tende a subir. É uma interpretação; para usar no artigo, precisa de citação.
+- **Volume** quase não é usado (1,8%); ele falta em câmbio, VIX e juros e em trechos antigos dos índices.
+- Os desvios entre anos são pequenos: o modelo usa as mesmas features em todos os anos de teste.
 
 ## 15. A variabilidade dos outros ativos agrega valor?
 
@@ -506,7 +583,24 @@ python src/models/market.py --universe todos_sem_alinhar
 python src/models/importance.py --universe todos_sem_alinhar --model geral_mercado
 ```
 
-**Resultado com dados reais:** *a preencher.*
+### 15.1 Resultado com dados reais
+
+| Modelo | IC sem mercado | IC com mercado | Ganho | Desvio | Anos melhor com mercado |
+|---|---|---|---|---|---|
+| por ativo | 0,3642 | 0,3500 | −0,0141 | 0,0154 | 1 de 17 |
+| por classe | 0,3903 | 0,3814 | −0,0089 | 0,0081 | 2 de 17 |
+| geral | 0,3811 | 0,3742 | −0,0069 | 0,0083 | 4 de 17 |
+
+- **Não agrega.** As features de mercado pioraram os três modelos de forma consistente (ganho negativo e acima
+  de 0,005 em módulo, piores em pelo menos 13 de 17 anos).
+- **O que isso diz sobre a hipótese do projeto:** nem o modelo por ativo, que não vê os outros ativos, ganhou
+  ao receber a agitação do mercado. Então a vantagem do modelo geral **não vem de "conhecer o mercado"**; vem
+  de ter muito mais exemplos para aprender o mesmo padrão (como a volatilidade de qualquer ativo se comporta
+  depois de dias agitados).
+- Ressalva: as features usam o pregão anterior, por cautela contra vazamento (mercados fecham em horários
+  diferentes). Uma versão com o mesmo dia não foi testada.
+- (Os ICs "sem mercado" diferem um pouco dos da seção 12 porque aqui a comparação usa as linhas comuns a cada
+  par de modelos.)
 
 ## 16. Condições de contorno
 
@@ -531,4 +625,73 @@ Saídas em `reports/results/<painel>/contorno/`:
   precisa de 500 linhas do próprio ativo para existir; nos primeiros anos de um ativo novo só o geral e a
   régua preveem. Essa é uma condição de contorno a favor do modelo geral.
 
-**Resultado com dados reais:** *a preencher.*
+### 16.1 Resultado com dados reais (modelo geral, `y_vol_h5`)
+
+**Em todos os recortes o geral ganhou da régua**, inclusive nos 17 de 17 anos de teste.
+
+Por regime de mercado (agitação média do mercado no dia):
+
+| Regime | Régua | Por ativo | Por classe | Geral | Geral − régua | Anos | Linhas |
+|---|---|---|---|---|---|---|---|
+| calmo | 0,230 | 0,280 | 0,297 | 0,297 | 0,068 | 16 | 38.443 |
+| normal | 0,254 | 0,311 | 0,337 | 0,325 | 0,071 | 17 | 44.238 |
+| agitado | 0,276 | 0,370 | 0,397 | 0,389 | 0,113 | 15 | 40.154 |
+| extremo (5% mais agitados) | 0,229 | 0,362 | 0,391 | 0,405 | 0,176 | 8 | 4.839 |
+
+- **O modelo é mais útil quando o mercado está agitado**: a vantagem sobre a régua vai de 0,068 (calmo) a 0,176
+  (extremo). O extremo tem só 8 anos e 4.839 linhas, então é o número menos certo.
+
+Por classe:
+
+| Classe | Régua | Por ativo | Por classe | Geral | Geral − régua | Anos |
+|---|---|---|---|---|---|---|
+| ações BR | 0,232 | 0,243 | 0,282 | 0,290 | 0,058 | 17 |
+| câmbio | 0,268 | 0,361 | 0,385 | 0,361 | 0,093 | 17 |
+| commodities | 0,255 | 0,279 | 0,275 | 0,280 | 0,026 | 17 |
+| cripto | 0,282 | 0,306 | 0,346 | 0,362 | 0,080 | 10 |
+| índices | 0,302 | 0,414 | 0,430 | 0,418 | 0,116 | 17 |
+| juros (VIX, US10Y) | 0,301 | 0,444 | 0,431 | 0,358 | 0,057 | 17 |
+| minis | 0,200 | 0,135 | 0,282 | 0,265 | 0,065 | 3 |
+
+- O geral **não é o melhor em todas as classes**: em **juros** fica bem abaixo do por ativo (0,358 × 0,444) —
+  são séries de nível, diferentes das de preço; em **câmbio** e **índices** o por classe é melhor; em
+  **commodities** quase não passa da régua (+0,026). É melhor em **ações BR** e **cripto**.
+- Nos **minis** o por ativo fica abaixo da própria régua (0,135 × 0,200): pouco histórico; juntar ativos resolve.
+
+Por anos de histórico do ativo (só régua e geral, que preveem desde o início):
+
+| Histórico | Régua | Geral | Geral − régua | Linhas | Cobertura do por ativo |
+|---|---|---|---|---|---|
+| menos de 2 anos | 0,201 | 0,264 | 0,063 | 2.098 | 2,7% |
+| 2 a 5 anos | 0,310 | 0,371 | 0,061 | 4.985 | 88,7% |
+| 5 a 10 anos | 0,275 | 0,326 | 0,051 | 12.349 | 99,4% |
+| 10 anos ou mais | 0,300 | 0,377 | 0,077 | 106.119 | 99,7% |
+
+- **Ativo novo:** nos 2 primeiros anos o modelo por ativo só consegue prever 2,7% das linhas (precisa de 500
+  linhas próprias); o geral prevê todas, e ganha da régua (0,264 × 0,201). É um argumento direto a favor da
+  hipótese do projeto.
+
+Por ano de teste: o geral ganhou da régua em todos (vantagem entre 0,024 e 0,120). **2020** foi o ano mais fácil
+(geral 0,600) e o de menor vantagem (régua 0,576): com a agitação alta o ano inteiro, "repetir a agitação
+recente" já acerta muito. O pior ano foi **2023** (0,253).
+
+**Bordas dos dados** (`bordas.csv`): todo ativo perde 113 pregões de aquecimento, como previsto em
+`docs/features.md`, exceto **SUZB3 (625)** e **WEGE3 (162)**, que têm falhas no início. Pontos para a
+Pessoa A:
+- **USDBRL**: buraco de **576 dias** sem cotação;
+- **WIN** (137 dias) e **WDO** (110 dias): buracos no arquivo intradiário dos minis;
+- **SUZB3**: só 2.458 linhas desde 2007 (o esperado seriam cerca de 4.800) — explica a queda dele na seção 13.1;
+- **EURUSD** e **USDJPY**: buracos de 18 dias;
+- falta de amplitude (máxima e mínima) em trechos antigos: US10Y 48,5%, NIKKEI225 37,2%, SP500 33,9%; o modelo
+  lida com isso (seção 2.6 de `docs/features.md`).
+
+## 17. Como ler os resultados das seções 12 a 16
+
+```
+python src/models/report.py --universe todos_sem_alinhar --cut todos_sem_alinhar_desde2008
+```
+
+Gera `reports/results/todos_sem_alinhar/relatorio_pendencias.html`. Para cada pergunta: a tabela, um gráfico,
+como ler e uma frase do que aconteceu, por regras fixas: diferença menor que 0,005 de IC = praticamente igual;
+"consistente" = mesmo sinal em pelo menos 70% dos anos de teste; na ablação, só conta o que passa do ruído.
+As frases são ponto de partida: conferir sempre com a tabela.

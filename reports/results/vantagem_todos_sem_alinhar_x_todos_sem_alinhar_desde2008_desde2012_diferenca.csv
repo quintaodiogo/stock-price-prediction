@@ -1,0 +1,6 @@
+target,painel,model,dif_ic,dif_std,anos_melhor
+y_vol_h5,todos_sem_alinhar_desde2008,lgbm_ativo,-0.0116,0.0177,5 de 15
+y_vol_h5,todos_sem_alinhar_desde2008,lgbm_classe,-0.0023,0.0134,7 de 15
+y_vol_h5,todos_sem_alinhar_desde2008,lgbm_geral,0.001,0.0098,7 de 15
+y_vol_h5,todos_sem_alinhar_desde2008,media_historica,-0.0126,0.0351,3 de 15
+y_vol_h5,todos_sem_alinhar_desde2008,vol_passada,-0.0,0.0,1 de 15

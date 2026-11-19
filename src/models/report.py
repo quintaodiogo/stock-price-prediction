@@ -10,7 +10,7 @@ Regras usadas nas frases (iguais para todas as perguntas):
   - fora disso: "empate" (a diferença muda de sinal de um ano para outro e não dá para afirmar nada);
   - antes de tudo: diferença média menor que 0,005 de IC = "praticamente igual", mesmo que o sinal se repita
     (o IC dos modelos varia cerca de 0,03 a 0,08 entre anos; 0,005 não muda nenhuma conclusão);
-  - na ablação, um ativo só "tem impacto" se a mudança passar do ruído (mudar só a semente aleatória).
+  - na ablação, um ativo só "tem impacto" se a mudança passar do ruído (mudar só a semente aleatória) E de 0,005.
 
 Uso (depois de rodar os comandos das seções 12 a 16):
   python src/models/report.py --universe todos_sem_alinhar --cut todos_sem_alinhar_desde2008
@@ -163,16 +163,24 @@ def sec_ablation(universe: str) -> str:
         return "".join(out) + missing(f"python src/models/ablation.py --universe {universe}")
     t = t[t["target"] == "y_vol_h5"].copy()
     t["perda_no_proprio"] = t["ic_proprio_nao_visto"] - t["ic_proprio_visto"]
-    above = t[t["acima_do_ruido"] == True]  # noqa: E712
+    # conta como impacto só o que passa do ruído E da diferença prática mínima (MIN_IC), como nas outras seções
+    above = t[(t["acima_do_ruido"] == True) & (t["dif_ic_outros"].abs() >= MIN_IC)]  # noqa: E712
     helps, hurts = above[above["dif_ic_outros"] < 0], above[above["dif_ic_outros"] > 0]
-    txt = (f"<p class='leitura'><b>O que aconteceu:</b> de {len(t)} ativos, {len(helps)} ajudavam os outros além do ruído"
-           + (f" ({', '.join(helps['ativo'])})" if len(helps) else "")
-           + f" e {len(hurts)} atrapalhavam" + (f" ({', '.join(hurts['ativo'])})" if len(hurts) else "") + ". ")
+    maxabs = t["dif_ic_outros"].abs().max()
+    txt = f"<p class='leitura'><b>O que aconteceu:</b> a maior mudança no IC dos outros ativos foi de {num(maxabs, 4)}. "
     if len(above) == 0:
-        txt += ("Nenhum ativo sozinho muda o modelo geral além do ruído: o ganho do modelo geral vem do conjunto, não de "
-                "um ativo específico. É um resultado válido para o relatório. ")
+        txt += ("Nenhum ativo sozinho muda o modelo geral de forma relevante (todas as mudanças abaixo de 0,005 de IC): "
+                "o ganho do modelo geral vem do conjunto, não de um ativo específico. ")
+        n_noise = int((t["acima_do_ruido"] == True).sum())  # noqa: E712
+        if n_noise:
+            txt += (f"{n_noise} ativos passaram do ruído medido, mas por diferenças desprezíveis; o ruído, medido com "
+                    "poucas sementes, tende a ser subestimado. ")
+    else:
+        txt += (f"{len(helps)} ativos ajudavam os outros de forma relevante"
+                + (f" ({', '.join(helps['ativo'])})" if len(helps) else "")
+                + f" e {len(hurts)} atrapalhavam" + (f" ({', '.join(hurts['ativo'])})" if len(hurts) else "") + ". ")
     big = t.reindex(t["dif_ic_outros"].abs().sort_values(ascending=False).index).head(3)
-    txt += "Maiores mudanças (mesmo dentro do ruído): " + "; ".join(
+    txt += "Maiores mudanças: " + "; ".join(
         f"{r.ativo} {num(r.dif_ic_outros, 4)} (ruído {num(r.ruido, 4)})" for r in big.itertuples()) + ". "
     worst = t.sort_values("perda_no_proprio").head(3)
     txt += ("No próprio ativo, nunca visto no treino, as maiores perdas de IC foram: " + "; ".join(
@@ -185,7 +193,7 @@ def sec_ablation(universe: str) -> str:
     ax.errorbar([0] * len(s), s["ativo"], xerr=s["ruido"], fmt="none", ecolor="#c00", lw=0.8, capsize=2)
     ax.axvline(0, color="k", lw=0.6)
     ax.set_xlabel("diferença de IC nos outros ativos ao tirar o ativo (negativo = ele ajudava)")
-    ax.set_title("Ablação: barra azul = passou do ruído; traço vermelho = faixa do ruído em torno de zero", loc="left", fontsize=9)
+    ax.set_title("Ablação: barra azul = passou do ruído; traço vermelho = ruído em torno de zero (relevante só acima de 0,005)", loc="left", fontsize=9)
     out.append(svg(fig))
     out.append(table(t.sort_values("dif_ic_outros"),
                      {"ativo": "Ativo", "dif_ic_outros": "Diferença nos outros", "ruido": "Ruído",

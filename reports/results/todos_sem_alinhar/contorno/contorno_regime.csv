@@ -1,0 +1,5 @@
+target,regime,vol_passada,media_historica,lgbm_ativo,lgbm_classe,lgbm_geral,anos,linhas
+y_vol_h5,1 calmo,0.2295,-0.0138,0.28,0.2969,0.2974,16,38443
+y_vol_h5,2 normal,0.2537,-0.0074,0.3114,0.3368,0.3246,17,44238
+y_vol_h5,3 agitado,0.2763,0.0232,0.3697,0.3965,0.3893,15,40154
+y_vol_h5,4 extremo (5% mais agitados),0.2291,0.0604,0.3616,0.3905,0.405,8,4839
