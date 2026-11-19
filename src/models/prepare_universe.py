@@ -13,8 +13,15 @@ Com --no-align o painel NÃO é cortado nas datas em que todos os ativos negocia
 com o próprio histórico (os 28 desde 2008, a cripto desde 2014/2017, os minis desde 2020). Assim incluir
 minis e cripto não encurta o histórico dos outros. Grava em data/processed/<conjunto>_sem_alinhar/.
 
+Com --start AAAA-MM-DD o painel é cortado nessa data DEPOIS de calcular features e alvos: as janelas
+móveis (252 dias da escala, 63 das features) usam o histórico anterior, então as linhas que sobram são
+idênticas às do painel completo; só somem as linhas antigas, que deixam de entrar no treino. Os anos de
+teste continuam os mesmos (desde 2010), e dá para comparar com e sem corte nas mesmas linhas.
+Grava em <pasta>_desde<ano> (ex.: todos_sem_alinhar_desde2008).
+
 Uso:
   python src/models/prepare_universe.py --universe todos
+  python src/models/prepare_universe.py --universe todos --no-align --start 2008-01-01  (-> todos_sem_alinhar_desde2008)
   python src/models/prepare_universe.py --universe todos --no-align     (-> todos_sem_alinhar)
   python src/models/prepare_universe.py --universe sem_minis_cripto
 Depois, os scripts de modelo com o mesmo --universe, por exemplo:
@@ -24,6 +31,8 @@ import argparse
 import json
 import sys
 from pathlib import Path
+
+import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -37,6 +46,17 @@ def missing_raw(names: list[str]) -> list[str]:
     return [n for n in names if not (features.RAW_DIR / f"{n}_1d.csv").exists()]
 
 
+def folder_name(universe: str, no_align: bool, start: str | None) -> str:
+    return universe + ("_sem_alinhar" if no_align else "") + (f"_desde{pd.Timestamp(start).year}" if start else "")
+
+
+def cut(panel: pd.DataFrame, start: str | None) -> pd.DataFrame:
+    """Remove as linhas antes de `start`. As features já foram calculadas com o histórico inteiro."""
+    if not start:
+        return panel
+    return panel[panel["date"] >= pd.Timestamp(start)].reset_index(drop=True)
+
+
 def main(argv: list[str] | None = None) -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--universe", required=True, choices=list(UNIVERSES))
@@ -44,10 +64,13 @@ def main(argv: list[str] | None = None) -> None:
     ap.add_argument("--no-align", action="store_true",
                     help="não corta o painel nas datas comuns: cada ativo entra com o próprio histórico. "
                          "Grava em <conjunto>_sem_alinhar (ex.: todos_sem_alinhar)")
+    ap.add_argument("--start", default=None,
+                    help="descarta as linhas antes desta data (AAAA-MM-DD), depois de calcular features e alvos "
+                         "com todo o histórico. Grava em <pasta>_desde<ano>")
     args = ap.parse_args(argv)
     if args.no_align and args.norm == nz.CROSS_SECTION:
         sys.exit("A normalização cross_section compara os ativos no mesmo dia e precisa do painel alinhado.")
-    folder = args.universe + ("_sem_alinhar" if args.no_align else "")
+    folder = folder_name(args.universe, args.no_align, args.start)
 
     names = UNIVERSES[args.universe]
     missing = missing_raw(names)
@@ -64,6 +87,7 @@ def main(argv: list[str] | None = None) -> None:
 
     raw = {n: features.load_raw(n) for n in names}
     panel = features.build_panel(raw, args.norm, align=not args.no_align)
+    panel = cut(panel, args.start)
     first = max(features.FIRST_TEST_YEAR, panel["date"].min().year + 1)
     folds = features.make_folds(panel["date"].max(), first)
 
@@ -72,7 +96,7 @@ def main(argv: list[str] | None = None) -> None:
     panel.to_parquet(common.PANEL_PATH, index=False)
     common.FOLDS_PATH.write_text(json.dumps(folds, indent=2))
     (common.PANEL_PATH.parent / "info.json").write_text(json.dumps(
-        {"universe": args.universe, "norm": args.norm, "alinhado": not args.no_align,
+        {"universe": args.universe, "norm": args.norm, "alinhado": not args.no_align, "inicio_corte": args.start,
          **common.panel_signature(panel, folds)},
         indent=2, ensure_ascii=False))
     print(f"painel ({folder}, {args.norm}): {len(panel)} linhas, {panel['asset'].nunique()} ativos, "
