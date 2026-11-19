@@ -12,7 +12,8 @@ Uso:
   python src/models/tree.py --mode geral
   python src/models/tree.py --mode geral --exclude IBOVESPA      (cenário "ativo não visto")
   python src/models/tree.py --mode ativo --targets y_vol_h5
--> reports/results/preds_lgbm_<modo>[_sem_<ativos>].parquet  (modelos gerais em models/)
+  python src/models/tree.py --mode geral --market   (+ features de mercado, src/models/market.py)
+-> reports/results/preds_lgbm_<modo>[_mercado][_sem_<ativos>].parquet  (modelos gerais em models/)
 """
 import argparse
 import sys
@@ -80,7 +81,7 @@ def fit_predict(train: pd.DataFrame, test: pd.DataFrame, target: str, feats: lis
 
 
 def run(panel: pd.DataFrame, folds: list[dict], mode: str, targets: list[str],
-        exclude: list[str], save_models: bool) -> list[pd.DataFrame]:
+        exclude: list[str], save_models: bool, market: bool = False) -> list[pd.DataFrame]:
     feats = common.feature_cols(panel)
     group_col = GROUP_COL[mode]
     frames = []
@@ -99,13 +100,13 @@ def run(panel: pd.DataFrame, folds: list[dict], mode: str, targets: list[str],
                 frames.append(common.preds_frame(te, fold, target, pred))
                 if save_models and mode == "geral":
                     common.MODELS_DIR.mkdir(exist_ok=True)
-                    model.save_model(str(common.MODELS_DIR / f"lgbm_{tag(mode, exclude)}_{target}_fold{fold['fold']}.txt"))
+                    model.save_model(str(common.MODELS_DIR / f"lgbm_{tag(mode, exclude, market)}_{target}_fold{fold['fold']}.txt"))
         print(f"  fold {fold['fold']:2d} ({fold['test_start'][:4]}) ok", flush=True)
     return frames
 
 
-def tag(mode: str, exclude: list[str]) -> str:
-    return mode + (f"_sem_{'-'.join(sorted(exclude))}" if exclude else "")
+def tag(mode: str, exclude: list[str], market: bool = False) -> str:
+    return mode + ("_mercado" if market else "") + (f"_sem_{'-'.join(sorted(exclude))}" if exclude else "")
 
 
 def main(argv: list[str] | None = None) -> None:
@@ -114,19 +115,24 @@ def main(argv: list[str] | None = None) -> None:
     ap.add_argument("--targets", nargs="+", default=common.TARGETS, choices=common.TARGETS)
     ap.add_argument("--exclude", nargs="*", default=[], help="ativos fora do treino (cenário 'ativo não visto')")
     ap.add_argument("--no-save-models", action="store_true")
+    ap.add_argument("--market", action="store_true",
+                    help="acrescenta as features de mercado (agitação dos outros ativos; src/models/market.py)")
     common.add_universe_arg(ap)
     args = ap.parse_args(argv)
     common.use_universe(args.universe)
 
     panel, folds = common.load_panel(), common.load_folds()
+    if args.market:
+        import market  # noqa: E402
+        panel = market.add_market_features(panel)
     unknown = set(args.exclude) - set(panel["asset"])
     if unknown:
         sys.exit(f"Ativos fora do painel: {sorted(unknown)}")
-    name = "lgbm_" + tag(args.mode, args.exclude)
+    name = "lgbm_" + tag(args.mode, args.exclude, args.market)
     print(f"{name}: {len(folds)} folds, alvos {args.targets}")
     t0 = time.time()
-    frames = run(panel, folds, args.mode, args.targets, args.exclude, not args.no_save_models)
-    info = {"modelo": name, "modo": args.mode, "excluidos": args.exclude, "params": PARAMS,
+    frames = run(panel, folds, args.mode, args.targets, args.exclude, not args.no_save_models, args.market)
+    info = {"modelo": name, "modo": args.mode, "excluidos": args.exclude, "mercado": args.market, "params": PARAMS,
             "max_trees": MAX_TREES, "early_stop": EARLY_STOP, "val_frac": VAL_FRAC,
             "painel": common.panel_signature(panel, folds)}
     path = common.save_preds(frames, name, info)

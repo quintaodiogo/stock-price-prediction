@@ -106,3 +106,70 @@ def test_unaligned_panel_keeps_each_asset_independent():
     p_small = features.build_panel(small, align=False)
     a = p_all[p_all["asset"] != "BTC"].reset_index(drop=True)
     pd.testing.assert_frame_equal(a, p_small.reset_index(drop=True))
+
+
+# ---------------------------------------------------------------- pendências do professor
+def _raw_many():
+    """Oito ativos de classes diferentes (as features de mercado pedem pelo menos 5 outros ativos)."""
+    names = ["SP500", "NASDAQ", "DAX", "GOLD", "WTI", "EURUSD", "BTC", "PETR4"]
+    return {n: synthetic(n, seed=i + 10) for i, n in enumerate(names)}
+
+
+def test_history_cut_keeps_remaining_rows_identical():
+    """--start só tira linhas antigas: as que sobram são iguais às do painel completo (features já calculadas)."""
+    import prepare_universe as pu
+    panel = features.build_panel(_raw(), align=False)
+    cut = pu.cut(panel, "2016-01-01")
+    assert cut["date"].min() >= pd.Timestamp("2016-01-01")
+    expected = panel[panel["date"] >= pd.Timestamp("2016-01-01")].reset_index(drop=True)
+    pd.testing.assert_frame_equal(cut, expected)
+    assert pu.folder_name("todos", True, "2008-01-01") == "todos_sem_alinhar_desde2008"
+
+
+def test_market_features_use_only_previous_days():
+    """Mudar os preços a partir de uma data não pode mudar as features de mercado até essa data (inclusive)."""
+    import market
+    raw = _raw_many()
+    broken = {k: v.copy() for k, v in raw.items()}
+    for v in broken.values():
+        v.loc[v["date"] >= CUT, ["Open", "High", "Low", "Close"]] *= 3.0
+    a, b = (market.add_market_features(features.build_panel(r, align=False)) for r in (raw, broken))
+    cols = market.MARKET_COLS
+    ka = a[a["date"] <= CUT].set_index(["date", "asset"])[cols]
+    kb = b.set_index(["date", "asset"]).loc[ka.index, cols]
+    assert ka["f_mkt_std21"].notna().sum() > 100
+    pd.testing.assert_frame_equal(ka, kb, check_exact=False, rtol=1e-9)
+
+
+def test_market_features_leave_the_asset_out():
+    """A feature de mercado de um ativo é a média dos OUTROS: mudar o próprio ativo não a altera."""
+    import market
+    raw = _raw_many()
+    changed = dict(raw, SP500=synthetic("SP500", seed=999))
+    a, b = (market.add_market_features(features.build_panel(r, align=False)) for r in (raw, changed))
+    key = ["date", "asset"]
+    sa = a[a["asset"] == "SP500"].set_index(key)[["f_mkt_std21", "f_mkt_move"]]
+    sb = b[b["asset"] == "SP500"].set_index(key).loc[sa.index, ["f_mkt_std21", "f_mkt_move"]]
+    pd.testing.assert_frame_equal(sa, sb, check_exact=False, rtol=1e-9)
+    other_a = a[a["asset"] == "GOLD"].set_index(key)["f_mkt_std21"]
+    other_b = b[b["asset"] == "GOLD"].set_index(key).loc[other_a.index, "f_mkt_std21"]
+    assert not np.allclose(other_a.fillna(0), other_b.fillna(0))   # os outros ativos enxergam a mudança
+
+
+def test_ablation_effect_is_zero_for_identical_models():
+    import ablation
+    rng = np.random.default_rng(0)
+    d = pd.bdate_range("2020-01-01", periods=300)
+    p = pd.DataFrame({"date": np.tile(d, 3), "asset": np.repeat(["A", "B", "C"], 300), "fold": np.tile(d.year - 2020, 3),
+                      "target": "y_vol_h5", "y_true": rng.normal(size=900)})
+    p["y_pred"] = p["y_true"] + rng.normal(size=900)
+    r = ablation.effect(p, p.copy(), ["A"])["y_vol_h5"]
+    assert r["dif_ic_outros"] == 0 and r["ic_proprio_visto"] == r["ic_proprio_nao_visto"]
+
+
+def test_edge_report_detects_same_targets():
+    import edge_report as er
+    d = pd.bdate_range("2020-01-01", periods=50)
+    p = pd.DataFrame({"date": d, "asset": "A", "target": "y_vol_h5", "y_true": np.arange(50.0), "y_pred": 1.0})
+    assert er.same_targets({"x": p, "y": p.iloc[10:]})
+    assert not er.same_targets({"x": p, "y": p.assign(y_true=p["y_true"] * 2)})

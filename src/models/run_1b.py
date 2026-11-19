@@ -22,7 +22,8 @@ import tree  # noqa: E402
 
 BASE_MODELS = ["zero", "media_historica", "vol_passada", "lgbm_ativo", "lgbm_classe", "lgbm_geral"]
 OPTIONAL_MODELS = ["gru_geral",                    # src/models/seq.py
-                   "lgbm_ativo_tuned", "lgbm_classe_tuned", "lgbm_geral_tuned"]   # src/models/tune.py
+                   "lgbm_ativo_tuned", "lgbm_classe_tuned", "lgbm_geral_tuned",   # src/models/tune.py
+                   "lgbm_ativo_mercado", "lgbm_classe_mercado", "lgbm_geral_mercado"]   # tree.py --market
 # os opcionais entram na comparação se as previsões existirem
 MODELS = BASE_MODELS + OPTIONAL_MODELS
 

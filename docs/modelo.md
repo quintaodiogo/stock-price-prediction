@@ -11,7 +11,7 @@ Requer **Python 3.10 ou mais novo** (o código usa `int | None`). No Mac, o Ligh
 ```
 python src/download_data.py
 python src/features.py --universe sem_minis_cripto
-python -m pytest tests                     # 26 testes, incluindo os da Pessoa B
+python -m pytest tests                     # 38 testes (1 pulado sem PyTorch), incluindo os da Pessoa B
 python src/models/run_1b.py                # baselines + LightGBM nos 3 modos + comparação (~10 min)
 ```
 
@@ -39,6 +39,11 @@ Os minis (WIN, WDO) e a cripto ficaram de fora porque, com as datas comuns, encu
 | `baselines.py` | `zero` (retorno 0, direção 0,5), `media_historica` (média do alvo por ativo no treino), `vol_passada` (vol. realizada dos últimos 20 pregões, só para `y_vol_h5`) |
 | `tree.py` | LightGBM em três modos: `geral` (todos os ativos juntos), `classe` (um modelo por classe), `ativo` (um modelo por ativo). Opção `--exclude` tira ativos do treino (cenário "ativo não visto" da Pessoa C) |
 | `run_1b.py` | Roda o que faltar e compara todos os modelos nas mesmas linhas |
+| `edge_report.py` | Vantagem de cada modelo sobre a régua em vários painéis (decisão do painel, seção 12) |
+| `ablation.py` | Tira um ativo (ou classe) por vez do treino do geral e mede o efeito (seção 13) |
+| `importance.py` | Importância das features no modelo geral (seção 14) |
+| `market.py` | Features de mercado e a comparação com e sem elas (seção 15) |
+| `boundary.py` | Condições de contorno: bordas dos dados e IC por regime, classe, histórico e ano (seção 16) |
 | `tests/test_models.py` | Vol. passada não usa o futuro; previsões no formato e no período certos; alvos nunca entram como feature; validação interna com embargo |
 
 **LightGBM.** Hiperparâmetros fixos (`learning_rate` 0,03, `num_leaves` 15, `min_child_samples` 200,
@@ -344,8 +349,186 @@ Cuidados:
 - O alinhamento é decisão da Pessoa A (contrato do painel); usar `--no-align` como padrão deve ser combinado com o grupo.
 - Cripto negocia todos os dias: sem alinhar, "5 dias" na cripto são 5 dias corridos, e nos outros, 5 pregões.
 
-**Resultado com dados reais (sem alinhar):** *a preencher depois de rodar.*
+**Resultado com dados reais (sem alinhar)** (`sem_minis_cripto_sem_alinhar` × `todos_sem_alinhar`; 17 anos
+de teste, 2010 a 2026; os mesmos 28 ativos e os mesmos dias nos dois):
 
-**Próximo teste (separar os dois efeitos):** rodar os 28 ativos com o treino começando também em 2021. Se a
-perda de 0,07 aparecer ali também, a causa é o histórico mais curto, e não os ativos novos. O conjunto
-`sem_minis` (com cripto, desde 2018) ajuda a separar o efeito da cripto do dos minis.
+*Pergunta 1: incluir minis e cripto mudou algo nos 28 ativos originais?* Volatilidade (`y_vol_h5`):
+
+| Modelo | IC sem minis/cripto | IC com tudo | Diferença | RMSE (os dois) |
+|---|---|---|---|---|
+| vol_passada | 0,302 | 0,302 | 0 | 0,554 |
+| lgbm_ativo | 0,364 | 0,364 | 0 | 0,512 |
+| lgbm_classe | 0,388 | 0,388 | 0 | 0,511 |
+| lgbm_geral | 0,378 | 0,378 | −0,0002 | 0,510 |
+
+- **Não mudou nada.** Por ativo e por classe são idênticos, como esperado (os ativos novos ficam em classes
+  próprias). O geral, o único que treina com os ativos novos, muda −0,0002 de IC, com o mesmo RMSE: efeito nulo.
+- Direção e retorno: diferenças de no máximo 0,0008 de IC. Também nulas.
+- **Conclusão: sem alinhar, minis e cripto entram sem custo para os outros ativos.** A perda de 0,07 do painel
+  alinhado vinha do histórico cortado, não dos ativos novos.
+
+*Pergunta 2: como os modelos se saem nos ativos novos, agora com todo o histórico deles?* Volatilidade, IC ao
+longo do tempo de cada ativo:
+
+| Ativo | Período | lgbm_geral | lgbm_classe | lgbm_ativo | vol_passada |
+|---|---|---|---|---|---|
+| BTC | 2015-01 a 2026-11 | **0,454** | 0,376 | 0,374 | 0,401 |
+| ETH | 2018-03 a 2026-11 | 0,308 | **0,334** | 0,226 | 0,253 |
+| WIN | 2021-04 a 2026-09 | **0,404** | 0,356 | 0,124 | 0,325 |
+| WDO | 2021-03 a 2026-03 | 0,223 | 0,174 | **0,241** | 0,152 |
+
+- **O modelo geral ganha da régua de agitação recente nos quatro ativos novos**, e é o melhor no BTC e no WIN.
+- Isso muda a conclusão do painel alinhado sobre a cripto: lá o geral perdia para a régua no BTC e no ETH, mas
+  com só 4 anos de teste e 1 ano de treino no início. Com o histórico completo, ele funciona também na cripto.
+- O modelo por ativo é o pior no WIN (0,124): os minis têm pouco histórico (desde 2020) para um modelo sozinho.
+- Direção e retorno: os modelos ficam entre −0,09 e +0,10, sem padrão (a média histórica chega a −0,14 no
+  WDO). Ruído.
+
+*Experimento 1b no painel sem alinhar com os 32 ativos* (`run_1b.py --universe todos_sem_alinhar`; 17 folds,
+todos os ativos, mesmas linhas para todos os modelos). Volatilidade:
+
+| Modelo | IC | IC desvio | RMSE | Vence o por ativo |
+|---|---|---|---|---|
+| vol_passada | 0,304 | 0,098 | 0,544 | 6% (1 de 17) |
+| lgbm_ativo | 0,364 | 0,082 | 0,511 | — |
+| lgbm_classe | **0,387** | 0,082 | 0,503 | **100% (17 de 17)** |
+| lgbm_geral | 0,377 | 0,088 | **0,503** | 76% (13 de 17) |
+
+- **A conclusão do 1b se mantém**: treinar com vários ativos juntos (por classe ou geral) vence o modelo por
+  ativo na maioria dos anos; o por classe vence em todos.
+- **A vantagem é menor que no painel alinhado** (geral − por ativo: 0,013 aqui, 0,047 na seção 4). *Não* é
+  porque o modelo por ativo melhorou: a vantagem dele sobre a régua ficou igual (0,295 − 0,236 = 0,059 no
+  alinhado; 0,364 − 0,304 = 0,060 aqui). O que caiu foi a vantagem do **geral** sobre a régua (0,342 − 0,236 =
+  0,106 no alinhado; 0,377 − 0,304 = 0,073 aqui). Duas hipóteses, testadas na seção 12: (a) sem alinhar, os
+  ativos com décadas de histórico (o S&P 500 desde 1927, o Nikkei desde 1965) dominam o treino do modelo
+  geral, com dados de mercados muito diferentes dos atuais; (b) os anos de teste não são os mesmos (2012 a
+  2026 no alinhado, 2010 a 2026 aqui).
+  *(Versão anterior deste item, errada: "o modelo por ativo tem mais dados e precisa menos da ajuda dos
+  outros". Os números acima mostram que o por ativo não ganhou nada sobre a régua.)*
+- Por classe e geral empatam (0,387 × 0,377, diferença bem menor que o desvio entre anos, cerca de 0,08), mas
+  o por classe é o mais consistente.
+- A régua de agitação recente fica mais forte (0,304 contra 0,236 no alinhado): os alvos sem buracos de
+  calendário são mais fáceis de prever para todos.
+- Direção e retorno: ruído, como antes; o geral fica até um pouco abaixo da média histórica na direção
+  (AUC 0,508 × 0,516).
+
+**Decisão sugerida:** se o grupo quiser minis e cripto, usar o painel **sem alinhar** (`--no-align`), com o
+modelo por classe e o geral como principais. Antes de adotá-lo como padrão: (1) combinar com a Pessoa A, dona
+do contrato do painel; (2) a Pessoa C refazer as comparações dela nesse painel; (3) não misturar números
+alinhados e não alinhados no relatório.
+
+**Próximo teste:** seção 12 (cortar o histórico antigo e ver se a vantagem do geral volta).
+
+## 12. Qual painel usar: histórico completo ou cortado
+
+O professor confirmou que **cortar dados antigos é aceitável quando eles não representam o comportamento
+atual dos ativos**. O teste: o mesmo painel sem alinhar, com e sem o histórico antigo, nas mesmas linhas de
+teste.
+
+`prepare_universe.py --start AAAA-MM-DD` corta o painel **depois** de calcular features e alvos. As janelas
+móveis continuam usando os dias anteriores ao corte, então toda linha que sobra é idêntica à do painel
+completo (há teste para isso); o corte só tira as linhas antigas do **treino**. Os anos de teste são os
+mesmos (2010 a 2026 com corte em 2008).
+
+```
+python src/models/prepare_universe.py --universe todos --no-align --start 2008-01-01
+python src/models/run_1b.py --universe todos_sem_alinhar_desde2008
+python src/models/edge_report.py --panels todos_sem_alinhar todos_sem_alinhar_desde2008
+python src/models/edge_report.py --panels todos_sem_alinhar todos_sem_alinhar_desde2008 --from-year 2012
+```
+
+O `edge_report.py` mostra, por painel e modelo: IC, RMSE, **vantagem sobre a régua** (IC do modelo menos IC
+da régua, ano a ano) e em quantos anos ganhou dela; e, como os alvos são iguais nos dois painéis, a diferença
+de IC de cada modelo entre os painéis, pareada por ano. O `--from-year 2012` repete tudo só nos anos de teste
+do painel alinhado (hipótese b da seção 11.1).
+
+Como decidir:
+- se o geral cortado ganhar do geral completo na maioria dos anos, o histórico antigo atrapalha → **painel
+  oficial: sem alinhar, desde 2008** (e a explicação da seção 11.1 é a hipótese a);
+- se empatar, o histórico antigo não atrapalha nem ajuda → fica o painel completo (mais dados, menos escolhas
+  arbitrárias), e a diferença da seção 11.1 vem dos anos de teste (hipótese b, confirmada com `--from-year 2012`);
+- a data de corte não deve ser escolhida olhando o resultado do teste (isso seria ajustar ao teste). 2008 foi
+  fixado antes, por ser o início do painel alinhado e incluir a crise de 2008 no treino.
+
+**Resultado com dados reais:** *a preencher.*
+
+## 13. Impacto de cada ativo (tirar um por vez)
+
+`ablation.py` treina o modelo geral 32 vezes, cada vez sem um ativo, e compara com o modelo completo:
+
+- **nos outros ativos**: IC do modelo sem X menos IC do completo, nas linhas dos outros 31 ativos. Negativo
+  = X ajudava os outros (e colocar X de volta ganha esse mesmo valor). Só entram os anos em que X já
+  estava no treino;
+- **no próprio X**: IC ao longo do tempo em X, visto no treino × nunca visto (a pergunta da Pessoa C, aqui
+  como subproduto);
+- **ruído**: só trocar a semente aleatória do LightGBM já muda o IC um pouco. O script treina o modelo
+  completo com mais 2 sementes e mede essa variação nas mesmas linhas. Efeito menor que o ruído
+  (`acima_do_ruido = False`) não deve ser lido como impacto do ativo.
+
+```
+python src/models/ablation.py --universe todos_sem_alinhar                  # ~35 treinos; continua de onde parou
+python src/models/ablation.py --universe todos_sem_alinhar --by classe      # tira uma classe inteira por vez
+```
+
+Só a volatilidade, por padrão: em retorno e direção não há sinal para perder (seção 5).
+Expectativa honesta: com 31 outros ativos, tirar um só deve mudar pouco; a tabela por classe mostra efeitos
+maiores, se existirem.
+
+**Resultado com dados reais:** *a preencher.*
+
+## 14. Como as features são calculadas e nomes técnicos
+
+Ver `docs/features.md`: fórmula, nome técnico e exemplo numérico de cada feature e de cada alvo, e as bordas
+da série. Os nomes no código não mudaram. Importância de cada feature no modelo geral:
+
+```
+python src/models/importance.py --universe todos_sem_alinhar
+```
+
+**Resultado com dados reais:** *a preencher.*
+
+## 15. A variabilidade dos outros ativos agrega valor?
+
+Quatro features novas com a agitação do **mercado** e da **classe** (média das features de volatilidade dos
+outros ativos, sempre do pregão anterior; definições em `docs/features.md`, seção 3). O teste separa duas
+perguntas:
+
+- **por ativo com mercado × por ativo**: um modelo que só vê o próprio ativo ganha ao ver também a agitação
+  dos outros? Se sim, a variabilidade dos outros ativos tem informação;
+- **geral com mercado × geral**: o modelo geral já aproveita isso por treinar com todos? Se o ganho aqui for
+  bem menor que no por ativo, a vantagem do modelo geral vem em parte de "conhecer o mercado".
+
+```
+python src/models/tree.py --mode ativo --market --universe todos_sem_alinhar
+python src/models/tree.py --mode classe --market --universe todos_sem_alinhar
+python src/models/tree.py --mode geral --market --universe todos_sem_alinhar
+python src/models/market.py --universe todos_sem_alinhar
+python src/models/importance.py --universe todos_sem_alinhar --model geral_mercado
+```
+
+**Resultado com dados reais:** *a preencher.*
+
+## 16. Condições de contorno
+
+Entendemos "condições de contorno" como **as bordas e os limites em que os resultados valem**: onde os dados
+começam e terminam, o que acontece nas bordas (aquecimento das janelas, fim da série, buracos), e em que
+situações o modelo funciona ou não (mercado calmo ou agitado, classe de ativo, pouco ou muito histórico,
+ano). Se o professor quis dizer outra coisa, esta seção se adapta.
+
+```
+python src/models/boundary.py --universe todos_sem_alinhar
+```
+
+Saídas em `reports/results/<painel>/contorno/`:
+- `bordas.csv`: por ativo, início e fim no painel, pregões de aquecimento perdidos (113 por ativo, ver
+  `docs/features.md`, seção 5), retornos descartados por buraco ou preço inválido, maior buraco, % sem volume
+  e sem amplitude;
+- `contorno_regime.csv`: IC por regime de mercado (terços da agitação média do mercado no dia: calmo,
+  normal, agitado; e os 5% mais agitados);
+- `contorno_classe.csv`, `contorno_ano.csv`: IC por classe e por ano de teste;
+- `contorno_historico.csv` e `contorno_historico_inicio.csv`: IC por anos de histórico do ativo;
+  `cobertura_historico.csv`: % das linhas de teste que cada modelo consegue prever. O modelo por ativo
+  precisa de 500 linhas do próprio ativo para existir; nos primeiros anos de um ativo novo só o geral e a
+  régua preveem. Essa é uma condição de contorno a favor do modelo geral.
+
+**Resultado com dados reais:** *a preencher.*
