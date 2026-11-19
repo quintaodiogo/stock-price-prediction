@@ -726,7 +726,31 @@ dois, a escolha está justificada. Se a regressão linear ficar praticamente igu
 dito: o ganho do projeto viria de juntar ativos, não da complexidade do modelo (coerente com a seção 9, em que a
 rede neural empatou com o LightGBM).
 
-**Resultado com dados reais:** *a preencher.*
+### 18.1 Resultado com dados reais
+
+Volatilidade (`y_vol_h5`), 17 anos de prova, mesmas linhas para todos os modelos:
+
+| Modelo | IC | LightGBM − modelo | Anos com LightGBM melhor |
+|---|---|---|---|
+| média histórica | 0,011 | 0,370 | 17 de 17 |
+| régua (vol. passada) | 0,308 | 0,073 | 17 de 17 |
+| linear (Ridge) | 0,334 | 0,047 | 17 de 17 |
+| uma árvore de decisão | 0,348 | 0,033 | 17 de 17 |
+| **LightGBM geral** | **0,381** | — | — |
+
+- **A escolha do LightGBM está justificada:** ganhou da regressão linear (+0,047) e da árvore única (+0,033)
+  em todos os 17 anos. A regressão linear ganha da régua só por 0,026; o LightGBM, por 0,073, quase três vezes
+  mais.
+- **Isso afina uma conclusão anterior** (seção 9, "o ganho vem dos dados, não do tipo de modelo"): o modelo
+  precisa ser **flexível** (não linear). Entre dois modelos flexíveis bem diferentes (LightGBM e rede neural
+  GRU) o resultado empatou; um modelo linear ou uma árvore só ficam abaixo.
+- **Retornos e direção:** todos perto de zero (IC entre −0,014 e 0,019) ou de 0,5 (AUC entre 0,502 e 0,516).
+  Não há sinal para nenhum modelo. A média histórica tem AUC 0,516 na direção, um pouco acima dos outros; isso
+  provavelmente vem de diferenças de tendência média entre ativos ao longo do tempo, e não de previsão do dia
+  seguinte. Não usar como resultado.
+- O IC do LightGBM aqui (0,381) difere do da seção 12.1 (0,374) porque cada tabela usa as linhas comuns aos
+  modelos que compara.
+
 
 ## 19. Quanto dado é preciso para treinar
 
@@ -752,4 +776,31 @@ Leitura: a menor janela "praticamente igual" (diferença menor que 0,005 de IC) 
 quantidade mínima de dados. Atenção: a janela curta perde as crises antigas (2008, 2020) do treino, então o
 resultado em anos de crise pode piorar mais que a média.
 
-**Resultado com dados reais:** *a preencher.*
+### 19.1 Resultado com dados reais
+
+**Janela de treino** (volatilidade, 17 anos de prova; diferença para o treino com todo o passado):
+
+| Treino com | IC | Diferença | Anos pior | Leitura |
+|---|---|---|---|---|
+| todo o passado | 0,381 | — | — | referência |
+| últimos 10 anos | 0,382 | +0,001 | 8 de 17 | praticamente igual |
+| últimos 5 anos | 0,379 | −0,003 | 11 de 17 | praticamente igual |
+| últimos 3 anos | 0,375 | −0,006 | 11 de 17 | empate (muda de sinal entre os anos) |
+| últimos 2 anos | 0,370 | −0,011 | 12 de 17 | perde de forma consistente |
+| último 1 ano | 0,339 | −0,043 | 17 de 17 | perde de forma consistente |
+| régua (não treina) | 0,308 | −0,073 | — | piso |
+
+**Corte em 2021** (só os anos de prova 2022 a 2026): geral 0,312 contra 0,318 com todo o passado (−0,006;
+melhor em 2 de 5 anos: empate pela regra). A vantagem sobre a régua cai de 0,069 para 0,063 e o geral continua
+ganhando dela nos 5 anos.
+
+- **Resposta ao professor: cerca de 5 anos de histórico bastam.** Com 5 ou 10 anos, o modelo fica praticamente
+  igual a estudar todo o passado. Com 3 anos começa a perder um pouco; com 1 ou 2 anos, perde de forma
+  consistente (−0,043 com 1 ano).
+- O corte em 2021 concorda: em 2022 o modelo tinha só 1 ano para estudar e em 2026, 5 anos; no conjunto,
+  perde pouco (−0,006) e ainda ganha da régua em todos os anos.
+- Por que 5 anos bastam: o modelo geral junta os 32 ativos; 5 anos são cerca de 40 mil linhas de treino
+  (32 ativos × cerca de 250 pregões × 5), o bastante para aprender o padrão. O ganho de juntar ativos é,
+  em parte, ganho de quantidade de dados.
+- Isso também é coerente com a seção 12.1: cortar em 2008 (mais de 5 anos antes de cada prova) não mudou nada.
+

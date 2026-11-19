@@ -364,8 +364,8 @@ def sec_data(universe: str, cut: str) -> str:
         g = diff[(diff["target"] == "y_vol_h5") & (diff["model"] == "lgbm_geral")]
         if len(g):
             k, n = frac(g["anos_melhor"].iloc[0])
-            out.append(f"<p class='leitura'><b>O que aconteceu:</b> treinando só a partir de 2021, o IC do modelo geral "
-                       f"{verdict(g['dif_ic'].iloc[0], k, n)} em relação ao treino com todo o passado (diferença "
+            out.append(f"<p class='leitura'><b>O que aconteceu:</b> treinando só a partir de 2021, o resultado do modelo "
+                       f"geral foi: {verdict(g['dif_ic'].iloc[0], k, n)}, em relação ao treino com todo o passado (diferença "
                        f"{num(g['dif_ic'].iloc[0], 4)}, melhor em {k} de {n} anos; só os anos de prova 2022 a 2026).</p>")
         summ = read(res / f"vantagem_{universe}_x_{cut}.csv")
         if summ is not None:
