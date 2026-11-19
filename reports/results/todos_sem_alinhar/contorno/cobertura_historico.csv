@@ -1,0 +1,5 @@
+target,historico,vol_passada,media_historica,lgbm_ativo,lgbm_classe,lgbm_geral,linhas_teste
+y_vol_h5,1) menos de 2 anos,95.7,100.0,2.7,39.7,100.0,2551
+y_vol_h5,2) 2 a 5 anos,100.0,100.0,88.7,100.0,100.0,5278
+y_vol_h5,3) 5 a 10 anos,100.0,100.0,99.4,100.0,100.0,12537
+y_vol_h5,4) 10 anos ou mais,100.0,100.0,99.7,100.0,100.0,106119

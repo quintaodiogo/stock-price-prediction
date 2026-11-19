@@ -1,0 +1,5 @@
+target,historico,vol_passada,media_historica,lgbm_geral,anos,linhas
+y_vol_h5,1) menos de 2 anos,0.2011,-0.0247,0.2639,6,2098
+y_vol_h5,2) 2 a 5 anos,0.31,0.0113,0.3711,12,4985
+y_vol_h5,3) 5 a 10 anos,0.2749,0.0056,0.3257,15,12349
+y_vol_h5,4) 10 anos ou mais,0.2997,-0.0024,0.3769,17,106119
