@@ -1,0 +1,232 @@
+{
+  "modelo": "transfer_unseen",
+  "cenario": "unseen",
+  "alvos": [
+    "y_vol_h5"
+  ],
+  "ft_lr": 0.01,
+  "ft_grid": [
+    0,
+    10,
+    25,
+    50,
+    100
+  ],
+  "painel": {
+    "linhas": 241664,
+    "ativos": [
+      "ABEV3",
+      "B3SA3",
+      "BBAS3",
+      "BBDC4",
+      "BTC",
+      "COPPER",
+      "DAX",
+      "DOWJONES",
+      "ETH",
+      "EURUSD",
+      "FTSE100",
+      "GBPUSD",
+      "GOLD",
+      "HANGSENG",
+      "IBOVESPA",
+      "ITUB4",
+      "NASDAQ",
+      "NIKKEI225",
+      "PETR4",
+      "RENT3",
+      "SILVER",
+      "SP500",
+      "SUZB3",
+      "US10Y",
+      "USDBRL",
+      "USDJPY",
+      "VALE3",
+      "VIX",
+      "WDO",
+      "WEGE3",
+      "WIN",
+      "WTI"
+    ],
+    "inicio": "1928-06-13",
+    "fim": "2026-11-13",
+    "folds": 17,
+    "features": [
+      "f_z_lag0",
+      "f_z_lag1",
+      "f_z_lag2",
+      "f_z_lag3",
+      "f_z_lag4",
+      "f_z_std5",
+      "f_z_std21",
+      "f_z_std63",
+      "f_z_mean21",
+      "f_z_mean63",
+      "f_rsi14",
+      "f_range",
+      "f_volrel"
+    ]
+  },
+  "excluidos_por_ativo": {
+    "ABEV3": [
+      "ABEV3",
+      "IBOVESPA",
+      "WIN"
+    ],
+    "B3SA3": [
+      "B3SA3",
+      "IBOVESPA",
+      "WIN"
+    ],
+    "BBAS3": [
+      "BBAS3",
+      "BBDC4",
+      "IBOVESPA",
+      "ITUB4",
+      "WIN"
+    ],
+    "BBDC4": [
+      "BBAS3",
+      "BBDC4",
+      "IBOVESPA",
+      "ITUB4",
+      "WIN"
+    ],
+    "BTC": [
+      "BTC",
+      "ETH"
+    ],
+    "COPPER": [
+      "COPPER"
+    ],
+    "DAX": [
+      "DAX",
+      "FTSE100"
+    ],
+    "DOWJONES": [
+      "DOWJONES",
+      "NASDAQ",
+      "SP500"
+    ],
+    "ETH": [
+      "BTC",
+      "ETH"
+    ],
+    "EURUSD": [
+      "EURUSD",
+      "GBPUSD"
+    ],
+    "FTSE100": [
+      "DAX",
+      "FTSE100"
+    ],
+    "GBPUSD": [
+      "EURUSD",
+      "GBPUSD"
+    ],
+    "GOLD": [
+      "GOLD",
+      "SILVER"
+    ],
+    "HANGSENG": [
+      "HANGSENG"
+    ],
+    "IBOVESPA": [
+      "ABEV3",
+      "B3SA3",
+      "BBAS3",
+      "BBDC4",
+      "IBOVESPA",
+      "ITUB4",
+      "PETR4",
+      "RENT3",
+      "SUZB3",
+      "VALE3",
+      "WEGE3",
+      "WIN"
+    ],
+    "ITUB4": [
+      "BBAS3",
+      "BBDC4",
+      "IBOVESPA",
+      "ITUB4",
+      "WIN"
+    ],
+    "NASDAQ": [
+      "DOWJONES",
+      "NASDAQ",
+      "SP500"
+    ],
+    "NIKKEI225": [
+      "NIKKEI225"
+    ],
+    "PETR4": [
+      "IBOVESPA",
+      "PETR4",
+      "WIN"
+    ],
+    "RENT3": [
+      "IBOVESPA",
+      "RENT3",
+      "WIN"
+    ],
+    "SILVER": [
+      "GOLD",
+      "SILVER"
+    ],
+    "SP500": [
+      "DOWJONES",
+      "NASDAQ",
+      "SP500"
+    ],
+    "SUZB3": [
+      "IBOVESPA",
+      "SUZB3",
+      "WIN"
+    ],
+    "US10Y": [
+      "US10Y"
+    ],
+    "USDBRL": [
+      "USDBRL",
+      "WDO"
+    ],
+    "USDJPY": [
+      "USDJPY"
+    ],
+    "VALE3": [
+      "IBOVESPA",
+      "VALE3",
+      "WIN"
+    ],
+    "VIX": [
+      "VIX"
+    ],
+    "WDO": [
+      "USDBRL",
+      "WDO"
+    ],
+    "WEGE3": [
+      "IBOVESPA",
+      "WEGE3",
+      "WIN"
+    ],
+    "WIN": [
+      "ABEV3",
+      "B3SA3",
+      "BBAS3",
+      "BBDC4",
+      "IBOVESPA",
+      "ITUB4",
+      "PETR4",
+      "RENT3",
+      "SUZB3",
+      "VALE3",
+      "WEGE3",
+      "WIN"
+    ],
+    "WTI": [
+      "WTI"
+    ]
+  }
+}
