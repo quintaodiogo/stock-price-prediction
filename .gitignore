@@ -1,13 +1,5 @@
 .venv/
 __pycache__/
 *.pyc
-data/raw/*.csv
-data/intraday/
-data/processed/
 .pytest_cache/
-models/*.txt
-reports/results/preds_*.parquet
-models/*.pt
-models/**/*.txt
-models/**/*.pt
-reports/results/**/preds_*.parquet
+.DS_Store

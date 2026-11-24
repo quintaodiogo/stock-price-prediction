@@ -1,4 +1,4 @@
-# Dados e features (Pessoa A)
+# Dados e features (Pessoa A: Jeohvana Vaz)
 
 Como reproduzir, do zero:
 

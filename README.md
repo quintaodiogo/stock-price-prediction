@@ -6,6 +6,11 @@ reaproveitá-lo em cada ativo via **transfer learning**, em vez de treinar um mo
 Pergunta central: *um modelo pré-treinado em muitos ativos prevê melhor um ativo novo do que um modelo
 treinado só com o histórico dele?*
 
+Equipe:
+- Pessoa A: Jeohvana Vaz (dados e features)
+- Pessoa B: Laura Beatriz dos Santos Silva (modelo geral)
+- Pessoa C: Diogo de Paula Quintão (transfer learning e avaliação)
+
 ```
 obter ativos  ->  normalizar  ->  pré-treino (modelo geral)  ->  transfer learning (por ativo)  ->  avaliação
    Pessoa A         Pessoa A            Pessoa B                        Pessoa C                     Pessoa C

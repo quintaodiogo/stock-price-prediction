@@ -1,4 +1,4 @@
-# Modelo geral (Pessoa B)
+# Modelo geral (Pessoa B: Laura Beatriz dos Santos Silva)
 
 Baselines e LightGBM no walk-forward, e o experimento 1b do README (seção 4): o modelo treinado
 em todos os ativos prevê melhor do que o modelo treinado só no ativo?

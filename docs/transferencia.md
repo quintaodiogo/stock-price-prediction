@@ -1,4 +1,4 @@
-# Transfer learning e avaliação (Pessoa C)
+# Transfer learning e avaliação (Pessoa C: Diogo de Paula Quintão)
 
 Pergunta: um modelo pré-treinado em vários ativos prevê melhor um ativo do que um modelo treinado só
 com o histórico dele, e o que acontece com um ativo que ele nunca viu?
