@@ -1,0 +1,14 @@
+,nome,grupo,importancia_%,desvio_%
+f_z_std21,"Volatilidade realizada relativa, 21 dias",volatilidade do próprio ativo,37.34,1.09
+f_range,Amplitude diária relativa,amplitude,12.97,2.89
+f_z_mean21,"Momento ajustado ao risco, 21 dias",tendência,11.83,1.24
+f_z_std5,"Volatilidade realizada relativa, 5 dias",volatilidade do próprio ativo,10.8,0.42
+f_rsi14,"Índice de força relativa (IFR), 14 dias",IFR,5.26,0.33
+f_z_mean63,"Momento ajustado ao risco, 63 dias",tendência,4.84,0.51
+f_z_std63,"Volatilidade realizada relativa, 63 dias",volatilidade do próprio ativo,4.67,0.5
+f_z_lag0,Retorno normalizado (t),retornos recentes,4.65,0.41
+f_z_lag1,Retorno normalizado (t-1),retornos recentes,2.98,0.17
+f_volrel,"Volume relativo, 21 dias",volume,1.84,0.59
+f_z_lag2,Retorno normalizado (t-2),retornos recentes,1.47,0.15
+f_z_lag3,Retorno normalizado (t-3),retornos recentes,0.79,0.12
+f_z_lag4,Retorno normalizado (t-4),retornos recentes,0.56,0.13

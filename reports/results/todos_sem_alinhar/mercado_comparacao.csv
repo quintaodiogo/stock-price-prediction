@@ -1,0 +1,13 @@
+target,modelo,ic_sem,ic_com,ganho,ganho_std,anos_melhor
+y_dir_h1,lgbm_ativo,0.0302,0.0302,0.0,0.0088,9 de 17
+y_dir_h1,lgbm_classe,0.0303,0.0316,0.0013,0.0081,11 de 17
+y_dir_h1,lgbm_geral,0.0134,0.013,-0.0004,0.0133,9 de 17
+y_ret_h1,lgbm_ativo,0.019,0.0186,-0.0004,0.0075,5 de 17
+y_ret_h1,lgbm_classe,0.016,0.0176,0.0016,0.0105,8 de 17
+y_ret_h1,lgbm_geral,-0.0108,-0.008,0.0029,0.015,10 de 17
+y_ret_h5,lgbm_ativo,0.0214,0.0278,0.0064,0.019,12 de 17
+y_ret_h5,lgbm_classe,0.0232,0.0365,0.0132,0.0341,11 de 17
+y_ret_h5,lgbm_geral,0.0024,0.0094,0.007,0.0429,9 de 17
+y_vol_h5,lgbm_ativo,0.3642,0.35,-0.0141,0.0154,1 de 17
+y_vol_h5,lgbm_classe,0.3903,0.3814,-0.0089,0.0081,2 de 17
+y_vol_h5,lgbm_geral,0.3811,0.3742,-0.0069,0.0083,4 de 17

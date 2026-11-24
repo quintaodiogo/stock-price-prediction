@@ -1,0 +1,3000 @@
+{
+  "modelo": "transfer_fine_tune",
+  "cenario": "fine_tune",
+  "alvos": [
+    "y_vol_h5"
+  ],
+  "ft_lr": 0.01,
+  "ft_grid": [
+    0,
+    10,
+    25,
+    50,
+    100
+  ],
+  "painel": {
+    "linhas": 241664,
+    "ativos": [
+      "ABEV3",
+      "B3SA3",
+      "BBAS3",
+      "BBDC4",
+      "BTC",
+      "COPPER",
+      "DAX",
+      "DOWJONES",
+      "ETH",
+      "EURUSD",
+      "FTSE100",
+      "GBPUSD",
+      "GOLD",
+      "HANGSENG",
+      "IBOVESPA",
+      "ITUB4",
+      "NASDAQ",
+      "NIKKEI225",
+      "PETR4",
+      "RENT3",
+      "SILVER",
+      "SP500",
+      "SUZB3",
+      "US10Y",
+      "USDBRL",
+      "USDJPY",
+      "VALE3",
+      "VIX",
+      "WDO",
+      "WEGE3",
+      "WIN",
+      "WTI"
+    ],
+    "inicio": "1928-06-13",
+    "fim": "2026-11-13",
+    "folds": 17,
+    "features": [
+      "f_z_lag0",
+      "f_z_lag1",
+      "f_z_lag2",
+      "f_z_lag3",
+      "f_z_lag4",
+      "f_z_std5",
+      "f_z_std21",
+      "f_z_std63",
+      "f_z_mean21",
+      "f_z_mean63",
+      "f_rsi14",
+      "f_range",
+      "f_volrel"
+    ]
+  },
+  "fine_tune_arvores": [
+    {
+      "fold": 0,
+      "target": "y_vol_h5",
+      "asset": "EURUSD",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 0,
+      "target": "y_vol_h5",
+      "asset": "GBPUSD",
+      "arvores_extras": 50
+    },
+    {
+      "fold": 0,
+      "target": "y_vol_h5",
+      "asset": "USDJPY",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 0,
+      "target": "y_vol_h5",
+      "asset": "DAX",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 0,
+      "target": "y_vol_h5",
+      "asset": "HANGSENG",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 0,
+      "target": "y_vol_h5",
+      "asset": "NIKKEI225",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 0,
+      "target": "y_vol_h5",
+      "asset": "ABEV3",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 0,
+      "target": "y_vol_h5",
+      "asset": "BBAS3",
+      "arvores_extras": 10
+    },
+    {
+      "fold": 0,
+      "target": "y_vol_h5",
+      "asset": "COPPER",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 0,
+      "target": "y_vol_h5",
+      "asset": "DOWJONES",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 0,
+      "target": "y_vol_h5",
+      "asset": "FTSE100",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 0,
+      "target": "y_vol_h5",
+      "asset": "GOLD",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 0,
+      "target": "y_vol_h5",
+      "asset": "IBOVESPA",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 0,
+      "target": "y_vol_h5",
+      "asset": "ITUB4",
+      "arvores_extras": 10
+    },
+    {
+      "fold": 0,
+      "target": "y_vol_h5",
+      "asset": "NASDAQ",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 0,
+      "target": "y_vol_h5",
+      "asset": "PETR4",
+      "arvores_extras": 25
+    },
+    {
+      "fold": 0,
+      "target": "y_vol_h5",
+      "asset": "RENT3",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 0,
+      "target": "y_vol_h5",
+      "asset": "SILVER",
+      "arvores_extras": 25
+    },
+    {
+      "fold": 0,
+      "target": "y_vol_h5",
+      "asset": "SP500",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 0,
+      "target": "y_vol_h5",
+      "asset": "US10Y",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 0,
+      "target": "y_vol_h5",
+      "asset": "USDBRL",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 0,
+      "target": "y_vol_h5",
+      "asset": "VALE3",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 0,
+      "target": "y_vol_h5",
+      "asset": "VIX",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 0,
+      "target": "y_vol_h5",
+      "asset": "WEGE3",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 0,
+      "target": "y_vol_h5",
+      "asset": "WTI",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 1,
+      "target": "y_vol_h5",
+      "asset": "DAX",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 1,
+      "target": "y_vol_h5",
+      "asset": "HANGSENG",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 1,
+      "target": "y_vol_h5",
+      "asset": "ABEV3",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 1,
+      "target": "y_vol_h5",
+      "asset": "B3SA3",
+      "arvores_extras": 10
+    },
+    {
+      "fold": 1,
+      "target": "y_vol_h5",
+      "asset": "BBAS3",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 1,
+      "target": "y_vol_h5",
+      "asset": "BBDC4",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 1,
+      "target": "y_vol_h5",
+      "asset": "COPPER",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 1,
+      "target": "y_vol_h5",
+      "asset": "DOWJONES",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 1,
+      "target": "y_vol_h5",
+      "asset": "EURUSD",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 1,
+      "target": "y_vol_h5",
+      "asset": "GBPUSD",
+      "arvores_extras": 50
+    },
+    {
+      "fold": 1,
+      "target": "y_vol_h5",
+      "asset": "GOLD",
+      "arvores_extras": 50
+    },
+    {
+      "fold": 1,
+      "target": "y_vol_h5",
+      "asset": "IBOVESPA",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 1,
+      "target": "y_vol_h5",
+      "asset": "ITUB4",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 1,
+      "target": "y_vol_h5",
+      "asset": "NASDAQ",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 1,
+      "target": "y_vol_h5",
+      "asset": "NIKKEI225",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 1,
+      "target": "y_vol_h5",
+      "asset": "PETR4",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 1,
+      "target": "y_vol_h5",
+      "asset": "RENT3",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 1,
+      "target": "y_vol_h5",
+      "asset": "SILVER",
+      "arvores_extras": 25
+    },
+    {
+      "fold": 1,
+      "target": "y_vol_h5",
+      "asset": "SP500",
+      "arvores_extras": 50
+    },
+    {
+      "fold": 1,
+      "target": "y_vol_h5",
+      "asset": "US10Y",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 1,
+      "target": "y_vol_h5",
+      "asset": "USDBRL",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 1,
+      "target": "y_vol_h5",
+      "asset": "USDJPY",
+      "arvores_extras": 50
+    },
+    {
+      "fold": 1,
+      "target": "y_vol_h5",
+      "asset": "VALE3",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 1,
+      "target": "y_vol_h5",
+      "asset": "VIX",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 1,
+      "target": "y_vol_h5",
+      "asset": "WEGE3",
+      "arvores_extras": 50
+    },
+    {
+      "fold": 1,
+      "target": "y_vol_h5",
+      "asset": "WTI",
+      "arvores_extras": 25
+    },
+    {
+      "fold": 1,
+      "target": "y_vol_h5",
+      "asset": "FTSE100",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 2,
+      "target": "y_vol_h5",
+      "asset": "DAX",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 2,
+      "target": "y_vol_h5",
+      "asset": "ABEV3",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 2,
+      "target": "y_vol_h5",
+      "asset": "B3SA3",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 2,
+      "target": "y_vol_h5",
+      "asset": "BBAS3",
+      "arvores_extras": 50
+    },
+    {
+      "fold": 2,
+      "target": "y_vol_h5",
+      "asset": "BBDC4",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 2,
+      "target": "y_vol_h5",
+      "asset": "EURUSD",
+      "arvores_extras": 50
+    },
+    {
+      "fold": 2,
+      "target": "y_vol_h5",
+      "asset": "GBPUSD",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 2,
+      "target": "y_vol_h5",
+      "asset": "HANGSENG",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 2,
+      "target": "y_vol_h5",
+      "asset": "ITUB4",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 2,
+      "target": "y_vol_h5",
+      "asset": "PETR4",
+      "arvores_extras": 25
+    },
+    {
+      "fold": 2,
+      "target": "y_vol_h5",
+      "asset": "RENT3",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 2,
+      "target": "y_vol_h5",
+      "asset": "USDBRL",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 2,
+      "target": "y_vol_h5",
+      "asset": "USDJPY",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 2,
+      "target": "y_vol_h5",
+      "asset": "VALE3",
+      "arvores_extras": 10
+    },
+    {
+      "fold": 2,
+      "target": "y_vol_h5",
+      "asset": "WEGE3",
+      "arvores_extras": 25
+    },
+    {
+      "fold": 2,
+      "target": "y_vol_h5",
+      "asset": "COPPER",
+      "arvores_extras": 50
+    },
+    {
+      "fold": 2,
+      "target": "y_vol_h5",
+      "asset": "DOWJONES",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 2,
+      "target": "y_vol_h5",
+      "asset": "FTSE100",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 2,
+      "target": "y_vol_h5",
+      "asset": "GOLD",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 2,
+      "target": "y_vol_h5",
+      "asset": "IBOVESPA",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 2,
+      "target": "y_vol_h5",
+      "asset": "NASDAQ",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 2,
+      "target": "y_vol_h5",
+      "asset": "NIKKEI225",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 2,
+      "target": "y_vol_h5",
+      "asset": "SILVER",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 2,
+      "target": "y_vol_h5",
+      "asset": "SP500",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 2,
+      "target": "y_vol_h5",
+      "asset": "US10Y",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 2,
+      "target": "y_vol_h5",
+      "asset": "VIX",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 2,
+      "target": "y_vol_h5",
+      "asset": "WTI",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 3,
+      "target": "y_vol_h5",
+      "asset": "DAX",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 3,
+      "target": "y_vol_h5",
+      "asset": "EURUSD",
+      "arvores_extras": 50
+    },
+    {
+      "fold": 3,
+      "target": "y_vol_h5",
+      "asset": "GBPUSD",
+      "arvores_extras": 50
+    },
+    {
+      "fold": 3,
+      "target": "y_vol_h5",
+      "asset": "HANGSENG",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 3,
+      "target": "y_vol_h5",
+      "asset": "USDBRL",
+      "arvores_extras": 25
+    },
+    {
+      "fold": 3,
+      "target": "y_vol_h5",
+      "asset": "USDJPY",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 3,
+      "target": "y_vol_h5",
+      "asset": "ABEV3",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 3,
+      "target": "y_vol_h5",
+      "asset": "B3SA3",
+      "arvores_extras": 25
+    },
+    {
+      "fold": 3,
+      "target": "y_vol_h5",
+      "asset": "BBAS3",
+      "arvores_extras": 50
+    },
+    {
+      "fold": 3,
+      "target": "y_vol_h5",
+      "asset": "BBDC4",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 3,
+      "target": "y_vol_h5",
+      "asset": "COPPER",
+      "arvores_extras": 50
+    },
+    {
+      "fold": 3,
+      "target": "y_vol_h5",
+      "asset": "DOWJONES",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 3,
+      "target": "y_vol_h5",
+      "asset": "FTSE100",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 3,
+      "target": "y_vol_h5",
+      "asset": "GOLD",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 3,
+      "target": "y_vol_h5",
+      "asset": "IBOVESPA",
+      "arvores_extras": 25
+    },
+    {
+      "fold": 3,
+      "target": "y_vol_h5",
+      "asset": "ITUB4",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 3,
+      "target": "y_vol_h5",
+      "asset": "NASDAQ",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 3,
+      "target": "y_vol_h5",
+      "asset": "PETR4",
+      "arvores_extras": 50
+    },
+    {
+      "fold": 3,
+      "target": "y_vol_h5",
+      "asset": "RENT3",
+      "arvores_extras": 25
+    },
+    {
+      "fold": 3,
+      "target": "y_vol_h5",
+      "asset": "SILVER",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 3,
+      "target": "y_vol_h5",
+      "asset": "SP500",
+      "arvores_extras": 25
+    },
+    {
+      "fold": 3,
+      "target": "y_vol_h5",
+      "asset": "US10Y",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 3,
+      "target": "y_vol_h5",
+      "asset": "VALE3",
+      "arvores_extras": 10
+    },
+    {
+      "fold": 3,
+      "target": "y_vol_h5",
+      "asset": "VIX",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 3,
+      "target": "y_vol_h5",
+      "asset": "WEGE3",
+      "arvores_extras": 10
+    },
+    {
+      "fold": 3,
+      "target": "y_vol_h5",
+      "asset": "WTI",
+      "arvores_extras": 25
+    },
+    {
+      "fold": 3,
+      "target": "y_vol_h5",
+      "asset": "NIKKEI225",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 4,
+      "target": "y_vol_h5",
+      "asset": "DAX",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 4,
+      "target": "y_vol_h5",
+      "asset": "EURUSD",
+      "arvores_extras": 50
+    },
+    {
+      "fold": 4,
+      "target": "y_vol_h5",
+      "asset": "GBPUSD",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 4,
+      "target": "y_vol_h5",
+      "asset": "HANGSENG",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 4,
+      "target": "y_vol_h5",
+      "asset": "USDBRL",
+      "arvores_extras": 50
+    },
+    {
+      "fold": 4,
+      "target": "y_vol_h5",
+      "asset": "USDJPY",
+      "arvores_extras": 25
+    },
+    {
+      "fold": 4,
+      "target": "y_vol_h5",
+      "asset": "ABEV3",
+      "arvores_extras": 25
+    },
+    {
+      "fold": 4,
+      "target": "y_vol_h5",
+      "asset": "B3SA3",
+      "arvores_extras": 50
+    },
+    {
+      "fold": 4,
+      "target": "y_vol_h5",
+      "asset": "BBAS3",
+      "arvores_extras": 50
+    },
+    {
+      "fold": 4,
+      "target": "y_vol_h5",
+      "asset": "BBDC4",
+      "arvores_extras": 25
+    },
+    {
+      "fold": 4,
+      "target": "y_vol_h5",
+      "asset": "COPPER",
+      "arvores_extras": 50
+    },
+    {
+      "fold": 4,
+      "target": "y_vol_h5",
+      "asset": "DOWJONES",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 4,
+      "target": "y_vol_h5",
+      "asset": "FTSE100",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 4,
+      "target": "y_vol_h5",
+      "asset": "GOLD",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 4,
+      "target": "y_vol_h5",
+      "asset": "IBOVESPA",
+      "arvores_extras": 25
+    },
+    {
+      "fold": 4,
+      "target": "y_vol_h5",
+      "asset": "ITUB4",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 4,
+      "target": "y_vol_h5",
+      "asset": "NASDAQ",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 4,
+      "target": "y_vol_h5",
+      "asset": "PETR4",
+      "arvores_extras": 50
+    },
+    {
+      "fold": 4,
+      "target": "y_vol_h5",
+      "asset": "RENT3",
+      "arvores_extras": 50
+    },
+    {
+      "fold": 4,
+      "target": "y_vol_h5",
+      "asset": "SILVER",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 4,
+      "target": "y_vol_h5",
+      "asset": "SP500",
+      "arvores_extras": 50
+    },
+    {
+      "fold": 4,
+      "target": "y_vol_h5",
+      "asset": "US10Y",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 4,
+      "target": "y_vol_h5",
+      "asset": "VALE3",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 4,
+      "target": "y_vol_h5",
+      "asset": "VIX",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 4,
+      "target": "y_vol_h5",
+      "asset": "WEGE3",
+      "arvores_extras": 10
+    },
+    {
+      "fold": 4,
+      "target": "y_vol_h5",
+      "asset": "WTI",
+      "arvores_extras": 50
+    },
+    {
+      "fold": 4,
+      "target": "y_vol_h5",
+      "asset": "NIKKEI225",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 5,
+      "target": "y_vol_h5",
+      "asset": "DAX",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 5,
+      "target": "y_vol_h5",
+      "asset": "EURUSD",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 5,
+      "target": "y_vol_h5",
+      "asset": "GBPUSD",
+      "arvores_extras": 25
+    },
+    {
+      "fold": 5,
+      "target": "y_vol_h5",
+      "asset": "HANGSENG",
+      "arvores_extras": 25
+    },
+    {
+      "fold": 5,
+      "target": "y_vol_h5",
+      "asset": "USDBRL",
+      "arvores_extras": 50
+    },
+    {
+      "fold": 5,
+      "target": "y_vol_h5",
+      "asset": "USDJPY",
+      "arvores_extras": 25
+    },
+    {
+      "fold": 5,
+      "target": "y_vol_h5",
+      "asset": "ABEV3",
+      "arvores_extras": 50
+    },
+    {
+      "fold": 5,
+      "target": "y_vol_h5",
+      "asset": "B3SA3",
+      "arvores_extras": 10
+    },
+    {
+      "fold": 5,
+      "target": "y_vol_h5",
+      "asset": "BBAS3",
+      "arvores_extras": 50
+    },
+    {
+      "fold": 5,
+      "target": "y_vol_h5",
+      "asset": "BBDC4",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 5,
+      "target": "y_vol_h5",
+      "asset": "COPPER",
+      "arvores_extras": 10
+    },
+    {
+      "fold": 5,
+      "target": "y_vol_h5",
+      "asset": "DOWJONES",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 5,
+      "target": "y_vol_h5",
+      "asset": "FTSE100",
+      "arvores_extras": 50
+    },
+    {
+      "fold": 5,
+      "target": "y_vol_h5",
+      "asset": "GOLD",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 5,
+      "target": "y_vol_h5",
+      "asset": "IBOVESPA",
+      "arvores_extras": 50
+    },
+    {
+      "fold": 5,
+      "target": "y_vol_h5",
+      "asset": "ITUB4",
+      "arvores_extras": 25
+    },
+    {
+      "fold": 5,
+      "target": "y_vol_h5",
+      "asset": "NASDAQ",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 5,
+      "target": "y_vol_h5",
+      "asset": "PETR4",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 5,
+      "target": "y_vol_h5",
+      "asset": "RENT3",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 5,
+      "target": "y_vol_h5",
+      "asset": "SILVER",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 5,
+      "target": "y_vol_h5",
+      "asset": "SP500",
+      "arvores_extras": 25
+    },
+    {
+      "fold": 5,
+      "target": "y_vol_h5",
+      "asset": "US10Y",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 5,
+      "target": "y_vol_h5",
+      "asset": "VALE3",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 5,
+      "target": "y_vol_h5",
+      "asset": "VIX",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 5,
+      "target": "y_vol_h5",
+      "asset": "WEGE3",
+      "arvores_extras": 10
+    },
+    {
+      "fold": 5,
+      "target": "y_vol_h5",
+      "asset": "WTI",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 5,
+      "target": "y_vol_h5",
+      "asset": "NIKKEI225",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 6,
+      "target": "y_vol_h5",
+      "asset": "EURUSD",
+      "arvores_extras": 10
+    },
+    {
+      "fold": 6,
+      "target": "y_vol_h5",
+      "asset": "GBPUSD",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 6,
+      "target": "y_vol_h5",
+      "asset": "USDBRL",
+      "arvores_extras": 50
+    },
+    {
+      "fold": 6,
+      "target": "y_vol_h5",
+      "asset": "USDJPY",
+      "arvores_extras": 25
+    },
+    {
+      "fold": 6,
+      "target": "y_vol_h5",
+      "asset": "DAX",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 6,
+      "target": "y_vol_h5",
+      "asset": "HANGSENG",
+      "arvores_extras": 25
+    },
+    {
+      "fold": 6,
+      "target": "y_vol_h5",
+      "asset": "NIKKEI225",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 6,
+      "target": "y_vol_h5",
+      "asset": "ABEV3",
+      "arvores_extras": 25
+    },
+    {
+      "fold": 6,
+      "target": "y_vol_h5",
+      "asset": "B3SA3",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 6,
+      "target": "y_vol_h5",
+      "asset": "BBAS3",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 6,
+      "target": "y_vol_h5",
+      "asset": "BBDC4",
+      "arvores_extras": 10
+    },
+    {
+      "fold": 6,
+      "target": "y_vol_h5",
+      "asset": "COPPER",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 6,
+      "target": "y_vol_h5",
+      "asset": "DOWJONES",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 6,
+      "target": "y_vol_h5",
+      "asset": "FTSE100",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 6,
+      "target": "y_vol_h5",
+      "asset": "GOLD",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 6,
+      "target": "y_vol_h5",
+      "asset": "IBOVESPA",
+      "arvores_extras": 50
+    },
+    {
+      "fold": 6,
+      "target": "y_vol_h5",
+      "asset": "ITUB4",
+      "arvores_extras": 25
+    },
+    {
+      "fold": 6,
+      "target": "y_vol_h5",
+      "asset": "NASDAQ",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 6,
+      "target": "y_vol_h5",
+      "asset": "PETR4",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 6,
+      "target": "y_vol_h5",
+      "asset": "RENT3",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 6,
+      "target": "y_vol_h5",
+      "asset": "SILVER",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 6,
+      "target": "y_vol_h5",
+      "asset": "SP500",
+      "arvores_extras": 50
+    },
+    {
+      "fold": 6,
+      "target": "y_vol_h5",
+      "asset": "US10Y",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 6,
+      "target": "y_vol_h5",
+      "asset": "VALE3",
+      "arvores_extras": 10
+    },
+    {
+      "fold": 6,
+      "target": "y_vol_h5",
+      "asset": "VIX",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 6,
+      "target": "y_vol_h5",
+      "asset": "WEGE3",
+      "arvores_extras": 50
+    },
+    {
+      "fold": 6,
+      "target": "y_vol_h5",
+      "asset": "WTI",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 7,
+      "target": "y_vol_h5",
+      "asset": "BTC",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 7,
+      "target": "y_vol_h5",
+      "asset": "DAX",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 7,
+      "target": "y_vol_h5",
+      "asset": "ABEV3",
+      "arvores_extras": 50
+    },
+    {
+      "fold": 7,
+      "target": "y_vol_h5",
+      "asset": "B3SA3",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 7,
+      "target": "y_vol_h5",
+      "asset": "BBAS3",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 7,
+      "target": "y_vol_h5",
+      "asset": "BBDC4",
+      "arvores_extras": 25
+    },
+    {
+      "fold": 7,
+      "target": "y_vol_h5",
+      "asset": "EURUSD",
+      "arvores_extras": 10
+    },
+    {
+      "fold": 7,
+      "target": "y_vol_h5",
+      "asset": "GBPUSD",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 7,
+      "target": "y_vol_h5",
+      "asset": "HANGSENG",
+      "arvores_extras": 25
+    },
+    {
+      "fold": 7,
+      "target": "y_vol_h5",
+      "asset": "IBOVESPA",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 7,
+      "target": "y_vol_h5",
+      "asset": "ITUB4",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 7,
+      "target": "y_vol_h5",
+      "asset": "PETR4",
+      "arvores_extras": 25
+    },
+    {
+      "fold": 7,
+      "target": "y_vol_h5",
+      "asset": "RENT3",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 7,
+      "target": "y_vol_h5",
+      "asset": "USDBRL",
+      "arvores_extras": 50
+    },
+    {
+      "fold": 7,
+      "target": "y_vol_h5",
+      "asset": "USDJPY",
+      "arvores_extras": 25
+    },
+    {
+      "fold": 7,
+      "target": "y_vol_h5",
+      "asset": "VALE3",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 7,
+      "target": "y_vol_h5",
+      "asset": "WEGE3",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 7,
+      "target": "y_vol_h5",
+      "asset": "COPPER",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 7,
+      "target": "y_vol_h5",
+      "asset": "DOWJONES",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 7,
+      "target": "y_vol_h5",
+      "asset": "FTSE100",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 7,
+      "target": "y_vol_h5",
+      "asset": "GOLD",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 7,
+      "target": "y_vol_h5",
+      "asset": "NASDAQ",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 7,
+      "target": "y_vol_h5",
+      "asset": "NIKKEI225",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 7,
+      "target": "y_vol_h5",
+      "asset": "SILVER",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 7,
+      "target": "y_vol_h5",
+      "asset": "SP500",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 7,
+      "target": "y_vol_h5",
+      "asset": "US10Y",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 7,
+      "target": "y_vol_h5",
+      "asset": "VIX",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 7,
+      "target": "y_vol_h5",
+      "asset": "WTI",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 8,
+      "target": "y_vol_h5",
+      "asset": "BTC",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 8,
+      "target": "y_vol_h5",
+      "asset": "DAX",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 8,
+      "target": "y_vol_h5",
+      "asset": "EURUSD",
+      "arvores_extras": 10
+    },
+    {
+      "fold": 8,
+      "target": "y_vol_h5",
+      "asset": "GBPUSD",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 8,
+      "target": "y_vol_h5",
+      "asset": "HANGSENG",
+      "arvores_extras": 25
+    },
+    {
+      "fold": 8,
+      "target": "y_vol_h5",
+      "asset": "USDBRL",
+      "arvores_extras": 50
+    },
+    {
+      "fold": 8,
+      "target": "y_vol_h5",
+      "asset": "USDJPY",
+      "arvores_extras": 10
+    },
+    {
+      "fold": 8,
+      "target": "y_vol_h5",
+      "asset": "ABEV3",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 8,
+      "target": "y_vol_h5",
+      "asset": "B3SA3",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 8,
+      "target": "y_vol_h5",
+      "asset": "BBAS3",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 8,
+      "target": "y_vol_h5",
+      "asset": "BBDC4",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 8,
+      "target": "y_vol_h5",
+      "asset": "COPPER",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 8,
+      "target": "y_vol_h5",
+      "asset": "DOWJONES",
+      "arvores_extras": 50
+    },
+    {
+      "fold": 8,
+      "target": "y_vol_h5",
+      "asset": "FTSE100",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 8,
+      "target": "y_vol_h5",
+      "asset": "GOLD",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 8,
+      "target": "y_vol_h5",
+      "asset": "IBOVESPA",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 8,
+      "target": "y_vol_h5",
+      "asset": "ITUB4",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 8,
+      "target": "y_vol_h5",
+      "asset": "NASDAQ",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 8,
+      "target": "y_vol_h5",
+      "asset": "PETR4",
+      "arvores_extras": 10
+    },
+    {
+      "fold": 8,
+      "target": "y_vol_h5",
+      "asset": "RENT3",
+      "arvores_extras": 25
+    },
+    {
+      "fold": 8,
+      "target": "y_vol_h5",
+      "asset": "SILVER",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 8,
+      "target": "y_vol_h5",
+      "asset": "SP500",
+      "arvores_extras": 25
+    },
+    {
+      "fold": 8,
+      "target": "y_vol_h5",
+      "asset": "US10Y",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 8,
+      "target": "y_vol_h5",
+      "asset": "VALE3",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 8,
+      "target": "y_vol_h5",
+      "asset": "VIX",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 8,
+      "target": "y_vol_h5",
+      "asset": "WEGE3",
+      "arvores_extras": 25
+    },
+    {
+      "fold": 8,
+      "target": "y_vol_h5",
+      "asset": "WTI",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 8,
+      "target": "y_vol_h5",
+      "asset": "NIKKEI225",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 9,
+      "target": "y_vol_h5",
+      "asset": "BTC",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 9,
+      "target": "y_vol_h5",
+      "asset": "DAX",
+      "arvores_extras": 25
+    },
+    {
+      "fold": 9,
+      "target": "y_vol_h5",
+      "asset": "EURUSD",
+      "arvores_extras": 50
+    },
+    {
+      "fold": 9,
+      "target": "y_vol_h5",
+      "asset": "GBPUSD",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 9,
+      "target": "y_vol_h5",
+      "asset": "HANGSENG",
+      "arvores_extras": 25
+    },
+    {
+      "fold": 9,
+      "target": "y_vol_h5",
+      "asset": "USDBRL",
+      "arvores_extras": 25
+    },
+    {
+      "fold": 9,
+      "target": "y_vol_h5",
+      "asset": "USDJPY",
+      "arvores_extras": 50
+    },
+    {
+      "fold": 9,
+      "target": "y_vol_h5",
+      "asset": "ABEV3",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 9,
+      "target": "y_vol_h5",
+      "asset": "B3SA3",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 9,
+      "target": "y_vol_h5",
+      "asset": "BBAS3",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 9,
+      "target": "y_vol_h5",
+      "asset": "BBDC4",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 9,
+      "target": "y_vol_h5",
+      "asset": "COPPER",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 9,
+      "target": "y_vol_h5",
+      "asset": "DOWJONES",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 9,
+      "target": "y_vol_h5",
+      "asset": "FTSE100",
+      "arvores_extras": 25
+    },
+    {
+      "fold": 9,
+      "target": "y_vol_h5",
+      "asset": "GOLD",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 9,
+      "target": "y_vol_h5",
+      "asset": "IBOVESPA",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 9,
+      "target": "y_vol_h5",
+      "asset": "ITUB4",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 9,
+      "target": "y_vol_h5",
+      "asset": "NASDAQ",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 9,
+      "target": "y_vol_h5",
+      "asset": "PETR4",
+      "arvores_extras": 50
+    },
+    {
+      "fold": 9,
+      "target": "y_vol_h5",
+      "asset": "RENT3",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 9,
+      "target": "y_vol_h5",
+      "asset": "SILVER",
+      "arvores_extras": 50
+    },
+    {
+      "fold": 9,
+      "target": "y_vol_h5",
+      "asset": "SP500",
+      "arvores_extras": 50
+    },
+    {
+      "fold": 9,
+      "target": "y_vol_h5",
+      "asset": "SUZB3",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 9,
+      "target": "y_vol_h5",
+      "asset": "US10Y",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 9,
+      "target": "y_vol_h5",
+      "asset": "VALE3",
+      "arvores_extras": 50
+    },
+    {
+      "fold": 9,
+      "target": "y_vol_h5",
+      "asset": "VIX",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 9,
+      "target": "y_vol_h5",
+      "asset": "WEGE3",
+      "arvores_extras": 50
+    },
+    {
+      "fold": 9,
+      "target": "y_vol_h5",
+      "asset": "WTI",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 9,
+      "target": "y_vol_h5",
+      "asset": "NIKKEI225",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 10,
+      "target": "y_vol_h5",
+      "asset": "BTC",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 10,
+      "target": "y_vol_h5",
+      "asset": "DAX",
+      "arvores_extras": 50
+    },
+    {
+      "fold": 10,
+      "target": "y_vol_h5",
+      "asset": "ETH",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 10,
+      "target": "y_vol_h5",
+      "asset": "EURUSD",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 10,
+      "target": "y_vol_h5",
+      "asset": "GBPUSD",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 10,
+      "target": "y_vol_h5",
+      "asset": "HANGSENG",
+      "arvores_extras": 25
+    },
+    {
+      "fold": 10,
+      "target": "y_vol_h5",
+      "asset": "USDBRL",
+      "arvores_extras": 50
+    },
+    {
+      "fold": 10,
+      "target": "y_vol_h5",
+      "asset": "USDJPY",
+      "arvores_extras": 10
+    },
+    {
+      "fold": 10,
+      "target": "y_vol_h5",
+      "asset": "ABEV3",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 10,
+      "target": "y_vol_h5",
+      "asset": "B3SA3",
+      "arvores_extras": 50
+    },
+    {
+      "fold": 10,
+      "target": "y_vol_h5",
+      "asset": "BBAS3",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 10,
+      "target": "y_vol_h5",
+      "asset": "BBDC4",
+      "arvores_extras": 10
+    },
+    {
+      "fold": 10,
+      "target": "y_vol_h5",
+      "asset": "COPPER",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 10,
+      "target": "y_vol_h5",
+      "asset": "DOWJONES",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 10,
+      "target": "y_vol_h5",
+      "asset": "FTSE100",
+      "arvores_extras": 25
+    },
+    {
+      "fold": 10,
+      "target": "y_vol_h5",
+      "asset": "GOLD",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 10,
+      "target": "y_vol_h5",
+      "asset": "IBOVESPA",
+      "arvores_extras": 25
+    },
+    {
+      "fold": 10,
+      "target": "y_vol_h5",
+      "asset": "ITUB4",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 10,
+      "target": "y_vol_h5",
+      "asset": "NASDAQ",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 10,
+      "target": "y_vol_h5",
+      "asset": "PETR4",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 10,
+      "target": "y_vol_h5",
+      "asset": "RENT3",
+      "arvores_extras": 50
+    },
+    {
+      "fold": 10,
+      "target": "y_vol_h5",
+      "asset": "SILVER",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 10,
+      "target": "y_vol_h5",
+      "asset": "SP500",
+      "arvores_extras": 50
+    },
+    {
+      "fold": 10,
+      "target": "y_vol_h5",
+      "asset": "SUZB3",
+      "arvores_extras": 10
+    },
+    {
+      "fold": 10,
+      "target": "y_vol_h5",
+      "asset": "US10Y",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 10,
+      "target": "y_vol_h5",
+      "asset": "VALE3",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 10,
+      "target": "y_vol_h5",
+      "asset": "VIX",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 10,
+      "target": "y_vol_h5",
+      "asset": "WEGE3",
+      "arvores_extras": 50
+    },
+    {
+      "fold": 10,
+      "target": "y_vol_h5",
+      "asset": "WTI",
+      "arvores_extras": 50
+    },
+    {
+      "fold": 10,
+      "target": "y_vol_h5",
+      "asset": "NIKKEI225",
+      "arvores_extras": 25
+    },
+    {
+      "fold": 11,
+      "target": "y_vol_h5",
+      "asset": "BTC",
+      "arvores_extras": 10
+    },
+    {
+      "fold": 11,
+      "target": "y_vol_h5",
+      "asset": "ETH",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 11,
+      "target": "y_vol_h5",
+      "asset": "EURUSD",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 11,
+      "target": "y_vol_h5",
+      "asset": "GBPUSD",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 11,
+      "target": "y_vol_h5",
+      "asset": "USDBRL",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 11,
+      "target": "y_vol_h5",
+      "asset": "USDJPY",
+      "arvores_extras": 50
+    },
+    {
+      "fold": 11,
+      "target": "y_vol_h5",
+      "asset": "DAX",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 11,
+      "target": "y_vol_h5",
+      "asset": "HANGSENG",
+      "arvores_extras": 50
+    },
+    {
+      "fold": 11,
+      "target": "y_vol_h5",
+      "asset": "NIKKEI225",
+      "arvores_extras": 50
+    },
+    {
+      "fold": 11,
+      "target": "y_vol_h5",
+      "asset": "ABEV3",
+      "arvores_extras": 25
+    },
+    {
+      "fold": 11,
+      "target": "y_vol_h5",
+      "asset": "B3SA3",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 11,
+      "target": "y_vol_h5",
+      "asset": "BBAS3",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 11,
+      "target": "y_vol_h5",
+      "asset": "BBDC4",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 11,
+      "target": "y_vol_h5",
+      "asset": "COPPER",
+      "arvores_extras": 50
+    },
+    {
+      "fold": 11,
+      "target": "y_vol_h5",
+      "asset": "DOWJONES",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 11,
+      "target": "y_vol_h5",
+      "asset": "FTSE100",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 11,
+      "target": "y_vol_h5",
+      "asset": "GOLD",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 11,
+      "target": "y_vol_h5",
+      "asset": "IBOVESPA",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 11,
+      "target": "y_vol_h5",
+      "asset": "ITUB4",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 11,
+      "target": "y_vol_h5",
+      "asset": "NASDAQ",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 11,
+      "target": "y_vol_h5",
+      "asset": "PETR4",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 11,
+      "target": "y_vol_h5",
+      "asset": "RENT3",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 11,
+      "target": "y_vol_h5",
+      "asset": "SILVER",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 11,
+      "target": "y_vol_h5",
+      "asset": "SP500",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 11,
+      "target": "y_vol_h5",
+      "asset": "SUZB3",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 11,
+      "target": "y_vol_h5",
+      "asset": "US10Y",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 11,
+      "target": "y_vol_h5",
+      "asset": "VALE3",
+      "arvores_extras": 10
+    },
+    {
+      "fold": 11,
+      "target": "y_vol_h5",
+      "asset": "VIX",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 11,
+      "target": "y_vol_h5",
+      "asset": "WEGE3",
+      "arvores_extras": 50
+    },
+    {
+      "fold": 11,
+      "target": "y_vol_h5",
+      "asset": "WTI",
+      "arvores_extras": 50
+    },
+    {
+      "fold": 12,
+      "target": "y_vol_h5",
+      "asset": "BTC",
+      "arvores_extras": 10
+    },
+    {
+      "fold": 12,
+      "target": "y_vol_h5",
+      "asset": "ETH",
+      "arvores_extras": 50
+    },
+    {
+      "fold": 12,
+      "target": "y_vol_h5",
+      "asset": "DAX",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 12,
+      "target": "y_vol_h5",
+      "asset": "HANGSENG",
+      "arvores_extras": 50
+    },
+    {
+      "fold": 12,
+      "target": "y_vol_h5",
+      "asset": "ABEV3",
+      "arvores_extras": 25
+    },
+    {
+      "fold": 12,
+      "target": "y_vol_h5",
+      "asset": "B3SA3",
+      "arvores_extras": 10
+    },
+    {
+      "fold": 12,
+      "target": "y_vol_h5",
+      "asset": "BBAS3",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 12,
+      "target": "y_vol_h5",
+      "asset": "BBDC4",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 12,
+      "target": "y_vol_h5",
+      "asset": "COPPER",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 12,
+      "target": "y_vol_h5",
+      "asset": "DOWJONES",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 12,
+      "target": "y_vol_h5",
+      "asset": "EURUSD",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 12,
+      "target": "y_vol_h5",
+      "asset": "GBPUSD",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 12,
+      "target": "y_vol_h5",
+      "asset": "GOLD",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 12,
+      "target": "y_vol_h5",
+      "asset": "IBOVESPA",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 12,
+      "target": "y_vol_h5",
+      "asset": "ITUB4",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 12,
+      "target": "y_vol_h5",
+      "asset": "NASDAQ",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 12,
+      "target": "y_vol_h5",
+      "asset": "NIKKEI225",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 12,
+      "target": "y_vol_h5",
+      "asset": "PETR4",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 12,
+      "target": "y_vol_h5",
+      "asset": "RENT3",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 12,
+      "target": "y_vol_h5",
+      "asset": "SILVER",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 12,
+      "target": "y_vol_h5",
+      "asset": "SP500",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 12,
+      "target": "y_vol_h5",
+      "asset": "SUZB3",
+      "arvores_extras": 50
+    },
+    {
+      "fold": 12,
+      "target": "y_vol_h5",
+      "asset": "US10Y",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 12,
+      "target": "y_vol_h5",
+      "asset": "USDBRL",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 12,
+      "target": "y_vol_h5",
+      "asset": "USDJPY",
+      "arvores_extras": 50
+    },
+    {
+      "fold": 12,
+      "target": "y_vol_h5",
+      "asset": "VALE3",
+      "arvores_extras": 10
+    },
+    {
+      "fold": 12,
+      "target": "y_vol_h5",
+      "asset": "VIX",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 12,
+      "target": "y_vol_h5",
+      "asset": "WEGE3",
+      "arvores_extras": 50
+    },
+    {
+      "fold": 12,
+      "target": "y_vol_h5",
+      "asset": "WTI",
+      "arvores_extras": 50
+    },
+    {
+      "fold": 12,
+      "target": "y_vol_h5",
+      "asset": "FTSE100",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 13,
+      "target": "y_vol_h5",
+      "asset": "BTC",
+      "arvores_extras": 50
+    },
+    {
+      "fold": 13,
+      "target": "y_vol_h5",
+      "asset": "DAX",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 13,
+      "target": "y_vol_h5",
+      "asset": "ETH",
+      "arvores_extras": 50
+    },
+    {
+      "fold": 13,
+      "target": "y_vol_h5",
+      "asset": "ABEV3",
+      "arvores_extras": 10
+    },
+    {
+      "fold": 13,
+      "target": "y_vol_h5",
+      "asset": "B3SA3",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 13,
+      "target": "y_vol_h5",
+      "asset": "BBAS3",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 13,
+      "target": "y_vol_h5",
+      "asset": "BBDC4",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 13,
+      "target": "y_vol_h5",
+      "asset": "EURUSD",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 13,
+      "target": "y_vol_h5",
+      "asset": "GBPUSD",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 13,
+      "target": "y_vol_h5",
+      "asset": "HANGSENG",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 13,
+      "target": "y_vol_h5",
+      "asset": "IBOVESPA",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 13,
+      "target": "y_vol_h5",
+      "asset": "ITUB4",
+      "arvores_extras": 10
+    },
+    {
+      "fold": 13,
+      "target": "y_vol_h5",
+      "asset": "PETR4",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 13,
+      "target": "y_vol_h5",
+      "asset": "RENT3",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 13,
+      "target": "y_vol_h5",
+      "asset": "SUZB3",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 13,
+      "target": "y_vol_h5",
+      "asset": "USDBRL",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 13,
+      "target": "y_vol_h5",
+      "asset": "USDJPY",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 13,
+      "target": "y_vol_h5",
+      "asset": "VALE3",
+      "arvores_extras": 50
+    },
+    {
+      "fold": 13,
+      "target": "y_vol_h5",
+      "asset": "WEGE3",
+      "arvores_extras": 50
+    },
+    {
+      "fold": 13,
+      "target": "y_vol_h5",
+      "asset": "COPPER",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 13,
+      "target": "y_vol_h5",
+      "asset": "DOWJONES",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 13,
+      "target": "y_vol_h5",
+      "asset": "FTSE100",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 13,
+      "target": "y_vol_h5",
+      "asset": "GOLD",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 13,
+      "target": "y_vol_h5",
+      "asset": "NASDAQ",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 13,
+      "target": "y_vol_h5",
+      "asset": "NIKKEI225",
+      "arvores_extras": 50
+    },
+    {
+      "fold": 13,
+      "target": "y_vol_h5",
+      "asset": "SILVER",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 13,
+      "target": "y_vol_h5",
+      "asset": "SP500",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 13,
+      "target": "y_vol_h5",
+      "asset": "US10Y",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 13,
+      "target": "y_vol_h5",
+      "asset": "VIX",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 13,
+      "target": "y_vol_h5",
+      "asset": "WTI",
+      "arvores_extras": 50
+    },
+    {
+      "fold": 14,
+      "target": "y_vol_h5",
+      "asset": "BTC",
+      "arvores_extras": 50
+    },
+    {
+      "fold": 14,
+      "target": "y_vol_h5",
+      "asset": "DAX",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 14,
+      "target": "y_vol_h5",
+      "asset": "ETH",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 14,
+      "target": "y_vol_h5",
+      "asset": "EURUSD",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 14,
+      "target": "y_vol_h5",
+      "asset": "GBPUSD",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 14,
+      "target": "y_vol_h5",
+      "asset": "HANGSENG",
+      "arvores_extras": 50
+    },
+    {
+      "fold": 14,
+      "target": "y_vol_h5",
+      "asset": "USDBRL",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 14,
+      "target": "y_vol_h5",
+      "asset": "USDJPY",
+      "arvores_extras": 50
+    },
+    {
+      "fold": 14,
+      "target": "y_vol_h5",
+      "asset": "ABEV3",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 14,
+      "target": "y_vol_h5",
+      "asset": "B3SA3",
+      "arvores_extras": 10
+    },
+    {
+      "fold": 14,
+      "target": "y_vol_h5",
+      "asset": "BBAS3",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 14,
+      "target": "y_vol_h5",
+      "asset": "BBDC4",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 14,
+      "target": "y_vol_h5",
+      "asset": "COPPER",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 14,
+      "target": "y_vol_h5",
+      "asset": "DOWJONES",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 14,
+      "target": "y_vol_h5",
+      "asset": "FTSE100",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 14,
+      "target": "y_vol_h5",
+      "asset": "GOLD",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 14,
+      "target": "y_vol_h5",
+      "asset": "IBOVESPA",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 14,
+      "target": "y_vol_h5",
+      "asset": "ITUB4",
+      "arvores_extras": 10
+    },
+    {
+      "fold": 14,
+      "target": "y_vol_h5",
+      "asset": "NASDAQ",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 14,
+      "target": "y_vol_h5",
+      "asset": "PETR4",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 14,
+      "target": "y_vol_h5",
+      "asset": "RENT3",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 14,
+      "target": "y_vol_h5",
+      "asset": "SILVER",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 14,
+      "target": "y_vol_h5",
+      "asset": "SP500",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 14,
+      "target": "y_vol_h5",
+      "asset": "SUZB3",
+      "arvores_extras": 50
+    },
+    {
+      "fold": 14,
+      "target": "y_vol_h5",
+      "asset": "US10Y",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 14,
+      "target": "y_vol_h5",
+      "asset": "VALE3",
+      "arvores_extras": 10
+    },
+    {
+      "fold": 14,
+      "target": "y_vol_h5",
+      "asset": "VIX",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 14,
+      "target": "y_vol_h5",
+      "asset": "WDO",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 14,
+      "target": "y_vol_h5",
+      "asset": "WEGE3",
+      "arvores_extras": 50
+    },
+    {
+      "fold": 14,
+      "target": "y_vol_h5",
+      "asset": "WIN",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 14,
+      "target": "y_vol_h5",
+      "asset": "WTI",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 14,
+      "target": "y_vol_h5",
+      "asset": "NIKKEI225",
+      "arvores_extras": 50
+    },
+    {
+      "fold": 15,
+      "target": "y_vol_h5",
+      "asset": "BTC",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 15,
+      "target": "y_vol_h5",
+      "asset": "DAX",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 15,
+      "target": "y_vol_h5",
+      "asset": "ETH",
+      "arvores_extras": 50
+    },
+    {
+      "fold": 15,
+      "target": "y_vol_h5",
+      "asset": "HANGSENG",
+      "arvores_extras": 25
+    },
+    {
+      "fold": 15,
+      "target": "y_vol_h5",
+      "asset": "ABEV3",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 15,
+      "target": "y_vol_h5",
+      "asset": "B3SA3",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 15,
+      "target": "y_vol_h5",
+      "asset": "BBAS3",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 15,
+      "target": "y_vol_h5",
+      "asset": "BBDC4",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 15,
+      "target": "y_vol_h5",
+      "asset": "COPPER",
+      "arvores_extras": 50
+    },
+    {
+      "fold": 15,
+      "target": "y_vol_h5",
+      "asset": "DOWJONES",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 15,
+      "target": "y_vol_h5",
+      "asset": "EURUSD",
+      "arvores_extras": 50
+    },
+    {
+      "fold": 15,
+      "target": "y_vol_h5",
+      "asset": "FTSE100",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 15,
+      "target": "y_vol_h5",
+      "asset": "GBPUSD",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 15,
+      "target": "y_vol_h5",
+      "asset": "GOLD",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 15,
+      "target": "y_vol_h5",
+      "asset": "IBOVESPA",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 15,
+      "target": "y_vol_h5",
+      "asset": "ITUB4",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 15,
+      "target": "y_vol_h5",
+      "asset": "NASDAQ",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 15,
+      "target": "y_vol_h5",
+      "asset": "PETR4",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 15,
+      "target": "y_vol_h5",
+      "asset": "RENT3",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 15,
+      "target": "y_vol_h5",
+      "asset": "SILVER",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 15,
+      "target": "y_vol_h5",
+      "asset": "SP500",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 15,
+      "target": "y_vol_h5",
+      "asset": "SUZB3",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 15,
+      "target": "y_vol_h5",
+      "asset": "US10Y",
+      "arvores_extras": 50
+    },
+    {
+      "fold": 15,
+      "target": "y_vol_h5",
+      "asset": "USDBRL",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 15,
+      "target": "y_vol_h5",
+      "asset": "USDJPY",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 15,
+      "target": "y_vol_h5",
+      "asset": "VALE3",
+      "arvores_extras": 10
+    },
+    {
+      "fold": 15,
+      "target": "y_vol_h5",
+      "asset": "VIX",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 15,
+      "target": "y_vol_h5",
+      "asset": "WDO",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 15,
+      "target": "y_vol_h5",
+      "asset": "WEGE3",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 15,
+      "target": "y_vol_h5",
+      "asset": "WIN",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 15,
+      "target": "y_vol_h5",
+      "asset": "WTI",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 15,
+      "target": "y_vol_h5",
+      "asset": "NIKKEI225",
+      "arvores_extras": 50
+    },
+    {
+      "fold": 16,
+      "target": "y_vol_h5",
+      "asset": "BTC",
+      "arvores_extras": 10
+    },
+    {
+      "fold": 16,
+      "target": "y_vol_h5",
+      "asset": "DAX",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 16,
+      "target": "y_vol_h5",
+      "asset": "ETH",
+      "arvores_extras": 50
+    },
+    {
+      "fold": 16,
+      "target": "y_vol_h5",
+      "asset": "HANGSENG",
+      "arvores_extras": 25
+    },
+    {
+      "fold": 16,
+      "target": "y_vol_h5",
+      "asset": "ABEV3",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 16,
+      "target": "y_vol_h5",
+      "asset": "B3SA3",
+      "arvores_extras": 50
+    },
+    {
+      "fold": 16,
+      "target": "y_vol_h5",
+      "asset": "BBAS3",
+      "arvores_extras": 50
+    },
+    {
+      "fold": 16,
+      "target": "y_vol_h5",
+      "asset": "BBDC4",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 16,
+      "target": "y_vol_h5",
+      "asset": "COPPER",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 16,
+      "target": "y_vol_h5",
+      "asset": "DOWJONES",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 16,
+      "target": "y_vol_h5",
+      "asset": "EURUSD",
+      "arvores_extras": 50
+    },
+    {
+      "fold": 16,
+      "target": "y_vol_h5",
+      "asset": "FTSE100",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 16,
+      "target": "y_vol_h5",
+      "asset": "GBPUSD",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 16,
+      "target": "y_vol_h5",
+      "asset": "GOLD",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 16,
+      "target": "y_vol_h5",
+      "asset": "IBOVESPA",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 16,
+      "target": "y_vol_h5",
+      "asset": "ITUB4",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 16,
+      "target": "y_vol_h5",
+      "asset": "NASDAQ",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 16,
+      "target": "y_vol_h5",
+      "asset": "PETR4",
+      "arvores_extras": 25
+    },
+    {
+      "fold": 16,
+      "target": "y_vol_h5",
+      "asset": "RENT3",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 16,
+      "target": "y_vol_h5",
+      "asset": "SILVER",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 16,
+      "target": "y_vol_h5",
+      "asset": "SP500",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 16,
+      "target": "y_vol_h5",
+      "asset": "SUZB3",
+      "arvores_extras": 10
+    },
+    {
+      "fold": 16,
+      "target": "y_vol_h5",
+      "asset": "US10Y",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 16,
+      "target": "y_vol_h5",
+      "asset": "USDBRL",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 16,
+      "target": "y_vol_h5",
+      "asset": "USDJPY",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 16,
+      "target": "y_vol_h5",
+      "asset": "VALE3",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 16,
+      "target": "y_vol_h5",
+      "asset": "VIX",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 16,
+      "target": "y_vol_h5",
+      "asset": "WDO",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 16,
+      "target": "y_vol_h5",
+      "asset": "WEGE3",
+      "arvores_extras": 0
+    },
+    {
+      "fold": 16,
+      "target": "y_vol_h5",
+      "asset": "WIN",
+      "arvores_extras": 10
+    },
+    {
+      "fold": 16,
+      "target": "y_vol_h5",
+      "asset": "WTI",
+      "arvores_extras": 100
+    },
+    {
+      "fold": 16,
+      "target": "y_vol_h5",
+      "asset": "NIKKEI225",
+      "arvores_extras": 50
+    }
+  ]
+}
